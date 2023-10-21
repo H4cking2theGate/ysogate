@@ -1,12 +1,13 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.rowset.JdbcRowSetImpl;
 import javassist.ClassClassPath;
 import javassist.CtClass;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.SuClassLoader;
+import A.R.ysogate.payloads.utils.Reflections;
+import A.R.ysogate.payloads.utils.SuClassLoader;
 
 import java.math.BigInteger;
 import java.util.Comparator;
@@ -46,5 +47,9 @@ public class CommonsBeanutils3183 implements ObjectPayload<Object> {
 
 		ctBeanComparator.defrost();
 		return queue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsBeanutils3183.class, args);
 	}
 }

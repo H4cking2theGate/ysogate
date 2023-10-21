@@ -9,13 +9,14 @@ import java.util.LinkedHashSet;
 
 import javax.xml.transform.Templates;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /*
@@ -101,5 +102,9 @@ public class Jdk7u21 implements ObjectPayload<Object> {
 	public static boolean isApplicableJavaVersion() {
 		JavaVersion v = JavaVersion.getLocalVersion();
 		return v != null && (v.major < 7 || (v.major == 7 && v.update <= 21));
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Jdk7u21.class, args);
 	}
 }

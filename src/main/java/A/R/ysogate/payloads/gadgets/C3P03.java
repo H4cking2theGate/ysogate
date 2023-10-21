@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.mchange.v2.c3p0.PoolBackedDataSource;
 import com.mchange.v2.c3p0.impl.PoolBackedDataSourceBase;
 import org.apache.naming.ResourceRef;
@@ -70,6 +71,9 @@ public class C3P03 implements ObjectPayload<Object> {
 
 		public PooledConnection getPooledConnection(String user, String password) throws SQLException {
 			return null;
+		}
+		public static void main ( final String[] args ) throws Exception {
+			PayloadRunner.run(C3P03.class, args);
 		}
 	}
 }

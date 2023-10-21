@@ -10,7 +10,7 @@ import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
 
-import static A.R.ysogate.payloads.util.Utils.makeClass;
+import static A.R.ysogate.payloads.utils.Utils.makeClass;
 
 
 /**

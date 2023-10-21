@@ -6,8 +6,8 @@ import javassist.CtClass;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.SuClassLoader;
+import A.R.ysogate.payloads.utils.Reflections;
+import A.R.ysogate.payloads.utils.SuClassLoader;
 
 import javax.naming.NamingException;
 import javax.naming.Reference;

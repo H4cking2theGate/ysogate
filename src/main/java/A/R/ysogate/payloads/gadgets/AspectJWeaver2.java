@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.Factory;
 import org.apache.commons.collections.Transformer;
@@ -84,5 +85,10 @@ public class AspectJWeaver2 implements ObjectPayload<Serializable> {
 
 		return map;
 
+	}
+
+	public static void main(String[] args) throws Exception {
+		args = new String[]{"ahi.txt;YWhpaGloaQ=="};
+		PayloadRunner.run(AspectJWeaver2.class, args);
 	}
 }

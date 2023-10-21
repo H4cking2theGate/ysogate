@@ -12,10 +12,11 @@ import javax.xml.transform.Templates;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.jre.*;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.PayloadRunner;
+import A.R.ysogate.payloads.utils.Reflections;
+import A.R.ysogate.payloads.utils.jre.*;
 
 @Dependencies
 @Authors({"frohoff"})
@@ -95,4 +96,7 @@ public class JRE8u20 implements ObjectPayload<Object> {
 		return (v != null && (v.major < 8 || (v.major == 8 && v.update <= 20)));
 	}
 
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(JRE8u20.class, args);
+	}
 }

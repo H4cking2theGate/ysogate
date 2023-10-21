@@ -1,12 +1,13 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.mozilla.javascript.*;
 import org.mozilla.javascript.tools.shell.Environment;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -99,5 +100,9 @@ public class MozillaRhino2 implements ObjectPayload<Object> {
 		out.writeObject("java.lang.Object");
 		out.writeObject(new String[0]);
 		out.writeObject(javaObject);
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(MozillaRhino2.class, args);
 	}
 }

