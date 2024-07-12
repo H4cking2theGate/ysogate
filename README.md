@@ -1,6 +1,13 @@
 ## ysogate
 
-ysoserial修改版
+
+### todo
+- [x] 基础的反序列化生成payload
+- [x] 增加JNDI/LDAP/RMI/JRMP等利用方式
+- [ ] 完善第三方库的gadget，hutool，fastjson，jackson，commons-collections等
+- [ ] 在加载字节码方面增加扩展攻击如回显，内存马，代理等
+- [ ] 防护绕过方面的补充，增加OverlongUTF8/脏数据等绕过
+- [ ] 代码结构优化
 
 ### 免责声明
 本项目仅面向安全研究与学习，禁止任何非法用途
@@ -11,4 +18,5 @@ ysoserial修改版
 
 ### 参考
  - https://github.com/frohoff/ysoserial
+ - https://github.com/X1r0z/JNDIMap
  - ysuserial

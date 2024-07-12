@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>A.R</groupId>
+    <groupId>com.h2tg</groupId>
     <artifactId>ysogate</artifactId>
-    <version>0.1</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
 
     <name>ysogate</name>
     <url>https://github.com/H4cking2theGate</url>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+<!--        <maven.compiler.source>8</maven.compiler.source>-->
+<!--        <maven.compiler.target>8</maven.compiler.target>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.1.4.RELEASE</spring.version>
     </properties>
@@ -24,11 +24,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5.1</version>
+                <version>3.10.1</version>
                 <configuration>
                     <!-- maximize compatibility -->
-                    <source>7</source>
-                    <target>7</target>
+<!--                    <source>6</source>-->
+<!--                    <target>6</target>-->
                     <!-- ignore noisy internal api warnings -->
                     <compilerArgument>-XDignore.symbol.file</compilerArgument>
                     <fork>true</fork>
@@ -42,18 +42,21 @@
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
                     <finalName>${project.artifactId}-${project.version}-all</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
-<!--                    <descriptorRefs>-->
-<!--                        &lt;!&ndash; 将依赖的jar包中的class文件打进生成的jar包&ndash;&gt;-->
-<!--                        <descriptorRef>jar-with-dependencies</descriptorRef>-->
-<!--                    </descriptorRefs>-->
+                    <descriptorRefs>
+                        <!-- 将依赖的jar包中的class文件打进生成的jar包-->
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>A.R.ysogate.GeneratePayload</mainClass>
+                            <mainClass>com.h2tg.ysogate.Main</mainClass>
                         </manifest>
                     </archive>
-                    <descriptor>assembly.xml</descriptor>
+<!--                    <descriptor>assembly.xml</descriptor>-->
                 </configuration>
                 <executions>
                     <execution>
@@ -307,11 +310,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-            <version>1.7.21</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.slf4j</groupId>-->
+<!--            <artifactId>slf4j-jdk14</artifactId>-->
+<!--            <version>1.7.21</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.clojure</groupId>
             <artifactId>clojure</artifactId>
@@ -433,6 +436,29 @@
             <groupId>com.caucho</groupId>
             <artifactId>resin</artifactId>
             <version>4.0.65</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.83</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.26</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <version>2.7.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.11</version>
         </dependency>
     </dependencies>
 
