@@ -34,7 +34,9 @@
                     <fork>true</fork>
                     <debug>false</debug>
                     <debuglevel>none</debuglevel>
-<!--                    <compilerArguments>-->
+                    <source>8</source>
+                    <target>8</target>
+                    <!--                    <compilerArguments>-->
 <!--                        <extdirs>lib</extdirs>-->
 <!--                    </compilerArguments>-->
                 </configuration>
@@ -460,7 +462,21 @@
             <artifactId>xstream</artifactId>
             <version>1.4.11</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.unboundid</groupId>
+            <artifactId>unboundid-ldapsdk</artifactId>
+            <version>6.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.10.2</version>
+        </dependency>
     </dependencies>
+
+
 
     <profiles>
         <profile>

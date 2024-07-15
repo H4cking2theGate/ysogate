@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.payloads.handle;
+package com.h2tg.ysogate.utils;
 
 import com.h2tg.ysogate.config.Config;
 import javassist.CtClass;
@@ -7,8 +7,14 @@ import javassist.CtField;
 /**
  * @author su18
  */
-public class ClassFieldHandler {
+public class CtClassUtils
+{
 
+    public static void setCtField(CtClass clazz, String name, CtField.Initializer value) throws Exception {
+        CtField ctField = clazz.getField(name);
+        clazz.removeField(ctField);
+        clazz.addField(ctField, value);
+    }
 
     public static void insertField(CtClass ctClass, String fieldName, String fieldCode) throws Exception {
         ctClass.defrost();

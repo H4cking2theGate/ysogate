@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import static com.h2tg.ysogate.config.Config.POOL;
-import static com.h2tg.ysogate.payloads.handle.ClassFieldHandler.insertField;
+import static com.h2tg.ysogate.utils.CtClassUtils.insertField;
 
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2", "commons-collections:commons-collections:3.1", "commons-logging:commons-logging:1.2"})
 public class CommonsBeanutils3183 implements ObjectPayload<Object> {

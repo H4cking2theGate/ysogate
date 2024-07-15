@@ -10,7 +10,7 @@ import com.h2tg.ysogate.payloads.ObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 
-import static com.h2tg.ysogate.utils.Utils.makeClass;
+import static com.h2tg.ysogate.utils.MiscUtils.makeClass;
 
 
 /**

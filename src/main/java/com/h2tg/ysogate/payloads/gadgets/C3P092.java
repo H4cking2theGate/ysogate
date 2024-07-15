@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.logging.Logger;
 
-import static com.h2tg.ysogate.payloads.handle.ClassFieldHandler.insertField;
+import static com.h2tg.ysogate.utils.CtClassUtils.insertField;
 
 
 @Dependencies({"com.mchange:c3p0:0.9.2-pre2-RELEASE ~ 0.9.5-pre8", "com.mchange:mchange-commons-java:0.2.11"})

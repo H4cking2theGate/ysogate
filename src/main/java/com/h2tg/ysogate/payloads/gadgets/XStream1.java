@@ -20,10 +20,6 @@ import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.PriorityQueue;
-
-import static com.h2tg.ysogate.config.Config.POOL;
-import static com.h2tg.ysogate.payloads.handle.ClassFieldHandler.insertField;
 
 // Xstream CVE-2021-39139
 

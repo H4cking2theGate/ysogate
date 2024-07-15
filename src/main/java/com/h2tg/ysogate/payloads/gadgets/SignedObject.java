@@ -27,7 +27,7 @@ import java.security.Signature;
 import java.util.*;
 
 import static java.lang.Class.forName;
-import static com.h2tg.ysogate.utils.Utils.base64Decode;
+import static com.h2tg.ysogate.utils.MiscUtils.base64Decode;
 
 /**
  * SignedObject 二次反序列化 Gadget，用来进行某些场景的绕过（常见如 TemplatesImpl 黑名单，CTF 中常出现的 CC 无数组加黑名单等）

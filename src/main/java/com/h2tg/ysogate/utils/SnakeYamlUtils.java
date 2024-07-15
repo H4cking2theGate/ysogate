@@ -3,7 +3,7 @@ package com.h2tg.ysogate.utils;
 import java.io.*;
 import java.util.zip.Deflater;
 
-import static com.h2tg.ysogate.utils.Utils.base64Encode;
+import static com.h2tg.ysogate.utils.MiscUtils.base64Encode;
 
 
 /**

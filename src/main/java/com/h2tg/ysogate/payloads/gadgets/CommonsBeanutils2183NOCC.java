@@ -14,7 +14,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 import static com.h2tg.ysogate.config.Config.POOL;
-import static com.h2tg.ysogate.payloads.handle.ClassFieldHandler.insertField;
+import static com.h2tg.ysogate.utils.CtClassUtils.insertField;
 import static com.h2tg.ysogate.utils.Reflections.setFieldValue;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
