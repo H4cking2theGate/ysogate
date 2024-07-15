@@ -1,5 +1,28 @@
 ## ysogate
 
+ysogate是一个java综合利用工具，支持JNDI注入相关利用，包含多种高版本jdk绕过方式，且支持片段化gadget生成和组合。
+
+- 生成多种Java反序列化gadget payload
+- 支持JNDI/LDAP/RMI/JRMP等多种利用方式
+- 灵活的命令行界面，支持多种操作模式
+- 可扩展的架构，便于添加新的gadget和攻击向量
+- 支持多种高版本jdk绕过方式
+
+### Usage
+
+```bash
+[root]#~  Payload Mode: java -jar ysogate-[version]-all.jar -m payload [PAYLOAD OPTIONS]
+[root]#~  JNDI Mode:    java -jar ysogate-[version]-all.jar -m jndi [JNDI OPTIONS]
+```
+### JNDI
+
+### 反序列化
+
+### 扩展攻击
+
+#### 回显
+
+#### 内存马
 
 ### todo
 - [x] 基础的反序列化生成payload
