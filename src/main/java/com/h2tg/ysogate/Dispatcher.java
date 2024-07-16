@@ -31,6 +31,9 @@ public class Dispatcher
         Logger root = (Logger) LoggerFactory.getLogger("org.reflections");
         root.setLevel(Level.OFF);
 
+        root = (Logger) LoggerFactory.getLogger("org.apache.commons.beanutils");
+        root.setLevel(Level.OFF);
+
         // 扫描所有使用 JNDIController 注解的类
         Reflections ref = new Reflections("com.h2tg.ysogate.controller",
                 new TypeAnnotationsScanner(), new MethodAnnotationsScanner());
@@ -55,14 +58,6 @@ public class Dispatcher
             JNDIMapping baseMapping = clazz.getAnnotation(JNDIMapping.class);
             String basePath = (baseMapping != null) ? baseMapping.value() : "";
             Method[] methods = clazz.getMethods();
-            Method processMethod = getMethodByClass(clazz, "process", new Class[]{Object.class});
-
-//            for (Method method : methods) {
-//                if ("process".equals(method.getName())) {
-//                    processMethod = method;
-//                    break;
-//                }
-//            }
 
             for (Method method : methods) {
                 // 获取方法的 JNDIMapping 注解

