@@ -11,8 +11,8 @@ import java.util.Base64;
 import static com.h2tg.ysogate.controller.bypass.EvalConverter.LoadByJshell;
 
 @JNDIController
-@JNDIMapping("/ELJShell")
-public class ELJShellController extends BasicController {
+@JNDIMapping("/EL2JShell")
+public class EL2JShellController extends BasicController {
     @Override
     public Object process(Object obj) {
         byte[] byteCode = (byte[]) obj;
