@@ -5,9 +5,7 @@ import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
-
 import java.util.Base64;
-
 import static com.h2tg.ysogate.controller.bypass.EvalConverter.LoadByJshell;
 
 @JNDIController
