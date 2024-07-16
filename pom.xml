@@ -17,6 +17,7 @@
 <!--        <maven.compiler.target>8</maven.compiler.target>-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.1.4.RELEASE</spring.version>
+<!--        <spring.version>6.1.2</spring.version>-->
     </properties>
 
     <build>

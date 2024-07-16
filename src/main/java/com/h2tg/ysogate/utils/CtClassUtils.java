@@ -3,6 +3,7 @@ package com.h2tg.ysogate.utils;
 import com.h2tg.ysogate.config.Config;
 import javassist.CtClass;
 import javassist.CtField;
+import javassist.NotFoundException;
 
 /**
  * @author su18
@@ -10,6 +11,14 @@ import javassist.CtField;
 public class CtClassUtils
 {
 
+    public static boolean hasSerialVersionUID(CtClass ctClass) {
+        try {
+            ctClass.getDeclaredField("serialVersionUID");
+            return true;
+        } catch (NotFoundException e) {
+            return false;
+        }
+    }
     public static void setCtField(CtClass clazz, String name, CtField.Initializer value) throws Exception {
         CtField ctField = clazz.getField(name);
         clazz.removeField(ctField);

