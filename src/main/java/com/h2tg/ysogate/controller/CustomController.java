@@ -10,7 +10,9 @@ import java.io.File;
 
 @JNDIController
 public class CustomController implements Controller {
-    public Object process(String args) throws Exception {
+    @Override
+    public Object process(Object obj) throws Exception {
+        String args = obj.toString();
         File file = new File(JndiConfig.file);
         String rootPath = file.getParentFile() != null ? file.getParentFile().getCanonicalPath() : new File("").getCanonicalPath();
         String fileName = file.getName();

@@ -10,7 +10,8 @@ import org.reflections.Reflections;
 import org.reflections.scanners.MethodAnnotationsScanner;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.slf4j.LoggerFactory;
-
+import static com.h2tg.ysogate.utils.Reflections.getMethodByClass;
+import static com.h2tg.ysogate.utils.Reflections.getMethodAndInvoke;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -54,16 +55,14 @@ public class Dispatcher
             JNDIMapping baseMapping = clazz.getAnnotation(JNDIMapping.class);
             String basePath = (baseMapping != null) ? baseMapping.value() : "";
             Method[] methods = clazz.getMethods();
-            Method processMethod = null;
+            Method processMethod = getMethodByClass(clazz, "process", new Class[]{Object.class});
 
-            // 获取当前 Controller 的 process 方法
-            // 目前这个实现不太优雅, 等后面再改
-            for (Method method : methods) {
-                if ("process".equals(method.getName())) {
-                    processMethod = method;
-                    break;
-                }
-            }
+//            for (Method method : methods) {
+//                if ("process".equals(method.getName())) {
+//                    processMethod = method;
+//                    break;
+//                }
+//            }
 
             for (Method method : methods) {
                 // 获取方法的 JNDIMapping 注解
@@ -91,7 +90,7 @@ public class Dispatcher
 
                         try {
                             Object obj = method.invoke(controller, params.toArray()); // 调用与路由相对应的方法
-                            return processMethod.invoke(controller, obj); // 调用 Controller 的 process 方法
+                            return getMethodAndInvoke(controller, "process", new Class[]{Object.class},new Object[]{obj}); // 调用 Controller 的 process 方法
                         } catch (Exception e) {
                             e.printStackTrace();
                             return null;

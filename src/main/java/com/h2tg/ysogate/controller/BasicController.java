@@ -20,7 +20,9 @@ import java.util.Base64;
 @JNDIController
 @JNDIMapping("/Basic")
 public class BasicController implements Controller {
-    public Object process(byte[] byteCode) {
+    @Override
+    public Object process(Object obj) {
+        byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Remote codebase: " + JndiConfig.codebase);
 
         String className;

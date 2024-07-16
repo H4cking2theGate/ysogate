@@ -10,7 +10,9 @@ import javax.naming.StringRefAddr;
 @JNDIController
 @JNDIMapping("/NativeLibLoader")
 public class NativeLibLoaderController implements Controller {
-    public Object process(String path) {
+    @Override
+    public Object process(Object obj) {
+        String path = obj.toString();
         System.out.println("[Reference] Factory: BeanFactory + NativeLibLoader");
 
         ResourceRef ref = new ResourceRef("com.sun.glass.utils.NativeLibLoader", null, "", "",

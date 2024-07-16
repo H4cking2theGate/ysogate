@@ -20,7 +20,8 @@ import com.h2tg.ysogate.utils.CtClassUtils;
 @JNDIMapping("/SnakeYaml")
 public class SnakeYamlController extends BasicController {
     @Override
-    public Object process(byte[] byteCode) {
+    public Object process(Object obj) {
+        byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + SnakeYaml");
 
         String factoryClassName = MiscUtils.getRandStr(12);

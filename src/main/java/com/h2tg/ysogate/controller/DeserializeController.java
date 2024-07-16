@@ -16,8 +16,9 @@ import static com.h2tg.ysogate.Serializer.serialize;
 @JNDIController
 @JNDIMapping("/Deserialize")
 public class DeserializeController implements Controller {
-    public Object process(byte[] data) {
-        return data;
+    @Override
+    public Object process(Object obj) {
+        return obj;
     }
 
     @JNDIMapping("/FromUrl/{data}")

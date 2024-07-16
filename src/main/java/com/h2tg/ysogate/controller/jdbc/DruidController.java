@@ -11,7 +11,9 @@ import java.util.Properties;
 @JNDIController
 @JNDIMapping("/Druid")
 public class DruidController extends DatabaseController {
-    public Object process(Properties props) {
+    @Override
+    public Object process(Object obj) {
+        Properties props = (Properties)obj;
         System.out.println("[Reference] Factory: Druid");
 
         Reference ref = new Reference("javax.sql.DataSource", "com.alibaba.druid.pool.DruidDataSourceFactory", null);

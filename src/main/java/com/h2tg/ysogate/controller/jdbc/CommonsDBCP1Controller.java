@@ -11,7 +11,9 @@ import java.util.Properties;
 @JNDIController
 @JNDIMapping("/CommonsDBCP1")
 public class CommonsDBCP1Controller extends DatabaseController {
-    public Object process(Properties props) {
+    @Override
+    public Object process(Object obj) {
+        Properties props = (Properties)obj;
         System.out.println("[Reference] Factory: CommonsDBCP1");
 
         Reference ref = new Reference("javax.sql.DataSource", "org.apache.commons.dbcp.BasicDataSourceFactory", null);

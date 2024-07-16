@@ -10,7 +10,9 @@ import java.util.Properties;
 @JNDIController
 @JNDIMapping("/HikariCP")
 public class HikariCPController extends SingleCommandController {
-    public Object process(Properties props) {
+    @Override
+    public Object process(Object obj) {
+        Properties props = (Properties)obj;
         System.out.println("[Reference] Factory: HikariCP");
 
         Reference ref = new Reference("javax.sql.DataSource", "com.zaxxer.hikari.HikariJNDIFactory", null);

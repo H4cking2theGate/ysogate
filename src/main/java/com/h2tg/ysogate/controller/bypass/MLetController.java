@@ -12,7 +12,9 @@ import javax.naming.StringRefAddr;
 @JNDIController
 @JNDIMapping("/MLet")
 public class MLetController implements Controller {
-    public Object process(String className) {
+    @Override
+    public Object process(Object obj) {
+        String className = obj.toString();
         System.out.println("[Reference] Factory: BeanFactory + MLet");
 
         ResourceRef ref = new ResourceRef("javax.management.loading.MLet", null, "", "", true, "org.apache.naming.factory.BeanFactory", null);
