@@ -3,7 +3,6 @@ package com.h2tg.ysogate.utils;
 import com.h2tg.ysogate.config.Config;
 import javassist.CannotCompileException;
 import javassist.CtClass;
-
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
@@ -73,11 +72,20 @@ public class MiscUtils
         return "Exploit_" + sb;
     }
 
+
+
     public static String tryBase64UrlDecode(String encText) {
         try {
             // 判断字符串是否使用 Base64 URL 编码
             // 方法: 先 decode 再重新 encodeToString, 判断两者是否相等
             byte[] decBytes = Base64.getUrlDecoder().decode(encText);
+
+            for (byte b : decBytes) {
+                if (b < 32 || b > 126) {
+                    return encText;
+                }
+            }
+
             String reEncText = Base64.getUrlEncoder().encodeToString(decBytes);
 
             if (reEncText.equals(encText)) {

