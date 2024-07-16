@@ -128,6 +128,7 @@ public class Main {
         int rmiPort = cmdLine.getOptionValue("rp") == null ? JndiConfig.rmiPort : Integer.parseInt(cmdLine.getOptionValue("rp"));
         int ldapPort = cmdLine.getOptionValue("lp") == null ? JndiConfig.ldapPort : Integer.parseInt(cmdLine.getOptionValue("lp"));
         int httpPort = cmdLine.getOptionValue("hp") == null ? JndiConfig.httpPort : Integer.parseInt(cmdLine.getOptionValue("hp"));
+        JndiConfig.codebase = "http://" + ip + ":" + httpPort + "/";
 
 //        printInfo("JNDI Server IP: " + ip);
 //        printInfo("RMI Port: " + rmiPort);
