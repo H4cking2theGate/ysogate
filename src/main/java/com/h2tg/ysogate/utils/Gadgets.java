@@ -5,18 +5,14 @@ import static com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl.DESERIA
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.h2tg.ysogate.config.Config;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
-
 import com.sun.org.apache.xalan.internal.xsltc.DOM;
 import com.sun.org.apache.xalan.internal.xsltc.TransletException;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;

