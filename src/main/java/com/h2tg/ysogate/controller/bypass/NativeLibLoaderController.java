@@ -4,7 +4,6 @@ import com.h2tg.ysogate.annotation.JNDIController;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.Controller;
 import org.apache.naming.ResourceRef;
-
 import javax.naming.StringRefAddr;
 
 @JNDIController

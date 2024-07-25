@@ -6,7 +6,6 @@ import com.h2tg.ysogate.config.JndiConfig;
 import com.h2tg.ysogate.controller.Controller;
 import com.h2tg.ysogate.exploit.server.WebServer;
 import org.apache.naming.ResourceRef;
-
 import javax.naming.StringRefAddr;
 
 @JNDIController
