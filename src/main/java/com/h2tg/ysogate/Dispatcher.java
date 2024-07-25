@@ -85,7 +85,12 @@ public class Dispatcher
 
                         try {
                             Object obj = method.invoke(controller, params.toArray()); // 调用与路由相对应的方法
-                            return getMethodAndInvoke(controller, "process", new Class[]{Object.class},new Object[]{obj}); // 调用 Controller 的 process 方法
+                            if (obj != null) {
+                                // 调用 Controller 的 process 方法
+                                return getMethodAndInvoke(controller, "process", new Class[]{Object.class},new Object[]{obj});
+                            }
+                            return null;
+
                         } catch (Exception e) {
                             e.printStackTrace();
                             return null;

