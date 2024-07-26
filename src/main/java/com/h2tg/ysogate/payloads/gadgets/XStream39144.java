@@ -5,7 +5,7 @@ import com.h2tg.ysogate.payloads.ObjectPayload;
 
 // Xstream CVE-2021-39144
 
-@Dependencies({"Xstream < 1.4.18"})
+@Dependencies({"com.thoughtworks.xstream:Xstream:<1.4.18"})
 public class XStream39144 implements ObjectPayload<Object> {
 
     @Override

