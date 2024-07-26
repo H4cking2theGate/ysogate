@@ -9,5 +9,7 @@ public class JndiConfig
     public static String url;
     public static String codebase;
     public static String file;
-    public static boolean useReferenceOnly = false;
+    // 绕过 trustSerialData
+    public static boolean onlyRef = false;
+    public static boolean ldap2rmi = false;
 }
