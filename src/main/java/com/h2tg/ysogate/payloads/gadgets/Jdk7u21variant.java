@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
@@ -16,7 +16,8 @@ import java.util.LinkedHashSet;
  * jdk 7u21 gadgets variant
  **/
 @Authors({"potats0"})
-public class Jdk7u21variant implements ObjectPayload<Object> {
+public class Jdk7u21variant implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

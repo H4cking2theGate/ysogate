@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import org.mozilla.javascript.*;
 import org.mozilla.javascript.tools.shell.Environment;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -49,7 +49,8 @@ import java.util.Map;
 */
 @Dependencies({"rhino:js:1.7R2"})
 @Authors({Authors.TINT0})
-public class MozillaRhino2 implements ObjectPayload<Object> {
+public class MozillaRhino2 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(String command) throws Exception {
 		ScriptableObject    dummyScope       = new Environment();

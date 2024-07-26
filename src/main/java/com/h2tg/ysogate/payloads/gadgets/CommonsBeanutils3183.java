@@ -4,7 +4,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import com.sun.rowset.JdbcRowSetImpl;
 import javassist.ClassClassPath;
 import javassist.CtClass;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
 import com.h2tg.ysogate.utils.SuClassLoader;
@@ -17,7 +17,8 @@ import static com.h2tg.ysogate.config.Config.POOL;
 import static com.h2tg.ysogate.utils.CtClassUtils.insertField;
 
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2", "commons-collections:commons-collections:3.1", "commons-logging:commons-logging:1.2"})
-public class CommonsBeanutils3183 implements ObjectPayload<Object> {
+public class CommonsBeanutils3183 implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

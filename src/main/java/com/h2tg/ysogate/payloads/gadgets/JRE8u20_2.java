@@ -4,7 +4,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import javassist.CtClass;
 import javassist.CtMethod;
 import com.h2tg.ysogate.Serializer;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.ByteUtils;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
@@ -23,7 +23,8 @@ import static com.h2tg.ysogate.config.Config.POOL;
 /**
  * @author 1nhann
  */
-public class JRE8u20_2 implements ObjectPayload<Object> {
+public class JRE8u20_2 implements CommandObjectPayload<Object>
+{
 
 	public static Class newInvocationHandlerClass() throws Exception {
 		CtClass   clazz = POOL.get(Gadgets.ANN_INV_HANDLER_CLASS);

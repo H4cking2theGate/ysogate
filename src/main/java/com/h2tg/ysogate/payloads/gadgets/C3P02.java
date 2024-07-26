@@ -1,7 +1,7 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
@@ -26,7 +26,7 @@ import java.util.logging.Logger;
  * 支持普通命令执行
  */
 @Dependencies({"com.mchange:c3p0:0.9.5.2", "com.mchange:mchange-commons-java:0.2.11", "org.apache:tomcat:8.5.35"})
-public class C3P02 implements ObjectPayload<Object>
+public class C3P02 implements CommandObjectPayload<Object>
 {
 
 	public Object getObject(String command) throws Exception {

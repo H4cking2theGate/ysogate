@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import javassist.ClassClassPath;
 import javassist.CtClass;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
@@ -19,7 +19,8 @@ import static com.h2tg.ysogate.utils.Reflections.setFieldValue;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"commons-beanutils:commons-beanutils:1.8.3", "commons-logging:commons-logging:1.2"})
-public class CommonsBeanutils2183NOCC implements ObjectPayload<Object> {
+public class CommonsBeanutils2183NOCC implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

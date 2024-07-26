@@ -2,7 +2,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 
 
 import com.h2tg.ysogate.payloads.DynamicDependencies;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.JavaVersion;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.annotation.Authors;
@@ -43,7 +43,7 @@ import com.sun.rowset.JdbcRowSetImpl;
 		"restriction"
 })
 @Authors({Authors.MBECHLER})
-public class Hibernate2 implements ObjectPayload<Object>, DynamicDependencies
+public class Hibernate2 implements CommandObjectPayload<Object>, DynamicDependencies
 {
 
 	public static boolean isApplicableJavaVersion() {

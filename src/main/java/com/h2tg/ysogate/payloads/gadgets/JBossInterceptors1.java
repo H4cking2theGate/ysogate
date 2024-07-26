@@ -15,7 +15,7 @@ import org.jboss.interceptor.spi.metadata.InterceptorReference;
 import org.jboss.interceptor.spi.metadata.MethodMetadata;
 import org.jboss.interceptor.spi.model.InterceptionModel;
 import org.jboss.interceptor.spi.model.InterceptionType;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -33,7 +33,8 @@ import java.util.*;
 		"javax.enterprise:cdi-api:1.0-SP1", "javax.interceptor:javax.interceptor-api:3.1",
 		"org.jboss.interceptor:jboss-interceptor-spi:2.0.0.Final", "org.slf4j:slf4j-api:1.7.21"})
 @Authors({Authors.MATTHIASKAISER})
-public class JBossInterceptors1 implements ObjectPayload<Object> {
+public class JBossInterceptors1 implements CommandObjectPayload<Object>
+{
 
 	public static boolean isApplicableJavaVersion() {
 		return JavaVersion.isAtLeast(7);

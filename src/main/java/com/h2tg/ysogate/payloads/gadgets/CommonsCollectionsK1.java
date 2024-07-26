@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Dependencies({"commons-collections:commons-collections:<=3.2.1"})
 @Authors({"KORLR"})
-public class CommonsCollectionsK1 implements ObjectPayload<Map>
+public class CommonsCollectionsK1 implements CommandObjectPayload<Map>
 {
 
 	public Map getObject(String command) throws Exception {

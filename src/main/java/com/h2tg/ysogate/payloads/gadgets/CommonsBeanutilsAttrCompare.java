@@ -5,7 +5,7 @@ import com.sun.org.apache.xerces.internal.dom.AttrNSImpl;
 import com.sun.org.apache.xerces.internal.dom.CoreDocumentImpl;
 import com.sun.org.apache.xml.internal.security.c14n.helper.AttrCompare;
 import org.apache.commons.beanutils.BeanComparator;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -20,7 +20,8 @@ import java.util.PriorityQueue;
  */
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2"})
 @Authors({"水滴"})
-public class CommonsBeanutilsAttrCompare implements ObjectPayload<Object> {
+public class CommonsBeanutilsAttrCompare implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

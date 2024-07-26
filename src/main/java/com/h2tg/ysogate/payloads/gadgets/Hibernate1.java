@@ -19,7 +19,7 @@ import org.hibernate.type.Type;
 import org.hibernate.EntityMode;
 
 import com.h2tg.ysogate.payloads.DynamicDependencies;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.JavaVersion;
@@ -43,7 +43,7 @@ import com.h2tg.ysogate.utils.Reflections;
  * @author mbechler
  */
 @Authors({Authors.MBECHLER})
-public class Hibernate1 implements ObjectPayload<Object>, DynamicDependencies {
+public class Hibernate1 implements CommandObjectPayload<Object>, DynamicDependencies {
 
 	public static boolean isApplicableJavaVersion() {
 		return JavaVersion.isAtLeast(7);

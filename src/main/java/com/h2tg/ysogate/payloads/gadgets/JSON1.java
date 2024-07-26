@@ -1,7 +1,7 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
@@ -65,7 +65,7 @@ import net.sf.json.JSONObject;
 		"net.sf.ezmorph:ezmorph:1.0.6", "commons-beanutils:commons-beanutils:1.9.2",
 		"org.springframework:spring-core:4.1.4.RELEASE", "commons-collections:commons-collections:3.1"})
 @Authors({Authors.MBECHLER})
-public class JSON1 implements ObjectPayload<Object>
+public class JSON1 implements CommandObjectPayload<Object>
 {
 
 	public Map getObject(String command) throws Exception {

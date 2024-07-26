@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
@@ -11,7 +11,7 @@ import java.math.BigInteger;
 import java.util.PriorityQueue;
 
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2", "commons-collections:commons-collections:3.1"})
-public class CommonsBeanutils3 implements ObjectPayload<Object>
+public class CommonsBeanutils3 implements CommandObjectPayload<Object>
 {
 
 	@Override

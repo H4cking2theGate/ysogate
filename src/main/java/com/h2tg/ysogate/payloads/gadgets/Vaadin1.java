@@ -6,7 +6,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import com.vaadin.data.util.NestedMethodProperty;
 import com.vaadin.data.util.PropertysetItem;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -15,7 +15,8 @@ import com.h2tg.ysogate.utils.Reflections;
 
 @Dependencies({"com.vaadin:vaadin-server:7.7.14", "com.vaadin:vaadin-shared:7.7.14"})
 @Authors({Authors.KULLRICH})
-public class Vaadin1 implements ObjectPayload<Object> {
+public class Vaadin1 implements CommandObjectPayload<Object>
+{
 //  +-------------------------------------------------+
 //  |                                                 |
 //  |  BadAttributeValueExpException                  |

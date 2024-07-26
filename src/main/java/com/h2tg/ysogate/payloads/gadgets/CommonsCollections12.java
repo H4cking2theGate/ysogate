@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
@@ -18,7 +18,7 @@ import java.util.Map;
  * @author su18
  */
 @Dependencies({"commons-collections:commons-collections:3.2.1"})
-public class CommonsCollections12 implements ObjectPayload<Hashtable>
+public class CommonsCollections12 implements CommandObjectPayload<Hashtable>
 {
 
 	public Hashtable getObject(final String command) throws Exception {

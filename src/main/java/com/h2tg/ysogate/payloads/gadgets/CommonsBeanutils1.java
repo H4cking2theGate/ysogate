@@ -8,14 +8,14 @@ import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
 import org.apache.commons.beanutils.BeanComparator;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2", "commons-collections:commons-collections:3.1", "commons-logging:commons-logging:1.2"})
 @Authors({Authors.FROHOFF})
-public class CommonsBeanutils1 implements ObjectPayload<Object>
+public class CommonsBeanutils1 implements CommandObjectPayload<Object>
 {
 
     public Object getObject(final String command) throws Exception {

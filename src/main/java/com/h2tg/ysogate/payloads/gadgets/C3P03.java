@@ -4,7 +4,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import com.mchange.v2.c3p0.PoolBackedDataSource;
 import com.mchange.v2.c3p0.impl.PoolBackedDataSourceBase;
 import org.apache.naming.ResourceRef;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
 
@@ -23,7 +23,8 @@ import java.util.logging.Logger;
  * 同 C3P0 2 只不过使用了 Groovy
  */
 @Dependencies({"com.mchange:c3p0:0.9.5.2", "com.mchange:mchange-commons-java:0.2.11", "org.apache:tomcat:8.5.35", "org.codehaus.groovy:groovy:2.3.9"})
-public class C3P03 implements ObjectPayload<Object> {
+public class C3P03 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(String command) throws Exception {
 		PoolBackedDataSource b = Reflections.createWithoutConstructor(PoolBackedDataSource.class);

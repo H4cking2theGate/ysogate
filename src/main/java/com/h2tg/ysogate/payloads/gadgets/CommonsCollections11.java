@@ -5,7 +5,7 @@ import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.functors.InvokerTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Reflections;
 
 import javax.management.remote.JMXServiceURL;
@@ -20,7 +20,8 @@ import java.util.Map;
  *
  * @author su18
  */
-public class CommonsCollections11 implements ObjectPayload<Object> {
+public class CommonsCollections11 implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

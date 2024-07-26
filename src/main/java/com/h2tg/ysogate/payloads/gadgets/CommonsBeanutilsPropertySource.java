@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.logging.log4j.util.PropertySource;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -18,7 +18,8 @@ import java.util.PriorityQueue;
  */
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2", "org.apache.logging.log4j:log4j-core:2.17.1"})
 @Authors({"SummerSec"})
-public class CommonsBeanutilsPropertySource implements ObjectPayload<Object> {
+public class CommonsBeanutilsPropertySource implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

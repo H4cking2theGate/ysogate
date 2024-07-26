@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.controller;
 
-import com.h2tg.ysogate.payloads.ObjectPayload.Utils;
+import com.h2tg.ysogate.payloads.CommandObjectPayload.Utils;
 import com.h2tg.ysogate.annotation.JNDIController;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.payloads.gadgets.*;
@@ -16,7 +16,7 @@ public class DeserializeController implements Controller {
         return obj;
     }
 
-    @JNDIMapping("/Custom/{data}")
+    @JNDIMapping("/{gadget}/Custom/{data}")
     public byte[] custom(String data) throws IOException
     {
         System.out.println("[Deserialize] Load custom serialized data");

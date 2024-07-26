@@ -2,7 +2,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 
 import com.alibaba.fastjson.JSONArray;
 import com.h2tg.ysogate.annotation.Dependencies;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
@@ -11,7 +11,7 @@ import javax.management.BadAttributeValueExpException;
 import java.util.HashMap;
 
 @Dependencies({"com.alibaba.fastjson:<=1.2.xx"})
-public class Fastjson1 implements ObjectPayload<Object>
+public class Fastjson1 implements CommandObjectPayload<Object>
 {
     public static void main(final String[] args) throws Exception
     {

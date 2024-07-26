@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.xml.transform.Templates;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -22,7 +22,7 @@ import com.h2tg.ysogate.utils.jre.*;
 
 @Dependencies
 @Authors({"frohoff"})
-public class JRE8u20 implements ObjectPayload<Object>
+public class JRE8u20 implements CommandObjectPayload<Object>
 {
 
 	public static Object makeTemplates(String command) throws Exception {

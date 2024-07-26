@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
 import javassist.CtClass;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
@@ -24,7 +24,8 @@ import static com.h2tg.ysogate.utils.CtClassUtils.insertField;
 
 @Dependencies({"com.mchange:c3p0:0.9.2-pre2-RELEASE ~ 0.9.5-pre8", "com.mchange:mchange-commons-java:0.2.11"})
 @Authors({Authors.MBECHLER})
-public class C3P092 implements ObjectPayload<Object> {
+public class C3P092 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(String command) throws Exception {
 		int sep = command.lastIndexOf(':');

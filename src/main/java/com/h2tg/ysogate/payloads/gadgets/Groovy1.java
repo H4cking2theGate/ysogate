@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import java.lang.reflect.InvocationHandler;
 import java.util.Map;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -28,7 +28,7 @@ import org.codehaus.groovy.runtime.MethodClosure;
 
 @Dependencies({"org.codehaus.groovy:groovy:2.3.9"})
 @Authors({Authors.FROHOFF})
-public class Groovy1 extends PayloadRunner implements ObjectPayload<InvocationHandler>
+public class Groovy1 extends PayloadRunner implements CommandObjectPayload<InvocationHandler>
 {
 
 	public InvocationHandler getObject(final String command) throws Exception {

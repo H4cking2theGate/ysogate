@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
@@ -20,7 +20,8 @@ import java.util.LinkedHashSet;
 // Xstream CVE-2021-39149
 
 @Dependencies({"com.thoughtworks.xstream:Xstream:<1.4.18"})
-public class XStream39149 implements ObjectPayload<Object> {
+public class XStream39149 implements CommandObjectPayload<Object>
+{
 
     private static Unsafe instaniateUnsafe() throws Exception {
         Field unsafeField = Unsafe.class.getDeclaredField("theUnsafe");

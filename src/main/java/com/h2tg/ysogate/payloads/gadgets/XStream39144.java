@@ -1,12 +1,13 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
 import com.h2tg.ysogate.annotation.Dependencies;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 
 // Xstream CVE-2021-39144
 
 @Dependencies({"com.thoughtworks.xstream:Xstream:<1.4.18"})
-public class XStream39144 implements ObjectPayload<Object> {
+public class XStream39144 implements CommandObjectPayload<Object>
+{
 
     @Override
     public Object getObject(String command) throws Exception {

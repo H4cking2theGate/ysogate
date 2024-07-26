@@ -7,7 +7,7 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
@@ -44,7 +44,8 @@ https://medium.com/nightst0rm/t%C3%B4i-%C4%91%C3%A3-chi%E1%BA%BFm-quy%E1%BB%81n-
 @Dependencies({"org.aspectj:aspectjweaver:1.9.2", "commons-collections:commons-collections:3.2.2"})
 @Authors({ Authors.JANG })
 
-public class AspectJWeaver implements ObjectPayload<Serializable> {
+public class AspectJWeaver implements CommandObjectPayload<Serializable>
+{
 
     public Serializable getObject(final String command) throws Exception {
         int sep = command.lastIndexOf(';');

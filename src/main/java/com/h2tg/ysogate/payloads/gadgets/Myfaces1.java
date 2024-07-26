@@ -18,10 +18,9 @@ import org.apache.myfaces.el.unified.FacesELContext;
 import org.apache.myfaces.view.facelets.el.ValueExpressionMethodExpression;
 
 import com.h2tg.ysogate.payloads.DynamicDependencies;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
-import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
 
 
@@ -45,7 +44,7 @@ import com.h2tg.ysogate.utils.Reflections;
 @PayloadTest(skip="Requires running MyFaces, no direct execution")
 @Dependencies
 @Authors({Authors.MBECHLER})
-public class Myfaces1 implements ObjectPayload<Object>, DynamicDependencies {
+public class Myfaces1 implements CommandObjectPayload<Object>, DynamicDependencies {
 
 	public Object getObject(String command) throws Exception {
 		return makeExpressionPayload(command);

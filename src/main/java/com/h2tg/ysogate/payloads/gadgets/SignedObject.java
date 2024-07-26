@@ -12,7 +12,7 @@ import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.mozilla.javascript.*;
 import org.mozilla.javascript.tools.shell.Environment;
 import org.springframework.beans.factory.ObjectFactory;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
 
@@ -45,7 +45,8 @@ import static com.h2tg.ysogate.utils.MiscUtils.base64Decode;
  *
  * @author su18
  */
-public class SignedObject implements ObjectPayload<Object> {
+public class SignedObject implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {
@@ -89,8 +90,8 @@ public class SignedObject implements ObjectPayload<Object> {
 
 		String realCmd = base64Decode(command);
 
-		final Class<? extends ObjectPayload> payloadClass = ObjectPayload.Utils.getPayloadClass(payloadType);
-		ObjectPayload                        payload      = payloadClass.newInstance();
+		final Class<? extends CommandObjectPayload> payloadClass = CommandObjectPayload.Utils.getPayloadClass(payloadType);
+		CommandObjectPayload payload      = payloadClass.newInstance();
 		Object                               object       = payload.getObject(realCmd);
 
 //		if (args.length >= 3) {

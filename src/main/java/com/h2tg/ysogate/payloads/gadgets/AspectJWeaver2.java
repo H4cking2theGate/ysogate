@@ -8,7 +8,7 @@ import org.apache.commons.collections.functors.ConstantFactory;
 import org.apache.commons.collections.functors.FactoryTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Reflections;
 
@@ -26,7 +26,8 @@ import java.util.Map;
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"org.aspectj:aspectjweaver:1.9.2", "commons-collections:commons-collections:3.2.2"})
-public class AspectJWeaver2 implements ObjectPayload<Serializable> {
+public class AspectJWeaver2 implements CommandObjectPayload<Serializable>
+{
 
 	@Override
 	public Serializable getObject(String command) throws Exception {

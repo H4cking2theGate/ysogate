@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
@@ -18,7 +18,7 @@ import java.util.PriorityQueue;
  */
 @Dependencies({"commons-beanutils:commons-beanutils:1.9.2", "org.apache.commons:commons-lang3:3.10"})
 @Authors({"水滴"})
-public class CommonsBeanutilsObjectToStringComparator implements ObjectPayload<Object>
+public class CommonsBeanutilsObjectToStringComparator implements CommandObjectPayload<Object>
 {
 
 	@Override

@@ -7,7 +7,7 @@ import java.rmi.server.ObjID;
 import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.Random;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import sun.rmi.server.UnicastRef;
 import sun.rmi.transport.LiveRef;
@@ -48,7 +48,8 @@ import com.h2tg.ysogate.annotation.Authors;
 		"restriction"
 })
 @Authors({Authors.MBECHLER})
-public class JRMPClient extends PayloadRunner implements ObjectPayload<Registry> {
+public class JRMPClient extends PayloadRunner implements CommandObjectPayload<Registry>
+{
 
 	public Registry getObject(final String command) throws Exception {
 

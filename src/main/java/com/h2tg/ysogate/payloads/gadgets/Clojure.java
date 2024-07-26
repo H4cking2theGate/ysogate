@@ -8,7 +8,7 @@ import clojure.core$constantly;
 import clojure.inspector.proxy$javax.swing.table.AbstractTableModel$ff19274a;
 import clojure.lang.PersistentArrayMap;
 import clojure.main$eval_opt;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 
@@ -33,7 +33,8 @@ import static com.h2tg.ysogate.annotation.Authors.JACKOFMOSTTRADES;
  */
 @Dependencies({"org.clojure:clojure:1.8.0"})
 @Authors({JACKOFMOSTTRADES})
-public class Clojure extends PayloadRunner implements ObjectPayload<Map<?, ?>> {
+public class Clojure extends PayloadRunner implements CommandObjectPayload<Map<?, ?>>
+{
 
 	public Map<?, ?> getObject(String command) throws Exception {
 		//		final String[] execArgs = command.split(" ");

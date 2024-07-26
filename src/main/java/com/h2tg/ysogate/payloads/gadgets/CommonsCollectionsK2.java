@@ -5,7 +5,7 @@ import org.apache.commons.collections4.Transformer;
 import org.apache.commons.collections4.functors.InvokerTransformer;
 import org.apache.commons.collections4.keyvalue.TiedMapEntry;
 import org.apache.commons.collections4.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -19,7 +19,8 @@ import java.util.Map;
  */
 @Dependencies({"commons-collections:commons-collections4:4.0"})
 @Authors({"KORLR"})
-public class CommonsCollectionsK2 implements ObjectPayload<Map> {
+public class CommonsCollectionsK2 implements CommandObjectPayload<Map>
+{
 
 	public Map getObject(String command) throws Exception {
 

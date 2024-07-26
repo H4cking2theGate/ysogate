@@ -4,7 +4,7 @@ import java.rmi.server.ObjID;
 import java.rmi.server.RemoteObjectInvocationHandler;
 import java.util.Random;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import sun.rmi.server.UnicastRef;
 import sun.rmi.transport.LiveRef;
@@ -12,7 +12,8 @@ import sun.rmi.transport.tcp.TCPEndpoint;
 
 
 @Authors({"mbechler"})
-public class JRMPClient_Obj implements ObjectPayload<RemoteObjectInvocationHandler> {
+public class JRMPClient_Obj implements CommandObjectPayload<RemoteObjectInvocationHandler>
+{
 
 	public RemoteObjectInvocationHandler getObject(String command) throws Exception {
 		String host;

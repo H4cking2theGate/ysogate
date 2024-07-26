@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 
@@ -39,7 +39,8 @@ import static com.h2tg.ysogate.utils.MiscUtils.makeClass;
  */
 @Dependencies()
 @Authors({Authors.GEBL})
-public class URLDNS implements ObjectPayload<Object> {
+public class URLDNS implements CommandObjectPayload<Object>
+{
 
 	public static String[] defaultClass = new String[]{
 			"CommonsCollections13567", "CommonsCollections24", "CommonsBeanutils2", "C3P0", "AspectJWeaver", "bsh",

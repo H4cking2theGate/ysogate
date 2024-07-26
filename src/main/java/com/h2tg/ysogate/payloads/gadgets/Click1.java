@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import org.apache.click.control.Column;
 import org.apache.click.control.Table;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -48,7 +48,8 @@ import java.util.PriorityQueue;
 @SuppressWarnings({"rawtypes", "unchecked"})
 @Dependencies({"org.apache.click:click-nodeps:2.3.0", "javax.servlet:javax.servlet-api:3.1.0"})
 @Authors({Authors.ARTSPLOIT})
-public class Click1 implements ObjectPayload<Object> {
+public class Click1 implements CommandObjectPayload<Object>
+{
 
 	public Object getObject(final String command) throws Exception {
 

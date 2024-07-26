@@ -4,7 +4,7 @@ import java.util.concurrent.Callable;
 
 import com.h2tg.ysogate.payloads.secmgr.ExecCheckingSecurityManager;
 import com.h2tg.ysogate.Serializer;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.Deserializer;
 
 /*
@@ -13,7 +13,7 @@ import com.h2tg.ysogate.Deserializer;
 @SuppressWarnings("unused")
 public class PayloadRunner {
 
-    public static void run(final Class<? extends ObjectPayload<?>> clazz, final String[] args) throws Exception {
+    public static void run(final Class<? extends CommandObjectPayload<?>> clazz, final String[] args) throws Exception {
         // ensure payload generation doesn't throw an exception
         byte[] serialized = new ExecCheckingSecurityManager().callWrapped(new Callable<byte[]>(){
             public byte[] call() throws Exception {
@@ -21,12 +21,12 @@ public class PayloadRunner {
 
                 System.out.println("generating payload object(s) for command: '" + command + "'");
 
-                ObjectPayload<?> payload = clazz.newInstance();
+                CommandObjectPayload<?> payload = clazz.newInstance();
                 final Object objBefore = payload.getObject(command);
 
                 System.out.println("serializing payload");
                 byte[] ser = Serializer.serialize(objBefore);
-                ObjectPayload.Utils.releasePayload(payload, objBefore);
+                CommandObjectPayload.Utils.releasePayload(payload, objBefore);
                 return ser;
             }});
 

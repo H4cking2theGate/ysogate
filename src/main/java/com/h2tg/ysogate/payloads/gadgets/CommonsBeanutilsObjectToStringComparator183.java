@@ -5,7 +5,7 @@ import javassist.ClassClassPath;
 import javassist.CtClass;
 import javassist.CtField;
 import org.apache.commons.lang3.compare.ObjectToStringComparator;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
@@ -24,7 +24,8 @@ import static com.h2tg.ysogate.config.Config.POOL;
  */
 @Dependencies({"commons-beanutils:commons-beanutils:1.8.3", "org.apache.commons:commons-lang3:3.10"})
 @Authors({"SummerSec"})
-public class CommonsBeanutilsObjectToStringComparator183 implements ObjectPayload<Object> {
+public class CommonsBeanutilsObjectToStringComparator183 implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {

@@ -7,7 +7,7 @@ import org.apache.commons.collections.functors.FactoryTransformer;
 import org.apache.commons.collections.functors.InstantiateFactory;
 import org.apache.commons.collections.keyvalue.TiedMapEntry;
 import org.apache.commons.collections.map.LazyMap;
-import com.h2tg.ysogate.payloads.ObjectPayload;
+import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.utils.Gadgets;
 
@@ -21,7 +21,8 @@ import static com.h2tg.ysogate.utils.Reflections.setFieldValue;
  * @author su18
  */
 @Dependencies({"commons-collections:commons-collections:3.2.1"})
-public class CommonsCollections10 implements ObjectPayload<Object> {
+public class CommonsCollections10 implements CommandObjectPayload<Object>
+{
 
 	@Override
 	public Object getObject(String command) throws Exception {
