@@ -204,6 +204,7 @@ java -jar ysogate-[version]-all.jar -m payload -g Jackson1 -p calc -b64
  -g,--gadget <arg>       Java deserialization gadget
  -h,--help               Show help message
  -m,--mode <arg>         Operation mode: 'payload' or 'jndi'
+ -ol,--overlong          Use overlong UTF-8 encoding
  -p,--parameters <arg>   Gadget parameters
 
 
