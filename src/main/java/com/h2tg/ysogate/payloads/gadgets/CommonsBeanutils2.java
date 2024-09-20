@@ -24,7 +24,7 @@ public class CommonsBeanutils2 implements CommandObjectPayload<Object>
 
 		Reflections.setFieldValue(comparator, "property", "outputProperties");
 		Reflections.setFieldValue(queue, "queue", new Object[]{template, template});
-
+//		Reflections.setFieldValue(queue, "queue", new Object[]{"template", "template"});
 		return queue;
 	}
 

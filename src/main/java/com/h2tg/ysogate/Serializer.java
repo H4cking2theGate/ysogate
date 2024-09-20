@@ -1,5 +1,7 @@
 package com.h2tg.ysogate;
 
+import com.h2tg.ysogate.utils.OverlongObjectOutputStream;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -24,6 +26,11 @@ public class Serializer implements Callable<byte[]> {
 
     public static void serialize(final Object obj, final OutputStream out) throws IOException {
         final ObjectOutputStream objOut = new ObjectOutputStream(out);
+        objOut.writeObject(obj);
+    }
+
+    public static void overlongSerialize(final Object obj, final OutputStream out) throws IOException {
+        final OverlongObjectOutputStream objOut = new OverlongObjectOutputStream(out);
         objOut.writeObject(obj);
     }
 

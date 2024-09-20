@@ -22,6 +22,8 @@ public class Config {
 
     public static Boolean BASE64_ENCODE = false;
 
+    public static Boolean USE_OVERLONG = false;
+
     public static Boolean IS_BYTECODES = false;
 
     public static ClassPool POOL = ClassPool.getDefault();

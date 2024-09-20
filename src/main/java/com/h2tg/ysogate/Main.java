@@ -64,13 +64,16 @@ public class Main {
     private static void initializeOptions() {
         commonOptions = new Options()
                 .addOption("m", "mode", true, "Operation mode: 'payload' or 'jndi'")
-                .addOption("h", "help", false, "Show help message");
+                .addOption("h", "help", false, "Show help message")
+        ;
 
         payloadOptions = new Options()
                 .addOption("g", "gadget", true, "Java deserialization gadget")
                 .addOption("p", "parameters", true, "Gadget parameters")
                 .addOption("f", "file", true, "Write Output into FileOutputStream (Specified FileName)")
-                .addOption("b64", "base64", false, "Encode Output into base64");
+                .addOption("b64", "base64", false, "Encode Output into base64")
+                .addOption("ol", "overlong", false, "Use overlong UTF-8 encoding")
+        ;
 
         jndiOptions = new Options()
                 .addOption("i", "ip", true, "IP address for JNDI server")
@@ -105,6 +108,7 @@ public class Main {
         Config.WRITE_FILE = cmdLine.hasOption("file");
         Config.FILE = cmdLine.getOptionValue("file");
         Config.BASE64_ENCODE = cmdLine.hasOption("base64");
+        Config.USE_OVERLONG = cmdLine.hasOption("overlong");
 
         generatePayload(cmdLine.getOptionValue("gadget"), cmdLine.getOptionValue("parameters"));
     }
@@ -169,7 +173,11 @@ public class Main {
             }
 
             try (OutputStream out = getOutputStream()) {
-                Serializer.serialize(object, out);
+                if (Config.USE_OVERLONG) {
+                    Serializer.overlongSerialize(object, out);
+                } else {
+                    Serializer.serialize(object, out);
+                }
                 CommandObjectPayload.Utils.releasePayload(payload, object);
             }
         } catch (Exception e) {
