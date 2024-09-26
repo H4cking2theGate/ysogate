@@ -295,9 +295,10 @@ java -jar ysogate-[version]-all.jar -m payload -g Jackson1 -p calc -b64
 - [x] 增加JNDI/LDAP/RMI/JRMP等利用方式
 - [x] 绕过trustSerialData
 - [ ] 完善第三方库的gadget
+- [x] 添加中间件回显
 - [ ] 在加载字节码方面增加扩展攻击如回显，内存马，代理等
 - [ ] 补充RMI反序列化的利用
-- [ ] 防护绕过方面的补充，增加OverlongUTF8/脏数据等绕过
+- [x] 防护绕过方面的补充，增加OverlongUTF8/脏数据等绕过
 
 
 

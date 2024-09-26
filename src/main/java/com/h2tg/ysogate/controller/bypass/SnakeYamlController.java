@@ -1,7 +1,7 @@
 package com.h2tg.ysogate.controller.bypass;
 
 import com.h2tg.ysogate.config.JndiConfig;
-import com.h2tg.ysogate.utils.MiscUtils;
+import com.h2tg.ysogate.utils.RandomUtils;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtField;
@@ -15,6 +15,7 @@ import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
 import com.h2tg.ysogate.utils.CtClassUtils;
 import java.util.Base64;
+
 import static com.h2tg.ysogate.bullet.defineClass.JsConverter.all;
 
 @JNDIController
@@ -25,8 +26,8 @@ public class SnakeYamlController extends BasicController {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + SnakeYaml");
 
-        String factoryClassName = MiscUtils.getRandStr(12);
-        String jarName = MiscUtils.getRandStr(12);
+        String factoryClassName = RandomUtils.getRandStr(12);
+        String jarName = RandomUtils.getRandStr(12);
 
         String code = all(Base64.getEncoder().encodeToString(byteCode));
 

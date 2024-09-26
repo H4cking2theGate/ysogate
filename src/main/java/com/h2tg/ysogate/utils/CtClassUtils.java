@@ -1,9 +1,12 @@
 package com.h2tg.ysogate.utils;
 
 import com.h2tg.ysogate.config.Config;
-import javassist.CtClass;
-import javassist.CtField;
-import javassist.NotFoundException;
+import javassist.*;
+import javassist.bytecode.AttributeInfo;
+import javassist.bytecode.ClassFile;
+import javassist.bytecode.SourceFileAttribute;
+
+import java.util.List;
 
 /**
  * @author su18
@@ -35,7 +38,62 @@ public class CtClassUtils
         ctClass.addField(CtField.make(fieldCode, ctClass));
     }
 
+    public static void addMethod(CtClass ctClass, String methodName, String methodBody) throws Exception {
+        ctClass.defrost();
+        try {
+            // 已存在，修改
+            CtMethod ctMethod = ctClass.getDeclaredMethod(methodName);
+            ctMethod.setBody(methodBody);
+        } catch (NotFoundException ignored) {
+            // 不存在，直接添加
+            CtMethod method = CtNewMethod.make(methodBody, ctClass);
+            ctClass.addMethod(method);
+        }
+    }
 
+    public static String bypassJDKModuleBody() throws Exception {
+        return "{try {\n" +
+                "            Class unsafeClass = Class.forName(\"sun.misc.Unsafe\");\n" +
+                "            java.lang.reflect.Field unsafeField = unsafeClass.getDeclaredField(\"theUnsafe\");\n" +
+                "            unsafeField.setAccessible(true);\n" +
+                "            Object unsafe = unsafeField.get(null);\n" +
+                "            java.lang.reflect.Method getModuleM = Class.class.getMethod(\"getModule\", new Class[0]);\n" +
+                "            Object module = getModuleM.invoke(Object.class, (Object[]) null);\n" +
+                "            java.lang.reflect.Method objectFieldOffsetM = unsafe.getClass().getMethod(\"objectFieldOffset\", new Class[]{java.lang.reflect.Field.class});\n" +
+                "            java.lang.reflect.Field moduleF = Class.class.getDeclaredField(\"module\");\n" +
+                "            Object offset = objectFieldOffsetM.invoke(unsafe, new Object[]{moduleF});\n" +
+                "            java.lang.reflect.Method getAndSetObjectM = unsafe.getClass().getMethod(\"getAndSetObject\", new Class[]{Object.class, long.class, Object.class});\n" +
+                "            getAndSetObjectM.invoke(unsafe, new Object[]{this.getClass(), offset, module});\n" +
+                "        } catch (Exception ignored) {\n" +
+                "        }}";
+    }
+
+    // 删除 SourceFileAttribute (源文件名) 信息
+    public static void removeSourceFileAttribute(CtClass ctClass) {
+        ctClass.defrost();
+        ClassFile classFile = ctClass.getClassFile2();
+
+        try {
+            // javassist.bytecode.ClassFile.removeAttribute  Since: 3.21
+            Reflections.getMethodAndInvoke(classFile, "removeAttribute", new Class[]{String.class}, new Object[]{SourceFileAttribute.tag});
+        } catch (Exception e) {
+            try {
+                // 兼容 javassist v3.20 及以下
+                List<AttributeInfo> attributes = (List<AttributeInfo>) Reflections.getFieldValue(classFile, "attributes");
+                removeAttribute(attributes, SourceFileAttribute.tag);
+            } catch (Exception ignored) {
+            }
+        }
+    }
+
+    public static synchronized AttributeInfo removeAttribute(List<AttributeInfo> attributes, String name) {
+        if (attributes == null) return null;
+
+        for (AttributeInfo ai : attributes)
+            if (ai.getName().equals(name)) if (attributes.remove(ai)) return ai;
+
+        return null;
+    }
     /**
      * 将 Field String 转一层，实际用处不大
      *

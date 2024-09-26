@@ -1,6 +1,7 @@
 package com.h2tg.ysogate.controller.jdbc;
 
 import com.h2tg.ysogate.config.JndiConfig;
+import com.h2tg.ysogate.utils.RandomUtils;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.NotFoundException;
@@ -9,12 +10,10 @@ import com.h2tg.ysogate.controller.DatabaseController;
 import com.h2tg.ysogate.exploit.server.WebServer;
 import com.h2tg.ysogate.template.DerbyJarTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
-import com.h2tg.ysogate.utils.MiscUtils;
-
 import java.util.Properties;
 
 public abstract class SingleCommandController extends DatabaseController {
-    private static final String className = MiscUtils.getRandStr(12);
+    private static final String className = RandomUtils.getRandStr(12);
 
     @JNDIMapping("/Derby/Install/{database}")
     public Properties derbyInstall(String database) {

@@ -1,5 +1,6 @@
 package com.h2tg.ysogate.controller;
 
+import com.h2tg.ysogate.utils.RandomUtils;
 import javassist.ClassPool;
 import javassist.CtClass;
 import com.h2tg.ysogate.config.JndiConfig;
@@ -8,7 +9,6 @@ import com.h2tg.ysogate.exploit.server.WebServer;
 import com.h2tg.ysogate.template.DerbyJarTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
 import com.h2tg.ysogate.utils.MiscUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -70,7 +70,7 @@ public abstract class DatabaseController implements Controller {
     public Properties postgresqlCommand(String cmd) {
         System.out.println("[PostgreSQL] Cmd: " + cmd);
 
-        String fileName = MiscUtils.getRandStr(12) + ".xml";
+        String fileName = RandomUtils.getRandStr(12) + ".xml";
         String fileContent = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n" +
                 "<beans xmlns=\"http://www.springframework.org/schema/beans\"\n" +
                 "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
@@ -215,7 +215,7 @@ public abstract class DatabaseController implements Controller {
 
         String url = "jdbc:derby:memory:" + database + ";create=true";
 
-        String className = MiscUtils.getRandStr(12);
+        String className = RandomUtils.getRandStr(12);
         ClassPool pool = ClassPool.getDefault();
         CtClass clazz = pool.get(DerbyJarTemplate.class.getName());
         clazz.replaceClassName(clazz.getName(), className);
