@@ -1,6 +1,6 @@
 package com.h2tg.ysogate;
 
-import com.h2tg.ysogate.utils.OverlongObjectOutputStream;
+import com.h2tg.ysogate.utils.jre.OverlongObjectOutputStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

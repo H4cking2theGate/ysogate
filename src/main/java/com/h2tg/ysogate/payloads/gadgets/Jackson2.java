@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.fasterxml.jackson.databind.node.POJONode;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.payloads.CommandObjectPayload;
-import com.h2tg.ysogate.payloads.gadgets.jdk.GXString;
+import com.h2tg.ysogate.bullet.jdk.GXString;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import javassist.ClassPool;

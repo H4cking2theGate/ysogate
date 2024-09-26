@@ -1,6 +1,6 @@
 package com.h2tg.ysogate.payloads.gadgets;
 
-import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
+import com.h2tg.ysogate.bullet.jdk.GHashMap;
 import com.sun.syndication.feed.impl.ObjectBean;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections.Transformer;

@@ -2,7 +2,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 
 
 import com.h2tg.ysogate.payloads.CommandObjectPayload;
-import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
+import com.h2tg.ysogate.bullet.jdk.GHashMap;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;

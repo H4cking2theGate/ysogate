@@ -9,7 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import com.h2tg.ysogate.annotation.PayloadTest;
-import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
+import com.h2tg.ysogate.bullet.jdk.GHashMap;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import org.apache.myfaces.context.servlet.FacesContextImpl;
 import org.apache.myfaces.context.servlet.FacesContextImplBase;

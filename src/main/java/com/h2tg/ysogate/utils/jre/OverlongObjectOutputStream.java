@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.utils;
+package com.h2tg.ysogate.utils.jre;
 
 import java.io.*;
 import java.lang.reflect.Field;

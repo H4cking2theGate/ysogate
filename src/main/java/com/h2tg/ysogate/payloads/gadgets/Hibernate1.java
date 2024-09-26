@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
+import com.h2tg.ysogate.bullet.jdk.GHashMap;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import org.hibernate.engine.spi.TypedValue;
 import org.hibernate.tuple.component.AbstractComponentTuplizer;

@@ -3,7 +3,7 @@ package com.h2tg.ysogate.payloads.gadgets;
 
 import javax.xml.transform.Templates;
 
-import com.h2tg.ysogate.payloads.gadgets.jdk.GHashMap;
+import com.h2tg.ysogate.bullet.jdk.GHashMap;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.sun.syndication.feed.impl.ObjectBean;
 
