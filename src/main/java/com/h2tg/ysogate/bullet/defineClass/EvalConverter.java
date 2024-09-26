@@ -1,8 +1,9 @@
-package com.h2tg.ysogate.controller.bypass.converter;
-
+package com.h2tg.ysogate.bullet.defineClass;
 import org.apache.commons.lang.StringEscapeUtils;
 import java.util.Base64;
+import static com.h2tg.ysogate.bullet.defineClass.JShellConverter.jshell2defineClass;
 
+@Deprecated
 public class EvalConverter
 {
 
@@ -68,6 +69,9 @@ public class EvalConverter
 
     public static void main(String[] args)
     {
+        String b64="123";
+        String payload=jshell2defineClass(b64);
+        System.out.println(payload);
     }
 
 }
