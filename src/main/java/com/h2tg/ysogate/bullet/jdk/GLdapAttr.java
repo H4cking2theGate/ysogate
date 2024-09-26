@@ -1,6 +1,6 @@
-package com.h2tg.ysogate.payloads.gadgets.jdk;
+package com.h2tg.ysogate.bullet.jdk;
 
-import com.h2tg.ysogate.payloads.gadgets.base.IGetter2Lookup;
+import com.h2tg.ysogate.bullet.base.IGetter2Lookup;
 
 import javax.naming.CompositeName;
 import javax.naming.directory.BasicAttribute;

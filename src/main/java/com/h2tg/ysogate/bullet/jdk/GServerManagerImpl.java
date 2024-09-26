@@ -1,6 +1,6 @@
-package com.h2tg.ysogate.payloads.gadgets.jdk;
+package com.h2tg.ysogate.bullet.jdk;
 
-import com.h2tg.ysogate.payloads.gadgets.base.IGetter2CmdExec;
+import com.h2tg.ysogate.bullet.base.IGetter2CmdExec;
 import com.h2tg.ysogate.utils.Reflections;
 import com.sun.corba.se.impl.activation.ServerTableEntry;
 import com.sun.corba.se.impl.activation.ServerManagerImpl;

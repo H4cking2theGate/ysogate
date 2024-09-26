@@ -1,7 +1,7 @@
-package com.h2tg.ysogate.payloads.gadgets.jdk;
+package com.h2tg.ysogate.bullet.jdk;
 
 
-import com.h2tg.ysogate.payloads.gadgets.base.IGetter2DefineClass;
+import com.h2tg.ysogate.bullet.base.IGetter2DefineClass;
 import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;

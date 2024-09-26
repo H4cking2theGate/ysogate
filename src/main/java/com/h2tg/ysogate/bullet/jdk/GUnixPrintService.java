@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.payloads.gadgets.jdk;
+package com.h2tg.ysogate.bullet.jdk;
 
 public class GUnixPrintService
 {

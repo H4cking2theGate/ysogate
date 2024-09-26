@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.payloads.gadgets.base;
+package com.h2tg.ysogate.bullet.base;
 
 public interface IReadObject2ToString
 {

@@ -1,6 +1,6 @@
-package com.h2tg.ysogate.payloads.gadgets.jdk;
+package com.h2tg.ysogate.bullet.jdk;
 
-import com.h2tg.ysogate.payloads.gadgets.base.IReadObject2ToString;
+import com.h2tg.ysogate.bullet.base.IReadObject2ToString;
 import com.h2tg.ysogate.utils.Reflections;
 
 import javax.swing.event.EventListenerList;
