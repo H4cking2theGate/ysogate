@@ -4,15 +4,19 @@ import com.h2tg.ysogate.annotation.JNDIController;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import org.apache.naming.ResourceRef;
+
 import javax.naming.StringRefAddr;
 import java.util.Base64;
+
 import static com.h2tg.ysogate.bullet.defineClass.JsConverter.all;
 
 @JNDIController
 @JNDIMapping("/GroovyShell")
-public class GroovyShellController extends BasicController {
+public class GroovyShellController extends BasicController
+{
     @Override
-    public Object process(Object obj) {
+    public Object process(Object obj)
+    {
         byte[] byteCode = (byte[]) obj;
         System.out.println("[Reference] Factory: BeanFactory + GroovyShell");
 
