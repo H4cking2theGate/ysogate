@@ -47,6 +47,13 @@ public class DeserializeController implements Controller {
         return serialize(obj);
     }
 
+    @JNDIMapping("/{gadget}/ReverseShell/{host}/{port}")
+    public byte[] GadgetReverseShell(String gadget,String host, String port) throws Exception {
+        System.out.println("[ReverseShell]: Host: " + host + " Port: " + port);
+        Object obj = null;
+        return serialize(obj);
+    }
+
 //    @JNDIMapping("/CommonsCollectionsK1/Command/{cmd}")
 //    public byte[] CommonsCollectionsK1Cmd(String cmd) throws Exception {
 //        System.out.println("[Deserialize] [CommonsCollectionsK1] [Command] Cmd: " + cmd);

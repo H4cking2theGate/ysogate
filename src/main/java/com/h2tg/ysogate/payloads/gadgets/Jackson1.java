@@ -18,7 +18,10 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 @SuppressWarnings({"rawtypes"})
-@Dependencies({"com.fasterxml.jackson.core:jackson-databind:2.14.2", "org.springframework:spring-aop:4.1.4.RELEASE"})
+@Dependencies({
+        "com.fasterxml.jackson.core:jackson-databind:2.14.2",
+        "org.springframework:spring-aop:4.1.4.RELEASE"
+})
 public class Jackson1 implements CommandObjectPayload<Object>
 {
     public static void main(final String[] args) throws Exception {
