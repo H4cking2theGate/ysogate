@@ -25,6 +25,7 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import static com.h2tg.ysogate.utils.CtClassUtils.bypassJDKModuleBody;
+import static com.h2tg.ysogate.utils.CtClassUtils.genEvilClass;
 
 @SuppressWarnings("rawtypes")
 public class Main
@@ -106,7 +107,7 @@ public class Main
                 .addOption("t", "type", true, "Middleware type")
                 .addOption("s", "sink", true, "Evil sink template")
                 .addOption("f", "format", true, "Output format")
-                .addOption("name", "classname",true, "Evil Class Name")
+                .addOption("name", "classname", true, "Evil Class Name")
                 .addOption("bypass", false, "ByPass JDK Module")
         ;
 
@@ -208,47 +209,11 @@ public class Main
             printError("Class name must start with 'org.springframework.expression' to bypass JDK module.");
             return;
         }
-
-        ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass;
-        byte[] clazzbytes = null;
-        try{
-            pool.insertClassPath(new ClassClassPath(Main.class));
-            ctClass = pool.getCtClass("com.h2tg.ysogate.template." + cmdLine.getOptionValue("type") +"."+ cmdLine.getOptionValue("sink"));
-            ctClass.getClassFile().setVersionToJava5();
-            try {
-                if (GenConfig.reqHeaderName != null) {
-                    CtClassUtils.addMethod(ctClass, "getReqHeaderName", String.format("{return \"%s\";}", GenConfig.reqHeaderName));
-                }
-                ctClass.setName(className);
-                if (GenConfig.bypassModule) {
-                    CtMethod ctMethod = new CtMethod(CtClass.voidType, "bypassJDKModule", new CtClass[0], ctClass);
-                    ctMethod.setModifiers(AccessFlag.PUBLIC);
-                    ctMethod.setBody(bypassJDKModuleBody());
-                    ctClass.addMethod(ctMethod);
-
-                    // 添加 bypassJDKModule 调用
-                    CtConstructor constructor = ctClass.getConstructors()[0];
-                    constructor.setModifiers(javassist.Modifier.setPublic(constructor.getModifiers()));
-                    constructor.insertBeforeBody("bypassJDKModule();");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            CtClassUtils.removeSourceFileAttribute(ctClass);
-            ctClass.getClassFile().setVersionToJava5();
-            clazzbytes = ctClass.toBytecode();
-            ctClass.defrost();
-            ctClass.detach();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        byte[] clazzbytes = genEvilClass(className, cmdLine.getOptionValue("type"), cmdLine.getOptionValue("sink"));
 
         String result = null;
         if (format.equals("base64")) {
-            result= Base64.getEncoder().encodeToString(clazzbytes);
+            result = Base64.getEncoder().encodeToString(clazzbytes);
         }
 
         System.out.println("Evil Class Name: " + className);
@@ -369,7 +334,8 @@ public class Main
         System.err.println("\r\n");
     }
 
-    public static void showTemplates() {
+    public static void showTemplates()
+    {
         Reflections reflections = new Reflections("com.h2tg.ysogate.template"); // Scanners.TypesAnnotated 扫描所有类型的类
         Set<Class<?>> classes = reflections.getSubTypesOf(Object.class);
         System.out.println("Available templates:");
