@@ -2,7 +2,7 @@ package com.h2tg.ysogate.utils;
 
 
 import static com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl.DESERIALIZE_TRANSLET;
-
+import temp.Foo;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationHandler;
@@ -69,12 +69,6 @@ public class Gadgets {
 
         @Override
         public void transform ( DOM document, DTMAxisIterator iterator, SerializationHandler handler ) throws TransletException {}
-    }
-
-    // required to make TemplatesImpl happy
-    public static class Foo implements Serializable {
-
-        private static final long serialVersionUID = 8207363842866235160L;
     }
 
 
