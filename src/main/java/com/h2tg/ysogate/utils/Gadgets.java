@@ -2,7 +2,7 @@ package com.h2tg.ysogate.utils;
 
 
 import static com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl.DESERIALIZE_TRANSLET;
-
+import temp.Foo;
 import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationHandler;
