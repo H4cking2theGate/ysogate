@@ -6,7 +6,7 @@
 
     <groupId>com.h2tg</groupId>
     <artifactId>ysogate</artifactId>
-    <version>0.6</version>
+    <version>0.7</version>
     <packaging>jar</packaging>
 
     <name>ysogate</name>
@@ -304,11 +304,11 @@
             <artifactId>cdi-api</artifactId>
             <version>1.0-SP1</version>
         </dependency>
-        <dependency>
-            <groupId>javax.interceptor</groupId>
-            <artifactId>javax.interceptor-api</artifactId>
-            <version>3.1</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>javax.interceptor</groupId>-->
+<!--            <artifactId>javax.interceptor-api</artifactId>-->
+<!--            <version>3.1</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>

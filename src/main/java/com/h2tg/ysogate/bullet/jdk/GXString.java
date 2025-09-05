@@ -14,7 +14,7 @@ public class GXString implements IReadObject2ToString
     @Override
     public Object readObjectToString(Object obj) throws Exception
     {
-        XString xString = new XString("A.R.");
+        XString xString = new XString("test");
 
         HashMap map1 = new HashMap();
         HashMap map2 = new HashMap();

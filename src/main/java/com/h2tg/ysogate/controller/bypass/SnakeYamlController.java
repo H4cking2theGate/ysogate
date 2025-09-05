@@ -9,7 +9,7 @@ import com.h2tg.ysogate.annotation.JNDIController;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.BasicController;
 import com.h2tg.ysogate.exploit.server.WebServer;
-import com.h2tg.ysogate.template.ScriptEngineFactoryTemplate;
+import com.template.ScriptEngineFactoryTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
 import org.apache.naming.ResourceRef;
 

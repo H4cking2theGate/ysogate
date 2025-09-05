@@ -2,6 +2,7 @@ package com.h2tg.ysogate.utils;
 
 import java.lang.reflect.*;
 
+import com.sun.xml.internal.ws.api.server.Module;
 import sun.misc.Unsafe;
 import sun.reflect.ReflectionFactory;
 
@@ -124,5 +125,16 @@ public class Reflections
         Unsafe unsafe = (Unsafe) theUnsafe.get(null);
         return unsafe.allocateInstance(clazz);
     }
+
+//    public static void unsafeBypassModule()throws Exception {
+//        Field theUnsafe= Unsafe.class.getDeclaredField("theUnsafe");
+//        theUnsafe.setAccessible(true);
+//        Unsafe unsafe= (Unsafe) theUnsafe.get(null);
+//
+//        Module objectmodule= Object.class.getModule();
+//        Class mainClass= Reflections.class;
+//        long module= unsafe.objectFieldOffset(Class.class.getDeclaredField("module"));
+//        unsafe.getAndSetObject(mainClass,module,objectmodule);
+//    }
 
 }

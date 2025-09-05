@@ -17,8 +17,6 @@ import com.h2tg.ysogate.utils.JavaVersion;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
 import com.h2tg.ysogate.utils.jre.*;
-//import A.R.ysogate.payloads.utils.jre.*;
-//import xyz.h2tg.ysogate.payloads.utils.jre.*;
 
 @Dependencies
 @Authors({"frohoff"})

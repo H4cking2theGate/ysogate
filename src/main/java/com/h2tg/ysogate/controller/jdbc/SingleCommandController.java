@@ -8,7 +8,7 @@ import javassist.NotFoundException;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.controller.DatabaseController;
 import com.h2tg.ysogate.exploit.server.WebServer;
-import com.h2tg.ysogate.template.DerbyJarTemplate;
+import com.template.DerbyJarTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
 import java.util.Properties;
 

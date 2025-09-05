@@ -1,24 +1,18 @@
 package com.h2tg.ysogate.controller;
 
-import com.h2tg.ysogate.Main;
-import com.h2tg.ysogate.config.GenConfig;
-import com.h2tg.ysogate.utils.CtClassUtils;
 import com.h2tg.ysogate.utils.RandomUtils;
 import javassist.*;
 import com.h2tg.ysogate.config.JndiConfig;
 import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.exploit.server.WebServer;
-import com.h2tg.ysogate.template.DerbyJarTemplate;
+import com.template.DerbyJarTemplate;
 import com.h2tg.ysogate.utils.JarUtils;
-import com.h2tg.ysogate.utils.MiscUtils;
-import javassist.bytecode.AccessFlag;
 
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Properties;
 
-import static com.h2tg.ysogate.utils.CtClassUtils.bypassJDKModuleBody;
 import static com.h2tg.ysogate.utils.CtClassUtils.genEvilClass;
 
 public abstract class DatabaseController implements Controller

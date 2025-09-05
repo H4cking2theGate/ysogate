@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.template;
+package com.template;
 
 import java.io.IOException;
 

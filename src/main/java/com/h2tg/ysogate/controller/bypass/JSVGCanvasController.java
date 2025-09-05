@@ -5,7 +5,7 @@ import com.h2tg.ysogate.annotation.JNDIMapping;
 import com.h2tg.ysogate.config.JndiConfig;
 import com.h2tg.ysogate.controller.BasicController;
 import com.h2tg.ysogate.exploit.server.WebServer;
-import com.h2tg.ysogate.template.CalcTemplate;
+import com.template.CalcTemplate;
 import com.h2tg.ysogate.utils.CtClassUtils;
 import com.h2tg.ysogate.utils.JarUtils;
 import com.h2tg.ysogate.utils.RandomUtils;

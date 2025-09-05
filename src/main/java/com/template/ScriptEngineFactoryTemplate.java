@@ -1,4 +1,4 @@
-package com.h2tg.ysogate.template;
+package com.template;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineFactory;

