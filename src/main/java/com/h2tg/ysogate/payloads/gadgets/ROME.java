@@ -34,7 +34,7 @@ public class ROME implements CommandObjectPayload<Object>
 {
 
 	public Object getObject(String command) throws Exception {
-		Object     o        = Gadgets.createTemplatesImpl(command);
+		Object     o        = Gadgets.createTemplates4Cmd(command);
 		ObjectBean delegate = new ObjectBean(Templates.class, o);
 		ObjectBean root     = new ObjectBean(ObjectBean.class, delegate);
 		GHashMap gHashMap = new GHashMap();

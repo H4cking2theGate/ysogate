@@ -54,7 +54,7 @@ public class MozillaRhino1 implements CommandObjectPayload<Object>
 		Object memberboxes = memberboxClassConstructor.newInstance(enterMethod);
 		getter.set(slot, memberboxes);
 
-		NativeJavaObject nativeObject = new NativeJavaObject(scriptableObject, Gadgets.createTemplatesImpl(command), TemplatesImpl.class);
+		NativeJavaObject nativeObject = new NativeJavaObject(scriptableObject, Gadgets.createTemplates4Cmd(command), TemplatesImpl.class);
 		idScriptableObject.setPrototype(nativeObject);
 
 		BadAttributeValueExpException badAttributeValueExpException = new BadAttributeValueExpException(null);

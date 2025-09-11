@@ -45,7 +45,7 @@ public class Spring2 extends PayloadRunner implements CommandObjectPayload<Objec
 {
 
 	public Object getObject(final String command) throws Exception {
-		final Object templates = Gadgets.createTemplatesImpl(command);
+		final Object templates = Gadgets.createTemplates4Cmd(command);
 
 		AdvisedSupport as = new AdvisedSupport();
 		as.setTargetSource(new SingletonTargetSource(templates));

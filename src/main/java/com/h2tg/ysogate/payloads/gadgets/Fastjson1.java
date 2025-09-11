@@ -21,7 +21,7 @@ public class Fastjson1 implements CommandObjectPayload<Object>
 
     public Object getObject(final String command) throws Exception
     {
-        final Object template = Gadgets.createTemplatesImpl(command);
+        final Object template = Gadgets.createTemplates4Cmd(command);
         JSONArray jsonArray = new JSONArray();
         ArrayList arrayList = new ArrayList();
         arrayList.add(template);

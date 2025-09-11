@@ -30,7 +30,7 @@ public class CommonsCollections4 implements CommandObjectPayload<Queue<Object>>
 {
 
 	public Queue<Object> getObject(final String command) throws Exception {
-		Object templates = Gadgets.createTemplatesImpl(command);
+		Object templates = Gadgets.createTemplates4Cmd(command);
 
 		ConstantTransformer constant = new ConstantTransformer(String.class);
 

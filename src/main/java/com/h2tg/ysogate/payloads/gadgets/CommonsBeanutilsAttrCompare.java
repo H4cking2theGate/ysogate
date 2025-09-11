@@ -25,7 +25,7 @@ public class CommonsBeanutilsAttrCompare implements CommandObjectPayload<Object>
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		final Object     template     = Gadgets.createTemplatesImpl(command);
+		final Object     template     = Gadgets.createTemplates4Cmd(command);
 		AttrNSImpl       attrNS1      = new AttrNSImpl();
 		CoreDocumentImpl coreDocument = new CoreDocumentImpl();
 		attrNS1.setValues(coreDocument, "1", "1", "1");

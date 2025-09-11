@@ -15,7 +15,7 @@ public class CommonsBeanutils2 implements CommandObjectPayload<Object>
 {
 
 	public Object getObject(final String command) throws Exception {
-		final Object         template   = Gadgets.createTemplatesImpl(command);
+		final Object         template   = Gadgets.createTemplates4Cmd(command);
 		final BeanComparator comparator = new BeanComparator(null, String.CASE_INSENSITIVE_ORDER);
 
 		final PriorityQueue<Object> queue = new PriorityQueue<Object>(2, comparator);

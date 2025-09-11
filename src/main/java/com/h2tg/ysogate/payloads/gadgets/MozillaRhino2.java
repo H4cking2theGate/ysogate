@@ -83,7 +83,7 @@ public class MozillaRhino2 implements CommandObjectPayload<Object>
 
 		NativeJavaArray nativeJavaArray = Reflections.createWithoutConstructor(NativeJavaArray.class);
 		Reflections.setFieldValue(nativeJavaArray, "parent", dummyScope);
-		Reflections.setFieldValue(nativeJavaArray, "javaObject", Gadgets.createTemplatesImpl(command));
+		Reflections.setFieldValue(nativeJavaArray, "javaObject", Gadgets.createTemplates4Cmd(command));
 		nativeJavaArray.setPrototype(scriptableObject);
 		Reflections.setFieldValue(nativeJavaArray, "prototype", scriptableObject);
 

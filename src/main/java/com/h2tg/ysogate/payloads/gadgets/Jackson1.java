@@ -32,7 +32,7 @@ public class Jackson1 implements CommandObjectPayload<Object>
         // use JdkDynamicAopProxy to make jackson better.
         // read this https://xz.aliyun.com/t/12846
         AdvisedSupport advisedSupport = new AdvisedSupport();
-        advisedSupport.setTarget(Gadgets.createTemplatesImpl(cmd));
+        advisedSupport.setTarget(Gadgets.createTemplates4Cmd(cmd));
         Constructor constructor = Class.forName("org.springframework.aop.framework.JdkDynamicAopProxy").getConstructor(AdvisedSupport.class);
         constructor.setAccessible(true);
         InvocationHandler handler = (InvocationHandler) constructor.newInstance(advisedSupport);

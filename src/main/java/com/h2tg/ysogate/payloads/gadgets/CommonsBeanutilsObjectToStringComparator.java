@@ -23,7 +23,7 @@ public class CommonsBeanutilsObjectToStringComparator implements CommandObjectPa
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		final Object template = Gadgets.createTemplatesImpl(command);
+		final Object template = Gadgets.createTemplates4Cmd(command);
 
 		ObjectToStringComparator stringComparator = new ObjectToStringComparator();
 

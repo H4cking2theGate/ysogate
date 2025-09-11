@@ -69,7 +69,7 @@ public class JSON1 implements CommandObjectPayload<Object>
 {
 
 	public Map getObject(String command) throws Exception {
-		return makeCallerChain(Gadgets.createTemplatesImpl(command), Templates.class);
+		return makeCallerChain(Gadgets.createTemplates4Cmd(command), Templates.class);
 	}
 
 

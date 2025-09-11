@@ -107,7 +107,7 @@ public class Hibernate1 implements CommandObjectPayload<Object>, DynamicDependen
 
 
 	public Object getObject(String command) throws Exception {
-		Object tpl     = Gadgets.createTemplatesImpl(command);
+		Object tpl     = Gadgets.createTemplates4Cmd(command);
 		Object getters = makeGetter(tpl.getClass(), "getOutputProperties");
 		return makeCaller(tpl, getters);
 	}

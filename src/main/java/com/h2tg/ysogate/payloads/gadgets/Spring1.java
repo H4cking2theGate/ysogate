@@ -54,7 +54,7 @@ public class Spring1 extends PayloadRunner implements CommandObjectPayload<Objec
 {
 
 	public Object getObject(final String command) throws Exception {
-		final Object templates = Gadgets.createTemplatesImpl(command);
+		final Object templates = Gadgets.createTemplates4Cmd(command);
 
 		final ObjectFactory objectFactoryProxy =
 				Gadgets.createMemoitizedProxy(Gadgets.createMap("getObject", templates), ObjectFactory.class);

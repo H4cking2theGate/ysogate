@@ -33,7 +33,7 @@ public class CommonsCollections3 implements CommandObjectPayload<Object>
 {
 
 	public Object getObject(final String command) throws Exception {
-		Object templatesImpl = Gadgets.createTemplatesImpl(command);
+		Object templatesImpl = Gadgets.createTemplates4Cmd(command);
 
 		// inert chain for setup
 		final Transformer transformerChain = new ChainedTransformer(

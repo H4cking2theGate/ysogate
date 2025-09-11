@@ -21,7 +21,7 @@ public class ROME2 implements CommandObjectPayload<Object>
 {
 
 	public Object getObject(String command) throws Exception {
-		Object o = Gadgets.createTemplatesImpl(command);
+		Object o = Gadgets.createTemplates4Cmd(command);
 
 		EqualsBean bean = new EqualsBean(String.class, "");
 

